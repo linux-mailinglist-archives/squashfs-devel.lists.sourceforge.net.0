@@ -2,79 +2,68 @@ Return-Path: <squashfs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+squashfs-devel@lfdr.de
 Delivered-To: lists+squashfs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8FB8BD03E2
-	for <lists+squashfs-devel@lfdr.de>; Wed,  9 Oct 2019 01:13:04 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5C2311859AB
+	for <lists+squashfs-devel@lfdr.de>; Sun, 15 Mar 2020 04:30:33 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.90_1)
 	(envelope-from <squashfs-devel-bounces@lists.sourceforge.net>)
-	id 1iHyf6-0004KL-MN; Tue, 08 Oct 2019 23:13:00 +0000
+	id 1jDJyq-0001AY-19; Sun, 15 Mar 2020 03:30:24 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
- (envelope-from <goliath@infraroot.at>)
- id 1iHyf4-0004Jr-L8; Tue, 08 Oct 2019 23:12:59 +0000
+ (envelope-from <ceo@teo-en-ming.com>) id 1jDJyp-0001A9-75
+ for squashfs-devel@lists.sourceforge.net; Sun, 15 Mar 2020 03:30:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Date:Message-ID:To:Subject:From:Sender:Reply-To:Cc:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Message-ID:
+ Subject:Cc:To:From:Date:MIME-Version:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9r+v0BobFYDgRUR3GJAvouCY1hWmo2WOvNF9GkSct/I=; b=EFQ8V7ddPi6ctkGS/pFHYmF5O0
- dFGQFhdbwzgv6XBXL2pIN4y5O89eRdqMQOmShV6WoV8s2nZtiExRtHQQsPMylb6Z1l/dt0mZ6z3uo
- 48TweeQHvpGZ3DigCZ4Uml5xQLtvaYhdSDp4sJV3L9HHzFfpqO/jBR0ZywfAM528Ouw0=;
+ bh=thaF/DzVPe/8HvFX1ufYTeXPgUX40ZUOJ7+RYrAnL7M=; b=bDmXIwEkDUX4vVN8YRtxClUutM
+ eo9FJcMJ81e9a2lr0Alla1OFDmxKK6ca2rb0UNiNIL5VjF55gKtu/ntzJCLY/i7P98DVyDcN0jpcU
+ 0Jbr8N0O51PePdGX7Y/Tdov0p1WjkosdZt53dag6R+agwDbOxcdhESn2I8bdIViE1sDM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:Message-ID:To:
- Subject:From:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
+ h=Content-Transfer-Encoding:Content-Type:Message-ID:Subject:Cc:To:From:Date
+ :MIME-Version:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=9r+v0BobFYDgRUR3GJAvouCY1hWmo2WOvNF9GkSct/I=; b=M
- IObrRADiitFUD9/RaRZy57POu8tyiHx1o0aEP7pluJzCOJNJVbvPI92RyGw9FkQ99tpVZMtEn+KWG
- 3Ke5VtflNDOAuh+OHW5HpI7urHUtLpac0NGSrTx8P00GLF4z6dSZTRfHIbngwQ4+e7u5NdhPAsgLr
- pr2AKv0jqUqgRhuw=;
-Received: from mail.infraroot.at ([54.37.73.54])
+ List-Owner:List-Archive; bh=thaF/DzVPe/8HvFX1ufYTeXPgUX40ZUOJ7+RYrAnL7M=; b=K
+ /sawe/NBk1zH+P4MUasE0/tYxCZbjgWsE7ZiqtDbTiVCM+1TBuJ1ygDmcMX4pXjRbj/+riWO6Y6TS
+ sb3sAW4NES9bRUYUKexBwasxkP7HPmshS1O+Gwd1VbTTgAC4SuqhQ3n8x/b6sGdl9I/LSu81s6udJ
+ MVWex6dOXrhtNPIw=;
+Received: from ec2-3-21-30-127.us-east-2.compute.amazonaws.com ([3.21.30.127]
+ helo=www.teo-en-ming.com)
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.92.2)
- id 1iHyf0-00AW8f-Io; Tue, 08 Oct 2019 23:12:58 +0000
-Received: from [192.168.178.20] (clnet-p04-043.ikbnet.co.at [83.175.81.43])
- by mail.infraroot.at (Postfix) with ESMTPSA id 858013FA13;
- Wed,  9 Oct 2019 00:54:10 +0200 (CEST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.infraroot.at 858013FA13
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=infraroot.at;
- s=default; t=1570575250;
- bh=9r+v0BobFYDgRUR3GJAvouCY1hWmo2WOvNF9GkSct/I=;
- h=From:Subject:To:Date:From;
- b=my1fSMhWTUI6FHulOuehipGjNa3qghsSZwp+jHiGM1adT0D8aCTJTnbK4pna6mus7
- YCh6b3+QuEtdf0PO9gFMNlHpBCWF452xykurIWsyKtFZ7Vel1VYXqHYmS62USkAKg6
- uskJYbinlYtga7A48sJ6Mqw2bjx5hv7zPvEhhcsI=
-From: David Oberhollenzer <goliath@infraroot.at>
-To: squashfs-announce@lists.sourceforge.net,
- squashfs-devel@lists.sourceforge.net,
- "Laszlo Boszormenyi (GCS)" <gcs@debian.org>,
- Matt Turner <mattst88@gentoo.org>
-Message-ID: <89fe3ed9-d8cb-77d8-b2b3-77d293784064@infraroot.at>
-Date: Wed, 9 Oct 2019 00:54:09 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.1.0
+ id 1jDJyl-001Ztt-Vl
+ for squashfs-devel@lists.sourceforge.net; Sun, 15 Mar 2020 03:30:23 +0000
+Received: from localhost (localhost [IPv6:::1])
+ by www.teo-en-ming.com (Postfix) with ESMTPA id C627E412ECD;
+ Sun, 15 Mar 2020 11:30:01 +0800 (+08)
 MIME-Version: 1.0
-Content-Language: en-US
-X-Spam-Score: -0.1 (/)
+Date: Sun, 15 Mar 2020 11:30:01 +0800
+From: Turritopsis Dohrnii Teo En Ming <ceo@teo-en-ming.com>
+To: squashfs-devel@lists.sourceforge.net
+Message-ID: <0f4914fc9f7b323714fe1e8554c3b74e@teo-en-ming.com>
+X-Sender: ceo@teo-en-ming.com
+User-Agent: Roundcube Webmail/1.2.3
+X-Spam-Score: 0.2 (/)
 X-Spam-Report: Spam Filtering performed by mx.sourceforge.net.
  See http://spamassassin.org/tag/ for more details.
  0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
  See
  http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URIs: infraroot.at]
+ for more information. [URIs: blogspot.sg]
+ -0.0 SPF_HELO_PASS          SPF: HELO matches SPF record
  -0.0 SPF_PASS               SPF: sender matches SPF record
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
-X-Headers-End: 1iHyf0-00AW8f-Io
-Subject: [Squashfs-devel] [ANNOUNCE] libsquashfs,
- squashfs-tools-ng 0.7 is released
+ 0.1 URI_HEX                URI: URI hostname has long hexadecimal sequence
+ 1.0 RDNS_DYNAMIC           Delivered to internal network by host with
+ dynamic-looking rDNS
+ -0.9 AWL AWL: Adjusted score from AWL reputation of From: address
+X-Headers-End: 1jDJyl-001Ztt-Vl
+Subject: [Squashfs-devel] How to create a Bootable Live CD/DVD from your
+ Linux From Scratch (LFS) build
 X-BeenThere: squashfs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -86,68 +75,842 @@ List-Post: <mailto:squashfs-devel@lists.sourceforge.net>
 List-Help: <mailto:squashfs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/squashfs-devel>, 
  <mailto:squashfs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: squashfs-devel-bounces@lists.sourceforge.net
 
-Hi,
+Subject of Hint: How to create a Bootable Live CD/DVD from your Linux 
+ From Scratch (LFS) build
 
-squashfs-tools-ng 0.7 is released.
+Good day from Singapore,
+
+I am Mr. Turritopsis Dohrnii Teo En Ming, based in Singapore.
+
+I have recently *successfully* created my own custom Linux distribution 
+called Teo En Ming Linux 2020.03 (FINAL), which is based on
+Linux From Scratch 20200302-systemd book and Linux Kernel 5.5.7, on 12 
+March 2020.
+
+You may refer to my redundant blog posts for the announcement.
+
+Blogger: Announcing Teo En Ming Linux 2020.03 (FINAL)
+Link: 
+https://tdtemcerts.blogspot.com/2020/03/announcing-teo-en-ming-linux-202003.html
+
+Wordpress: Announcing Teo En Ming Linux 2020.03 (FINAL)
+Link: 
+https://tdtemcerts.wordpress.com/2020/03/12/announcing-teo-en-ming-linux-2020-03-final/
+
+Jimmy Anderson's guide/hint was written on 20 Jan 2013, which is more 
+than 7 years ago. Today is 14 March 2020 Saturday. Therefore, his guide 
+is definitely outdated
+and needs some tweaking to adapt to the *latest* LFS system at the time 
+of this writing.
+
+Jimmy Anderson's guide/hint was verified with LFS version 7.2. I have 
+made *extensive* modifications to his guide/hint to work with my LFS 
+20200302-systemd build.
+
+You can download Teo En Ming Linux 2020.03 (FINAL) Bootable Live CD/DVD 
+ISOs from the following github.com link.
+
+Link: 
+https://github.com/teo-en-ming/teo-en-ming-linux/blob/master/iso%20download%20links.txt
+
+Note: Please note that my Live CD/DVD boots with a Kernel Panic. I hope 
+that Linux experts will be able to download my ISO, examine its contents 
+and find out what's wrong.
+I would like to thank all of you in advance for your kind assistance and 
+advise.
+
+==============================================================================================================================================================================
+
+The attached file is a new hint which describes how to turn your LFS 
+build
+into your own Live CD/DVD.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: 
+<http://lists.linuxfromscratch.org/pipermail/hints/attachments/20130320/5714cb82/attachment.html>
+-------------- next part --------------
+
+ORIGINAL AUTHOR: Jimmy Anderson (jimmy.anderson1057 at gmail.com)
+ORIGINAL DATE: 2013-01-20
+Link to original hint: 
+http://lists.linuxfromscratch.org/pipermail/hints/2013-March/003307.html
+
+EDITED BY: Turritopsis Dohrnii Teo En Ming, Singapore
+EDIT DATE: 14 MARCH 2020, SATURDAY
+
+LICENSE:
+
+Portions of the instructions in this hint were derived from scripts
+in the LFScript project.  These scripts are covered by the following
+license:
+
+# Permission is hereby granted, free of charge, to any person obtaining 
+a copy
+# of this software and associated documentation files (the "Software"), 
+to
+# deal in the Software without restriction, including without limitation 
+the
+# rights to use, copy, modify, merge, publish, distribute, sublicense, 
+and/or
+# sell copies of the Software, and to permit persons to whom the 
+Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be 
+included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT 
+SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, 
+ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+DEALINGS
+# IN THE SOFTWARE.
+
+This hint is also provided under the above license terms.
 
 
-Tarball:     https://infraroot.at/pub/squashfs/squashfs-tools-ng-0.7.tar.xz
-Signature:   https://infraroot.at/pub/squashfs/squashfs-tools-ng-0.7.tar.xz.asc
-Signed tag:  https://github.com/AgentD/squashfs-tools-ng.git v0.7
+SYNOPSIS: How to create a bootable Live CD/DVD from your LFS build.
+
+DESCRIPTION:
+
+    This hint describes how to create a live CD/DVD from your LFS build.  
+The
+resulting live CD/DVD can be used as an LFS/CLFS build host or for 
+whatever
+purpose you desire.
+
+    Briefly, you will build your LFS system and a "squashed" version
+of it will be created.   A busybox based ramdisk will be created
+which sets up a union mount (either aufs or unionfs) of the squashed
+LFS system with a ram based file system and then the system will be
+started with the union filesystem as root.
+
+    unionfs and aufs are not part of the standard kernel code.   To build
+a live cd/dvd you must patch your kernel to add support for one or the 
+other.
+This hint will still work without aufs or unionfs support but the result
+will not be a live CD/DVD but instead be a bootable CD/DVD (useful but
+with lesser ability than a live cd/dvd). Teo En Ming *did not* patch 
+Linux kernel 5.5.7
+to add support for aufs or unionfs filesystems because he did not have 
+the knowledge to tweak
+the patches.
+
+    The original hint was verified with LFS 7.2 x86 (32 and 64 bit).  It 
+may
+(likely will) work with other LFS versions also but it only was
+specifically tested with 7.2 and you are on your own to work out how
+to make it work with other LFS versions. Teo En Ming has modifed this 
+guide/hint to allow it
+to work with the latest LFS 20200302-systemd development book.
+
+    A description of each step and cut and paste for that
+step is provided.  Cut and pasting should make it easier to build a live 
+cd/dvd
+but it is important that you understand what the purpose of each step
+is.  Blindly cutting and pasting from this hint will probably not
+result in success.
+
+    Following this hint, like doing pretty much anything in LFS, has the
+potential of damaging your system.   Before you begin, make sure
+you've saved a copy of any data that is important to you.  It's also 
+suggested
+to follow this procedure on a system that is used only by you so that 
+any
+errors will not affect others.
 
 
-The major change in this version consists of exposing all of the SquashFS
-handling code through a library called libsquashfs. The library code itself
-has been re-licensed and is now made available under the terms and
-conditions of the LGPL version 3 or later. This allows dynamic linking with
-programs under different licenses, including proprietary ones. The rest
-of the tools and static helper libraries stay under the GPLv3. They also
-contain 3rd party contributions, so that's no longer my call anyway.
+ATTACHMENTS:
+None
 
-The new library allows SquashFS to be used in a wide variety of applications.
-Not only applications that work with standard SquashFS images, but also
-ones that require a powerful, flexible, archive or package format that can
-be easily customized and embedded.
+PREREQUISITES:
 
-In theory this refactoring should have been easy, since the code was already
-neatly structured in sub-components and helper libraries to begin with. In
-practice however, it required a little more time than anticipated to cleanly
-separate the generic stuff from the tool specific code, polishing the API
-and re-testing a lot of things.
+This hint assumes the reader is familiar with Linux From Scratch (LFS).
+
+Much of this hint assumes that the LFS variable is properly set. So,
+when following this hint, at all times make sure LFS is set properly:
+
+export LFS=/mnt/lfs   (or as needed for your setup)
 
 
-Changes from 0.6.1 to 0.7:
+HINT:
 
-Features:
-- LGPLv3 licensed, library `libsquashfs` containing all the SquashFS logic.
-- Legacy LZMA 1 compression support.
-- User configurable queue backlog for tar2sqfs and gensquashfs.
-- Make sqfsdiff continue comparing even if the types are different,
-  but compatible (e.g. extended directory vs basic directory).
-- In gensquashfs & tar2sqfs, try to determine the number of available CPU
-  cores and use the maximum by default.
-- Make "--keep-time" the default for tar2sqfs and use a flag to disable it.
+Step 1) Download additional needed packages.
 
-Fixed:
-- An off-by-one error in the directory index count.
-- Typo in configure fallback path searching for LZO library.
-- Typo that caused LZMA2 VLI filters to not be used at all.
-- Possible out-of-bounds access in LZO compressor constructor.
-- Inverted logic in sqfs2tar extended attributes processing.
-- Start numbering inodes at 1, instead of 2.
-- Omit the mode bits in the inodes, only store permissions.
+    This step is done on the HOST (not in LFS chroot).
 
-Removed:
-- Comparison with directory from sqfsdiff.
+    You will need some additional packages.   Download the squashfs 
+tools,
+busybox and syslinux.   The squashfs tools will be needed on the host.
 
 
-Regards,
+#------------ Cut and Paste start
+cd /home/teo-en-ming/Downloads
+wget -4 
+https://sourceforge.net/projects/squashfs/files/squashfs/squashfs4.4/squashfs4.4.tar.gz/download
+wget -4 https://busybox.net/downloads/busybox-1.31.1.tar.bz2
+wget -4 
+http://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-4.06.tar.xz
+#------------ Cut and Paste end
 
-David
+    Additionally, the addendum of this hint contains a script that is
+required for the live cd/dvd.   Save the addendum of this hint as:
+
+$LFS/sources/init.sh
+
+    Note: You can skip the aufs/unionfs kernel patch altogether if a
+more simple bootable CD/DVD is adequate for your needs.
+
+
+Step 2) Add squashfs tools to your host.   (Do this on your HOST)
+
+Teo En Ming's host operating system is Ubuntu 18.04.3 LTS Desktop 
+Edition.
+
+    If you are running a host distribution which provides prepackaged
+squashfs tools, you may be able to use them.   However they must be
+at least version 4.1 to work properly with this hint.
+
+    It is recommended however, that you build squashfs tools 4.4 from
+the source. This hint was tested with squashfs tools 4.4 and better
+(xz) compression is obtained with 4.4 (compared with 4.1).  To build the
+squashfs tools do:
+
+#------------ Cut and Paste start
+cd /home/teo-en-ming/Downloads
+tar xvfz squashfs4.4.tar.gz
+cd squashfs4.4/squashfs-tools
+Edit Makefile as follows:
+XZ_SUPPORT = 1
+COMP_DEFAULT = xz
+sudo apt install liblzma-dev
+make
+sudo make install
+mksquashfs -version
+#------------ Cut and Paste end
+
+The version string displayed should be 4.4.   If not, you may need to
+adjust your PATH so that $HOME/bin appears first in it.
+
+If you are on a single user system, or if no other version of
+squashfs tools exists, squashfs tools could be installed in /usr/bin
+or /usr/local/bin rather than $HOME/bin.
+
+If the lzma libraries are not installed, the build of squashfs-tools
+will fail.   To resolve it, either install the lzma libraries or
+rebuild squashfs without xz support.   squashfs (and this hint) can 
+operate
+properly without xz support but without xz support, the resulting
+live CD/DVD iso size will be somewhat larger.
+
+
+Step 3) Build your LFS system and kernel.
+
+    Follow the instructions in the LFS/BLFS book and build your LFS 
+system
+as you normally would.
+
+When you configure the kernel, make sure the following are enabled
+as builtins (not as modules):
+
+    SQUASHFS support (and support for SQUASHFS XZ compressed file 
+systems).
+    UNIONFS or AUFS support (Teo En Ming *did not* patch Linux Kernel 
+5.5.7 for AUFS or UNIONFS support).
+    CDROM support (ISO9660).
+    DEVTMPFS support.
+
+    Then build and install as normal:
+#------------ Cut and Paste start
+make
+make modules_install
+cp arch/x86/boot/bzImage 
+/boot/vmlinuz-5.5.7-turritopsis.dohrnii.teo.en.ming
+cp .config /boot/config-5.5.7
+#------------ Cut and Paste end
+
+
+    Additionally, /etc/fstab needs some tweaks for a live cd/dvd.
+Edit /etc/fstab and comment out all hard drive mounts.
+But leave the virtual filesystem mounts (/proc and such) in it:
+#------------ Cut and Paste start
+# Teo En Ming's favorite text editor in Linux is nano.
+nano /etc/fstab
+>> comment out any hard drive mounts <<
+#------------ Cut and Paste end
+
+    Build and configure the remainder of your LFS system as normal.
+
+
+Step 4) Build busybox in your LFS.
+
+    While inside the chroot environment add busybox to your
+    LFS system:
+
+ERROR compiling busybox with glibc-2.31: "sys-apps/busybox-1.31.1 fails 
+to compile with sys-devel/glibc-2.31"
+
+Software Bug Link: https://bugs.gentoo.org/708350
+
+Link to patch file: 
+https://708350.bugs.gentoo.org/attachment.cgi?id=611780
+
+===Start File busybox-glibc-2.31.patch===
+
+diff --git a/coreutils/date.c b/coreutils/date.c
+index 3414d38ae..4ade6abb4 100644
+--- a/coreutils/date.c
++++ b/coreutils/date.c
+@@ -279,6 +279,9 @@ int date_main(int argc UNUSED_PARAM, char **argv)
+  		time(&ts.tv_sec);
+  #endif
+  	}
++#if !ENABLE_FEATURE_DATE_NANO
++	ts.tv_nsec = 0;
++#endif
+  	localtime_r(&ts.tv_sec, &tm_time);
+
+  	/* If date string is given, update tm_time, and maybe set date */
+@@ -301,9 +304,10 @@ int date_main(int argc UNUSED_PARAM, char **argv)
+  		if (date_str[0] != '@')
+  			tm_time.tm_isdst = -1;
+  		ts.tv_sec = validate_tm_time(date_str, &tm_time);
++		ts.tv_nsec = 0;
+
+  		/* if setting time, set it */
+-		if ((opt & OPT_SET) && stime(&ts.tv_sec) < 0) {
++		if ((opt & OPT_SET) && clock_settime(CLOCK_REALTIME, &ts) < 0) {
+  			bb_perror_msg("can't set date");
+  		}
+  	}
+diff --git a/libbb/missing_syscalls.c b/libbb/missing_syscalls.c
+index 87cf59b3d..dc40d9155 100644
+--- a/libbb/missing_syscalls.c
++++ b/libbb/missing_syscalls.c
+@@ -15,14 +15,6 @@ pid_t getsid(pid_t pid)
+  	return syscall(__NR_getsid, pid);
+  }
+
+-int stime(const time_t *t)
+-{
+-	struct timeval tv;
+-	tv.tv_sec = *t;
+-	tv.tv_usec = 0;
+-	return settimeofday(&tv, NULL);
+-}
+-
+  int sethostname(const char *name, size_t len)
+  {
+  	return syscall(__NR_sethostname, name, len);
+diff --git a/util-linux/rdate.c b/util-linux/rdate.c
+index 70f829e7f..878375d78 100644
+--- a/util-linux/rdate.c
++++ b/util-linux/rdate.c
+@@ -95,9 +95,13 @@ int rdate_main(int argc UNUSED_PARAM, char **argv)
+  	if (!(flags & 2)) { /* no -p (-s may be present) */
+  		if (time(NULL) == remote_time)
+  			bb_error_msg("current time matches remote time");
+-		else
+-			if (stime(&remote_time) < 0)
++		else {
++			struct timespec ts;
++			ts.tv_sec = remote_time;
++			ts.tv_nsec = 0;
++			if (clock_settime(CLOCK_REALTIME, &ts) < 0)
+  				bb_perror_msg_and_die("can't set time of day");
++		}
+  	}
+
+  	if (flags != 1) /* not lone -s */
+
+===End File busybox-glibc-2.31.patch===
+
+#------------ Cut and Paste start
+cd /sources
+tar xvf busybox-1.31.1.tar.bz2
+cd busybox-1.31.1
+cat ../busybox-glibc-2.31.patch | patch -Np1
+make defconfig
+sed 's/# CONFIG_STATIC is not set/CONFIG_STATIC=y/' -i .config
+
+sed 's/CONFIG_FEATURE_HAVE_RPC=y/# CONFIG_FEATURE_HAVE_RPC is not set/' 
+\
+         -i .config
+sed 's/CONFIG_FEATURE_MOUNT_NFS=y/# CONFIG_FEATURE_MOUNT_NFS is not 
+set/' \
+         -i .config
+sed 's/CONFIG_FEATURE_INETD_RPC=y/# CONFIG_FEATURE_INETD_RPC is not 
+set/' \
+         -i .config
+make
+cp -v busybox /bin
+#------------ Cut and Paste end
+
+
+Step 5) Create ramdisk.
+
+Do this step from inside the LFS chroot environment.   This step
+creates a busybox based ramdisk.   The ramdisk does the work of
+creating and mounting the union filesystem and switching to it
+for the root file system.
+
+#------------ Cut and Paste start
+cd /sources
+echo "Teo En Ming Linux 2020.03 (FINAL) Bootable Live CD/DVD" >id_label
+mkdir -pv mnt_init/{bin,boot}
+cp -v id_label mnt_init/boot
+cp -v /bin/busybox mnt_init/bin
+cp init.sh mnt_init/init
+sed -i "s/<ARCH>/$(uname -m)/g" mnt_init/init
+chmod +x mnt_init/init
+
+pushd mnt_init
+find . | ./bin/busybox cpio -o -H newc -F ../initramfs.cpio
+popd
+gzip -9 initramfs.cpio
+rm -rf mnt_init
+mv initramfs.cpio.gz /boot/initram.fs
+mv id_label /boot
+#------------ Cut and Paste end
+
+
+Step 6) Make a squashed version of your LFS.
+
+    This step should be done on the HOST (not inside chroot).
+
+    Do any needed cleanup and final tweaking of your LFS system prior to
+continuing.  Strip any binaries you want stripped, remove any build 
+cruft,
+remove $LFS/tools, etc.   Add any additional data that you would like
+to be present on the live CD/DVD, etc.  A base LFS system (without 
+source) turns into only
+a 267 megabyte (or thereabouts) size iso, so there should be plenty of
+space available for extras.
+
+    Exit the chroot and unmount any filesystems that are associated with
+the $LFS directory.   At this point, it is a good idea to do a system
+shutdown and restart to ensure that the LFS directory is unused and
+in a quiescent state.   Make sure LFS is set again after the reboot.
+
+
+#------------ Cut and Paste start
+# Set LFS value as needed...
+export LFS=/mnt/lfs
+cd /home/teo-en-ming
+echo $LFS
+rm -f root.sfs
+sudo mksquashfs $LFS root.sfs -comp xz
+#------------ Cut and Paste end
+
+(omit the -comp xz if your squashfs tools don't support xz compression).
+
+
+
+Step 7) Add syslinux and create CD/DVD image.
+
+This step should be done on the HOST (not inside chroot).
+
+Setup the isolinux configuration file:
+
+#------------ Cut and Paste start
+cd /home/teo-en-ming
+
+cat > isolinux.cfg << EOF
+DEFAULT menu.c32
+PROMPT 0
+MENU TITLE Select an option...
+TIMEOUT 300
+
+LABEL live
+     MENU LABEL ^Boot Teo En Ming Linux 2020.03 (FINAL) Live CD/DVD 
+($(uname -m))
+     MENU DEFAULT
+     KERNEL /boot/$(uname -m)/vmlinuz
+     APPEND initrd=/boot/$(uname -m)/initram.fs quiet
+
+LABEL busybox
+     MENU LABEL ^Boot busybox ($(uname -m))
+     KERNEL /boot/$(uname -m)/vmlinuz
+     APPEND initrd=/boot/$(uname -m)/initram.fs quiet busybox
+
+LABEL harddisk
+     MENU LABEL Boot from first ^Hard disk
+     LOCALBOOT 0x80
+
+EOF
+#------------ Cut and Paste end
+
+Package the isolinux bootloader, squashed rootfs and ramdisk
+into a subdirectory:
+
+#------------ Cut and Paste start
+tar xf syslinux-4.06.tar.xz
+rm -rf live
+mkdir -p live/boot/{isolinux,$(uname -m)}
+cp -v syslinux-4.06/core/isolinux.bin live/boot/isolinux
+cp -v syslinux-4.06/com32/menu/menu.c32 live/boot/isolinux
+mv -v /home/teo-en-ming/isolinux.cfg                 live/boot/isolinux
+
+cp -v /home/teo-en-ming/root.sfs live/boot/$(uname -m)
+cp -v $LFS/boot/vmlinuz-5.5.7-turritopsis.dohrnii.teo.en.ming   
+live/boot/$(uname -m)/vmlinuz
+cp -v $LFS/boot/id_label live/boot/$(uname -m)
+cp -v $LFS/boot/initram.fs live/boot/$(uname -m)/initram.fs
+
+#------------ Cut and Paste end
+
+Create the live CD/DVD iso image using whatever iso creation tool you
+have.   In this example, it is 'genisoimage':
+
+#------------ Cut and Paste start
+genisoimage -o teo-en-ming-linux-2020.03-final-live-cd-dvd.iso     \
+         -b boot/isolinux/isolinux.bin \
+         -c boot.cat                   \
+         -no-emul-boot                 \
+         -boot-load-size 4             \
+         -boot-info-table              \
+         -joliet -l -R                 \
+         live
+
+rm -rf live ### OPTIONAL
+#------------ Cut and Paste end
+
+Step 8) Burn and boot.
+
+Burn the iso using whatever cd/dvd writing tools you prefer.
+Teo En Ming uses k3b. Reboot the
+system with the CD/DVD inserted and it should boot into your live 
+CD/DVD.
+
+Step 9) Usage
+
+The CD/DVD boot menu allows you to boot busybox or the live cd/dvd.   
+Busybox
+may be useful if debugging or experimenting is needed.
+
+You can use the live cd/dvd to inject your LFS image onto the target 
+computer (
+rather than rebuilding from scratch..)   First, mount
+/dev/cdrom somewhere.   In the boot subdirectory in the cd image, you 
+will
+find the root.sfs file.   root.sfs is your LFS system in a squashed 
+format.
+To install it into the target, either use the unsquashfs tools to
+uncompress it onto the target computer system or loop mount the root.sfs
+file and then use tar or some other directory copy tool to inject
+it into the target computer.
+
+
+
+ACKNOWLEDGEMENTS:
+   * The LFS from script project 
+(http://lfscript.org/wiki/index.php/Main_Page)
+   * The LFS project (http://www.linuxfromscratch.org/lfs/)
+
+CHANGELOG:
+[2013-01-20]
+   * Initial hint by Jimmy Anderson.
+[2020-03-14]
+   * Modifications by Turritopsis Dohrnii Teo En Ming, Singapore
+
+ADDENDUM: v Cut and save the remainder of this file as 
+$LFS/sources/init.sh v
+#!/bin/busybox sh
+#
+# This file is a modified version of:
+#
+# Initramfs boot script 1.3.1 (2012-02-09)
+# Copyright (c) 2010-2012   Marcel van den Boer
+#
+# Permission is hereby granted, free of charge, to any person obtaining 
+a copy
+# of this software and associated documentation files (the "Software"), 
+to
+# deal in the Software without restriction, including without limitation 
+the
+# rights to use, copy, modify, merge, publish, distribute, sublicense, 
+and/or
+# sell copies of the Software, and to permit persons to whom the 
+Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be 
+included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT 
+SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, 
+ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+DEALINGS
+# IN THE SOFTWARE.
+
+# FS layout at the start of this script:
+# - /boot/id_label
+# - /bin/busybox
+# - /dev/console (created by kernel)
+# - /init (this file)
+
+set -e
+
+ARCH="<ARCH>"
+
+###########################################
+copyBindMount() { # COPY/BIND LIVECD MODE #
+###########################################
+
+# This function bind-mounts directories which are designed to be capable 
+of
+# read-only access and copies the remaining directories to a tmpfs.
+#
+# The downside of this method is that the resulting root filesystem is 
+not
+# fully writable. So, for example, installation of new programs will not 
+be
+# possible.
+#
+# However, this function can be used without any modification to the 
+kernel and
+# is therefore perfect for use as a fallback if other options are not 
+available.
+
+# Mount a tmpfs where the new rootfs will be.
+mount -t tmpfs tmpfs ${ROOT} # Allows remounting root in the bootscripts
+
+# Bind mount read-only filesystems, copy the rest
+cd /mnt/system
+for dir in $(ls -1); do
+     case ${dir} in
+         lost+found)
+             ;;
+         bin | boot | lib | opt | sbin | usr)
+             mkdir ${ROOT}/${dir}
+             mount --bind ${dir} ${ROOT}/${dir}
+             ;;
+         *)
+             cp -R ${dir} ${ROOT}
+             ;;
+     esac
+done
+cd /
+
+##############################################
+}; unionMount() { # UNIONFS/AUFS LIVECD MODE #
+##############################################
+
+# A union mount takes one or more directories and combines them 
+transparantly
+# in a third. This function creates a writable directory in memory 
+(tmpfs) and
+# uses it to overlay the read-only system image, resulting in a fully 
+writable
+# root file system.
+#
+# The only downside to this method is that it requires a union type 
+filesystem
+# in the kernel, which can only be accomplished by patching the kernel 
+as there
+# is no such feature in a vanilla kernel.
+
+mkdir -p /mnt/writable
+mount -t tmpfs -o rw tmpfs /mnt/writable
+
+UNIONFSOPT="/mnt/writable=rw:/mnt/system=ro"
+AUFSOPT="/mnt/writable=rw:/mnt/system=ro"
+mount -t unionfs -o dirs=${UNIONFSOPT} unionfs ${ROOT} 2> /dev/null || \
+mount -t aufs -o br=${AUFSOPT} none ${ROOT} 2> /dev/null || \
+{
+     # If UnionFS fails, fall back to copy/bind mounting
+     copyBindMount
+}
+
+######################
+} # END OF FUNCTIONS #
+######################
+
+# Make required applets easier to access
+for applet in cat chmod cp cut grep ls mkdir mknod mount umount 
+switch_root \
+     rm mv vi cpio tar mke2fs sync fdisk dd ; do
+     /bin/busybox ln /bin/busybox /bin/${applet}
+done
+
+# Clear the screen
+#clear # Don't! This will clear the Linux boot logo when using a 
+framebuffer.
+        # If you want to clear the screen on boot add the "clear" command 
+to
+        # '/usr/share/live/sec_init.sh' in the system image.
+
+# Create device nodes required to run this script
+# Note: /dev/console will already be available in the ramfs
+mknod /dev/null c  1  3
+
+mknod /dev/scd0 b 11  0  # +--------
+mknod /dev/scd1 b 11  1  # |
+mknod /dev/scd2 b 11  2  # |
+mknod /dev/scd3 b 11  3  # |
+                          # |
+mknod /dev/hdc  b 22  0  # |
+                          # |
+mknod /dev/sda  b  8  0  # |
+mknod /dev/sda1 b  8  1  # |
+mknod /dev/sda2 b  8  2  # |
+mknod /dev/sda3 b  8  3  # |
+mknod /dev/sda4 b  8  4  # |
+                          # |
+mknod /dev/sdb  b  8 16  # |    <----
+mknod /dev/sdb1 b  8 17  # |        Devices which could be or contain 
+the
+mknod /dev/sdb2 b  8 18  # |        boot medium...
+mknod /dev/sdb3 b  8 19  # |
+mknod /dev/sdb4 b  8 20  # |
+                          # |
+mknod /dev/sdc  b  8 32  # |
+mknod /dev/sdc1 b  8 33  # |
+mknod /dev/sdc2 b  8 34  # |
+mknod /dev/sdc3 b  8 35  # |
+mknod /dev/sdc4 b  8 36  # |
+                          # |
+mknod /dev/sdd  b  8 48  # |
+mknod /dev/sdd1 b  8 49  # |
+mknod /dev/sdd2 b  8 50  # |
+mknod /dev/sdd3 b  8 51  # |
+mknod /dev/sdd4 b  8 52  # +--------
+
+# Create mount points for filesystems
+mkdir -p /mnt/medium
+mkdir -p /mnt/system
+mkdir -p /mnt/rootfs
+
+# Mount the /proc filesystem (enables filesystem detection for 'mount')
+mkdir /proc
+mount -t proc proc /proc
+
+# Invoke busybox if requested via the kernel command line.
+if [ `grep -c "busybox" /proc/cmdline` -ne "0" ]; then
+     echo "Busybox requested";
+     busybox sh
+fi
+
+# Search for, and mount the boot medium
+LABEL="$(cat /boot/id_label)"
+for device in $(ls /dev); do
+     [ "${device}" == "console" ] && continue
+     [ "${device}" == "null"    ] && continue
+
+     mount -o ro /dev/${device} /mnt/medium 2> /dev/null && \
+     if [ "$(cat /mnt/medium/boot/${ARCH}/id_label)" != "${LABEL}" ]; 
+then
+         umount /mnt/medium
+     else
+         DEVICE="${device}"
+         break
+     fi
+done
+
+if [ "${DEVICE}" == "" ]; then
+     echo "FATAL: Boot medium not found."
+     /bin/busybox sh
+fi
+
+# Mount the system image
+mount -t squashfs -o ro,loop /mnt/medium/boot/${ARCH}/root.sfs 
+/mnt/system || {
+     echo "FATAL: Boot medium found, but system image is missing."
+     /bin/busybox sh
+}
+
+# Define where the new root filesystem will be
+ROOT="/mnt/rootfs" # Also needed for /usr/share/live/sec_init.sh
+
+# Run in bootable cd mode if requested via the kernel command line.
+if [ `grep -c "bootcd" /proc/cmdline` -ne "0" ]; then
+     echo "Bootcd mode (bind mount) requested";
+     copyBindMount
+else
+     # Select LiveCD mode
+     unionMount # Might fall back to copyBindMount
+fi
+
+# Tell LFS to skip fsck during startup:
+> $ROOT/fastboot
+
+# Get rid of / manipulations in mountfs script:
+grep -v ' \/ ' $ROOT/etc/rc.d/init.d/mountfs > $ROOT/tmp/mountfs
+rm -f $ROOT/etc/rc.d/init.d/mountfs
+mv $ROOT/tmp/mountfs $ROOT/etc/rc.d/init.d/mountfs
+chmod +x $ROOT/etc/rc.d/init.d/mountfs
+
+# Move current mounts to directories accessible in the new root
+cd /mnt
+for dir in $(ls -1); do
+     if [ "${dir}" != "rootfs" ]; then
+         mkdir -p ${ROOT}/mnt/.boot/${dir}
+         mount --move /mnt/${dir} ${ROOT}/mnt/.boot/${dir}
+     fi
+done
+cd /
+
+# Run secondary initialization (if the system provides it)
+if [ -x ${ROOT}/usr/share/live/sec_init.sh ]; then
+     . ${ROOT}/usr/share/live/sec_init.sh
+fi
+
+# Clean up
+umount /proc
+
+# Switch to the new root and launch INIT!
+exec switch_root -c /dev/console ${ROOT} /sbin/init
+
+
+
+
+
+
+
+
+-----BEGIN EMAIL SIGNATURE-----
+
+The Gospel for all Targeted Individuals (TIs):
+
+[The New York Times] Microwave Weapons Are Prime Suspect in Ills of
+U.S. Embassy Workers
+
+Link: 
+https://www.nytimes.com/2018/09/01/science/sonic-attack-cuba-microwave.html
+
+********************************************************************************************
+
+Singaporean Mr. Turritopsis Dohrnii Teo En Ming's Academic
+Qualifications as at 14 Feb 2019 and refugee seeking attempts at the 
+United Nations Refugee Agency Bangkok (21 Mar 2017), in Taiwan (5 Aug 
+2019) and Australia (25 Dec 2019 to 9 Jan 2020):
+
+[1] https://tdtemcerts.wordpress.com/
+
+[2] https://tdtemcerts.blogspot.sg/
+
+[3] https://www.scribd.com/user/270125049/Teo-En-Ming
+
+-----END EMAIL SIGNATURE-----
 
 
 _______________________________________________
