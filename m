@@ -2,63 +2,68 @@ Return-Path: <squashfs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+squashfs-devel@lfdr.de
 Delivered-To: lists+squashfs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 22910523D9E
-	for <lists+squashfs-devel@lfdr.de>; Wed, 11 May 2022 21:35:35 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
+	by mail.lfdr.de (Postfix) with ESMTPS id 074445274CB
+	for <lists+squashfs-devel@lfdr.de>; Sun, 15 May 2022 03:17:04 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <squashfs-devel-bounces@lists.sourceforge.net>)
-	id 1nos7O-00072X-N7; Wed, 11 May 2022 19:35:31 +0000
+	id 1nq2sW-0001I3-Dp; Sun, 15 May 2022 01:16:58 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <phillip@squashfs.org.uk>) id 1nos55-0006sZ-Pv
- for squashfs-devel@lists.sourceforge.net; Wed, 11 May 2022 19:33:08 +0000
+ (envelope-from <hsinyi@chromium.org>) id 1np2Ev-000673-U2
+ for squashfs-devel@lists.sourceforge.net; Thu, 12 May 2022 06:23:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CFo0n8dotqVDDiALcCzgUm76yZS4Wprmht6luVbY/1g=; b=G3qzhnGpDxJVHW7hkkQ9rU9wqS
- GcJ35Lh/2g7ppmMOhhGB2xlTgJpq7g8Q1+vRd6HTaMyrHV/KdDjAndMds4Hxu5gBhJi73QJUIUokr
- i2mbo9ZMstcF5qEE0+JVPIAkbfv/x9X6lPRLDB/oxUKOcQLratda2/hgkNKHLSZ5gc1c=;
+ bh=H/TrlpDlY7GcT/PtCd2Qn03YpuFdqv9BFmHUeEezNAs=; b=UPeuvlwAXAZTtL6BplJxOy8ttv
+ IxYZoVI4KWNcLRqelPzmEsOWBDD+8342XZCn+qrOxE83TpFyYnXnEgVWb7yGei4Cjl8plcucGVbmd
+ OXmkN8CMuKQZBKlHpVIdhVpRWujC96TQhFO9Dh9jZ1QbvZ6Q88imBtRTd5ASNZMCVGWw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=CFo0n8dotqVDDiALcCzgUm76yZS4Wprmht6luVbY/1g=; b=lEvdVjqok2rWqJL6aNjhcEpYwz
- IBa6T+DQmbOlrce/5jLA4+9Ba1m6wThliTYSogC9nMA4YAJ8HAlcDZ1hLagFU9OIP6ZVHto9aJDJ+
- DaL9Is2tlJadwxeV8OeW3EXeVbwidcWzWxhqBgZd/P9nG80riZGLmGgu2jnVFvaQt4/0=;
-Received: from p3plsmtp17-01-2.prod.phx3.secureserver.net ([173.201.193.162]
- helo=p3plwbeout17-01.prod.phx3.secureserver.net)
+ bh=H/TrlpDlY7GcT/PtCd2Qn03YpuFdqv9BFmHUeEezNAs=; b=CivBZp78grZF26giEHIM8t+hNb
+ Kwes6M9hNXWeKAnkLR2b0W532wiHjeCyWD8nz66bgHxUqD7IFDvpd3gW1rk9B5FzrfSU8xvhBk4zJ
+ rHL9Xyrchpt9Udzc/Vy1VEiUsui/kNBY28cYq2gPC2qlxv9FBgxqtJ86X/Uowt4h2mQE=;
+Received: from mail-vk1-f177.google.com ([209.85.221.177])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nos53-0007Mp-6n
- for squashfs-devel@lists.sourceforge.net; Wed, 11 May 2022 19:33:07 +0000
-Received: from mailex.mailcore.me ([94.136.40.145]) by :WBEOUT: with ESMTP
- id orlznk8yT7LSyorm0nJoje; Wed, 11 May 2022 12:13:24 -0700
-X-CMAE-Analysis: v=2.4 cv=JLT+D+Gb c=1 sm=1 tr=0 ts=627c0ad4
- a=7e6w4QD8YWtpVJ/7+iiidw==:117 a=84ok6UeoqCVsigPHarzEiQ==:17
- a=ggZhUymU-5wA:10 a=IkcTkHD0fZMA:10 a=oZkIemNP1mAA:10 a=pGLkceISAAAA:8
- a=cm27Pg_UAAAA:8 a=JfrnYn6hAAAA:8 a=P-IC7800AAAA:8 a=mz2Ht4xZ29uFL5uRX6cA:9
- a=QEXdDO2ut3YA:10 a=xmb-EsYY8bH0VWELuYED:22 a=1CNFftbPRP8L7MoqJWF3:22
- a=d3PnA9EDa4IxuAV0gXij:22
-X-SECURESERVER-ACCT: phillip@squashfs.org.uk  
-X-SID: orlznk8yT7LSy
-Received: from 82-69-79-175.dsl.in-addr.zen.co.uk ([82.69.79.175]
- helo=[192.168.178.33])
- by smtp02.mailcore.me with esmtpa (Exim 4.94.2)
- (envelope-from <phillip@squashfs.org.uk>)
- id 1norly-0001qw-Db; Wed, 11 May 2022 20:13:23 +0100
-Message-ID: <adf436dd-d17d-7a84-68ba-0dd2125620cf@squashfs.org.uk>
-Date: Wed, 11 May 2022 20:13:17 +0100
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
+ id 1np2Es-00010c-Ur
+ for squashfs-devel@lists.sourceforge.net; Thu, 12 May 2022 06:23:56 +0000
+Received: by mail-vk1-f177.google.com with SMTP id o132so2168102vko.11
+ for <squashfs-devel@lists.sourceforge.net>;
+ Wed, 11 May 2022 23:23:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=H/TrlpDlY7GcT/PtCd2Qn03YpuFdqv9BFmHUeEezNAs=;
+ b=iZaZ+S/P/lSB/srplzcsz2eHG0FloWA8/Od+LbVrWCmJ6mJMEb6TS8sshn9Xi2RtEu
+ 6OQ1ZPYcYkdZhv9CZePP5xG406wzw1Ijx0uuLQjHwaHcObjOzDFRUmbfUU3D7Yp7bodJ
+ gDn8L673r75MUf2NUDmImcaXv24mVep9jNPY8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=H/TrlpDlY7GcT/PtCd2Qn03YpuFdqv9BFmHUeEezNAs=;
+ b=bvSb122R+Dx1ufnfsjqp0xeqCcm5PwuVGPyrdnjdo9yXOl8rwCpRrmF6msKHAOGvdc
+ N6wdmbLrOFkgSsWpqhpAnOeDyEccm3rf2SjTRQnnyBcDg7QvPGSRj+Uf6Fp+qYyiSiwc
+ ImR8PIzJ/OIzZNg+IKsOmTB1rX6TrfKK27A4YwxJbTFOKorUjOXEOTKCrq76JJV/ot5R
+ ELPYT8c36UOsJlok077iiEHmEt9lu0UOeuWahK/uR1Xg3v8U4VTfh+TBB0xdoZRTwEt/
+ /GpAoocni2bV9/zRwG9k2PbzsDR0IIA2UBtQcrkA/WG9zg04ct98bUEu4OsG86TvFaA+
+ Vr4g==
+X-Gm-Message-State: AOAM530rz+4TU8Vz6h7NQ4dt0pj5dZeqdCXM/kqq1IbCCctCytNpVTRD
+ qQjZCWShccBJxCik3tDn4P2KQl/p61SUoHhe+AN2fg==
+X-Google-Smtp-Source: ABdhPJy7DdmGHMVnR63NRDpq7FSFO4XT9fKL8az1/1RTxxbLhxTnvOtAuuuNv2Uq7wmQ9/B5o/hnWzusdl5jkpR/mgQ=
+X-Received: by 2002:a05:6122:da8:b0:331:3b30:8b40 with SMTP id
+ bc40-20020a0561220da800b003313b308b40mr15919850vkb.30.1652336628101; Wed, 11
+ May 2022 23:23:48 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.9.0
-To: Hsin-Yi Wang <hsinyi@chromium.org>, Xiongwei Song <sxwjean@gmail.com>
 References: <PH0PR11MB519282C2834C7BB7B5431F34ECC79@PH0PR11MB5192.namprd11.prod.outlook.com>
  <Ynfzh2ifG85MZEoN@casper.infradead.org>
  <CAJMQK-jNYoJVqsri4REV=E3bG8AS7T82HrVSAUPzbUiWask01A@mail.gmail.com>
@@ -70,35 +75,44 @@ References: <PH0PR11MB519282C2834C7BB7B5431F34ECC79@PH0PR11MB5192.namprd11.prod.
  <CAJMQK-jgNPvO+8xZph-MPs57DjDrVvhduxvHbtR_Hwd7+kZc-A@mail.gmail.com>
  <CAEVVKH9SuUFoR8SGP0tcB1fohW3nWRCVmSro_iDUVEV0NS2VqQ@mail.gmail.com>
  <CAJMQK-h3p72P=Ltpk9X1o6f56iKN6z=DimEtdGEUXf8cVabQOQ@mail.gmail.com>
-From: Phillip Lougher <phillip@squashfs.org.uk>
-In-Reply-To: <CAJMQK-h3p72P=Ltpk9X1o6f56iKN6z=DimEtdGEUXf8cVabQOQ@mail.gmail.com>
-X-Mailcore-Auth: 439999529
-X-Mailcore-Domain: 1394945
-X-123-reg-Authenticated: phillip@squashfs.org.uk  
-X-Originating-IP: 82.69.79.175
-X-CMAE-Envelope: MS4xfCvBaHugZ6/NWQ2EdkSZRcFax3X8BjgPx53VDdBslCVoUdloizzucprRpKFOhcg7vA7l+or10b6LDCeKyqXTOywVfqleRXotEaEcPSqJEdLFKK8YH8Sg
- 58yzg+7gCxBAvlJAznZxiMzA5qWQdEOdkW8hwoQ9WJLTKXkM6eoQSM7XKKBg1BIcMMV0Igkk95Rjyg9zdYw3QgrrGvXVT0shQVBvGg9BcWi63wXVFeVlsYpS
-X-Spam-Score: -0.7 (/)
+ <adf436dd-d17d-7a84-68ba-0dd2125620cf@squashfs.org.uk>
+In-Reply-To: <adf436dd-d17d-7a84-68ba-0dd2125620cf@squashfs.org.uk>
+From: Hsin-Yi Wang <hsinyi@chromium.org>
+Date: Thu, 12 May 2022 14:23:21 +0800
+Message-ID: <CAJMQK-gQ+LD6t74FUwuxYVcmETgJxK8Q5_ZtuJvELm+yr=f8Yg@mail.gmail.com>
+To: Phillip Lougher <phillip@squashfs.org.uk>
+Content-Type: multipart/mixed; boundary="000000000000c4a4db05deca99fc"
+X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 11/05/2022 16:12, Hsin-Yi Wang wrote: > On Tue, May 10,
- 2022 at 9:19 PM Xiongwei Song <sxwjean@gmail.com> wrote: >> >> On Tue, May
- 10, 2022 at 8:47 PM Hsin-Yi Wang <hsinyi@chromium.org> wrote: >>> [...] 
- Content analysis details:   (-0.7 points, 6.0 required)
+ Content preview:  On Thu, May 12,
+ 2022 at 3:13 AM Phillip Lougher <phillip@squashfs.org.uk>
+ wrote: > > On 11/05/2022 16:12, Hsin-Yi Wang wrote: > > On Tue, May 10, 2022
+ at 9:19 PM Xiongwei Song <sxwjean@gmail.com> wrot [...] 
+ Content analysis details:   (-0.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [173.201.193.162 listed in list.dnswl.org]
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ no trust [209.85.221.177 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.221.177 listed in wl.mailspike.net]
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.7 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1nos53-0007Mp-6n
-X-Mailman-Approved-At: Wed, 11 May 2022 19:35:29 +0000
+ -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1np2Es-00010c-Ur
+X-Mailman-Approved-At: Sun, 15 May 2022 01:16:57 +0000
 Subject: Re: [Squashfs-devel] squashfs performance regression and readahea
 X-BeenThere: squashfs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -112,198 +126,407 @@ List-Help: <mailto:squashfs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/squashfs-devel>, 
  <mailto:squashfs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: "Song, Xiongwei" <Xiongwei.Song@windriver.com>,
- Zhang Yi <yi.zhang@huawei.com>, Linus Torvalds <torvalds@linux-foundation.org>,
+ Zhang Yi <yi.zhang@huawei.com>, Xiongwei Song <sxwjean@gmail.com>,
+ Linus Torvalds <torvalds@linux-foundation.org>,
  Matthew Wilcox <willy@infradead.org>,
  "linux-mm@kvack.org" <linux-mm@kvack.org>,
  Zheng Liang <zhengliang6@huawei.com>, Hou Tao <houtao1@huawei.com>,
  "squashfs-devel@lists.sourceforge.net" <squashfs-devel@lists.sourceforge.net>,
  Andrew Morton <akpm@linux-foundation.org>, Miao Xie <miaoxie@huawei.com>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: squashfs-devel-bounces@lists.sourceforge.net
 
-T24gMTEvMDUvMjAyMiAxNjoxMiwgSHNpbi1ZaSBXYW5nIHdyb3RlOgo+IE9uIFR1ZSwgTWF5IDEw
-LCAyMDIyIGF0IDk6MTkgUE0gWGlvbmd3ZWkgU29uZyA8c3h3amVhbkBnbWFpbC5jb20+IHdyb3Rl
-Ogo+Pgo+PiBPbiBUdWUsIE1heSAxMCwgMjAyMiBhdCA4OjQ3IFBNIEhzaW4tWWkgV2FuZyA8aHNp
-bnlpQGNocm9taXVtLm9yZz4gd3JvdGU6Cj4+Pgo+Pj4gT24gVHVlLCBNYXkgMTAsIDIwMjIgYXQg
-ODozMSBQTSBYaW9uZ3dlaSBTb25nIDxzeHdqZWFuQGdtYWlsLmNvbT4gd3JvdGU6Cj4+Pj4KPj4+
-PiBIaSBIc2luLVlpLAo+Pj4+Cj4+Pj4gT24gTW9uLCBNYXkgOSwgMjAyMiBhdCAxMDoyOSBQTSBI
-c2luLVlpIFdhbmcgPGhzaW55aUBjaHJvbWl1bS5vcmc+IHdyb3RlOgo+Pj4+Pgo+Pj4+PiBPbiBN
-b24sIE1heSA5LCAyMDIyIGF0IDk6MjEgUE0gTWF0dGhldyBXaWxjb3ggPHdpbGx5QGluZnJhZGVh
-ZC5vcmc+IHdyb3RlOgo+Pj4+Pj4KPj4+Pj4+IE9uIE1vbiwgTWF5IDA5LCAyMDIyIGF0IDA4OjQz
-OjQ1UE0gKzA4MDAsIFhpb25nd2VpIFNvbmcgd3JvdGU6Cj4+Pj4+Pj4gSGkgSHNpbi1ZaSBhbmQg
-TWF0dGhldywKPj4+Pj4+Pgo+Pj4+Pj4+IFdpdGggdGhlIHBhdGNoIGZyb20gdGhlIGF0dGFjaG1l
-bnQgb24gbGludXggNS4xMCwgcmFuIHRoZSBjb21tYW5kIGFzIEkKPj4+Pj4+PiBtZW50aW9uZWQg
-ZWFybGllciwKPj4+Pj4+PiBnb3QgdGhlIHJlc3VsdHMgYmVsb3c6Cj4+Pj4+Pj4gMTo0MC42NSAo
-MW0gKyA0MC42NXMpCj4+Pj4+Pj4gMToxMC4xMgo+Pj4+Pj4+IDE6MTEuMTAKPj4+Pj4+PiAxOjEx
-LjQ3Cj4+Pj4+Pj4gMToxMS41OQo+Pj4+Pj4+IDE6MTEuOTQKPj4+Pj4+PiAxOjExLjg2Cj4+Pj4+
-Pj4gMToxMi4wNAo+Pj4+Pj4+IDE6MTIuMjEKPj4+Pj4+PiAxOjEyLjA2Cj4+Pj4+Pj4KPj4+Pj4+
-PiBUaGUgcGVyZm9ybWFuY2UgaGFzIGltcHJvdmVkIG9idmlvdXNseSwgYnV0IGNvbXBhcmVkIHRv
-IGxpbnV4IDQuMTgsIHRoZQo+Pj4+Pj4+IHBlcmZvcm1hbmNlIGlzIG5vdCBzbyBnb29kLgo+Pj4+
-Pj4+Cj4+Pj4+IEkgdGhpbmsgeW91IHNob3VsZG4ndCBjb21wYXJlIHRoZSBwZXJmb3JtYW5jZSB3
-aXRoIDQuMTggZGlyZWN0bHksCj4+Pj4+IHNpbmNlIHRoZXJlIG1pZ2h0IGJlIG90aGVyIGZhY3Rv
-cnMgdGhhdCBpbXBhY3QgdGhlIHBlcmZvcm1hbmNlLgo+Pj4+Cj4+Pj4gTWFrZSBzZW5zZS4KPj4+
-Pgo+Pj4+PiBJJ2Qgc3VnZ2VzdCBjb21wYXJpbmcgdGhlIHNhbWUga2VybmVsIHZlcnNpb24gd2l0
-aDoKPj4+Pj4gYSkgd2l0aCB0aGlzIHBhdGNoCj4+Pj4+IGIpIHdpdGggYzFmNjkyNWUxMDkxICgi
-bW06IHB1dCByZWFkYWhlYWQgcGFnZXMgaW4gY2FjaGUgZWFybGllciIpIHJldmVydGVkLgo+Pj4+
-Cj4+Pj4gV2l0aCA5ZWVjMWQ4OTcxMzkgKCJzcXVhc2hmczogcHJvdmlkZSBiYWNraW5nX2Rldl9p
-bmZvIGluIG9yZGVyIHRvIGRpc2FibGUKPj4+PiByZWFkLWFoZWFkIikgcmV2ZXJ0ZWQgYW5kIGFw
-cGxpZWQgMDAwMS1XSVAtc3F1YXNoZnMtaW1wbGVtZW50LXJlYWRhaGVhZC5wYXRjaCwKPj4+PiB0
-ZXN0IHJlc3VsdCBvbiBsaW51eCA1LjE477yaCj4+Pj4gMTo0MS41MSAoMW0gKyA0MS41MXMpCj4+
-Pj4gMTowOC4xMQo+Pj4+IDE6MTAuMzcKPj4+PiAxOjExLjE3Cj4+Pj4gMToxMS4zMgo+Pj4+IDE6
-MTEuNTkKPj4+PiAxOjEyLjIzCj4+Pj4gMToxMi4wOAo+Pj4+IDE6MTIuNzYKPj4+PiAxOjEyLjUx
-Cj4+Pj4KPj4+PiBwZXJmb3JtYW5jZSB3b3JzZSAxIH4gMnMgdGhhbiBsaW51eCA1LjE4IHZhbmls
-bGEuCj4+Pj4KPj4+Cj4+PiBDYW4geW91IHNoYXJlIHRoZSBwYWNrIGZpbGUgeW91IHVzZWQgZm9y
-IHRlc3Rpbmc/IFRoYW5rcwo+Pgo+PiBZb3UgYXJlIHNheWluZyB0aGUgZmlsZXMgdGhhdCBhcmUg
-cHV0IGluIHNxdWFzaGZzIHBhcnRpdGlvbnM/IElmIHllcywgSSBjYW4gdGVsbAo+PiBJIGp1c3Qg
-cHV0IHNvbWUgZHluYW1pYyBsaWJyYXJpZXMgaW4gcGFydGl0aW9uczoKPj4gLXJ3eHIteHIteCAx
-IHJvb3Qgcm9vdCAgMjAwNjgwIEFwciAyMCAwMzo1NyBsZC0yLjMzLnNvCj4+IGxyd3hyd3hyd3gg
-MSByb290IHJvb3QgICAgICAxMCBBcHIgMjAgMDM6NTcgbGQtbGludXgteDg2LTY0LnNvLjIgLT4g
-bGQtMi4zMy5zbwo+PiAtcnd4ci14ci14IDEgcm9vdCByb290ICAgMTg3NzYgQXByIDIwIDAzOjU3
-IGxpYmFubC0yLjMzLnNvCj4+IGxyd3hyd3hyd3ggMSByb290IHJvb3QgICAgICAxNCBBcHIgMjAg
-MDM6NTcgbGliYW5sLnNvLjEgLT4gbGliYW5sLTIuMzMuc28KPj4gbHJ3eHJ3eHJ3eCAxIHJvb3Qg
-cm9vdCAgICAgIDE3IEFwciAyMCAwNDowOCBsaWJibGtpZC5zby4xIC0+IGxpYmJsa2lkLnNvLjEu
-MS4wCj4+IC1yd3hyLXhyLXggMSByb290IHJvb3QgIDMzMDc3NiBBcHIgMjAgMDQ6MDggbGliYmxr
-aWQuc28uMS4xLjAKPj4gLXJ3eHIteHIteCAxIHJvb3Qgcm9vdCAxODIzMTkyIEFwciAyMCAwMzo1
-NyBsaWJjLTIuMzMuc28KPj4gLi4uLi4uIHNuaXAgLi4uLi4uCj4+Cj4+IFRoZSBudW1iZXIgb2Yg
-ZmlsZXMgaXMgMTEwKDU1IGxpYnMgKyA1NSBzb2Z0IGxpbmtzIHRvIGxpYnMpLiAgSSBoYXZlIDkw
-IHNxdWFzaGZzCj4+IHBhcnRpdGlvbnMgd2hpY2ggc2F2ZSB0aGUgaWRlbnRpY2FsIGZpbGVzLiBU
-aGUgc3BhY2Ugb2YgZWFjaCBwYXJ0aXRpb24gaXMgMTFNLAo+PiBub3RoaW5nIHNwZWNpYWwuCj4+
-Cj4+IFRoYW5rcy4KPj4KPiAKPiBJIG5vdGljZWQgdGhhdCB0aGVyZSdzIGEgY3Jhc2ggYXQKPiBo
-dHRwczovL2VsaXhpci5ib290bGluLmNvbS9saW51eC9sYXRlc3Qvc291cmNlL2xpYi9sem8vbHpv
-MXhfZGVjb21wcmVzc19zYWZlLmMjTDIxOAo+IHdoZW4gdGVzdGluZyBvbiBteSBzeXN0ZW0uCj4g
-KEkgaGF2ZSBDT05GSUdfSEFWRV9FRkZJQ0lFTlRfVU5BTElHTkVEX0FDQ0VTUyBlbmFibGVkKQo+
-IAo+IEZ1bGwgbG9nczoKPiBbICAxMTkuMDYyNDIwXSBVbmFibGUgdG8gaGFuZGxlIGtlcm5lbCBw
-YWdpbmcgcmVxdWVzdCBhdCB2aXJ0dWFsCj4gYWRkcmVzcyBmZmZmZmZjMDE3MzM3MDAwCj4gWyAg
-MTE5LjA2MjQzN10gTWVtIGFib3J0IGluZm86Cj4gWyAgMTE5LjA2MjQ0Ml0gICBFU1IgPSAweDk2
-MDAwMDQ3Cj4gWyAgMTE5LjA2MjQ0N10gICBFQyA9IDB4MjU6IERBQlQgKGN1cnJlbnQgRUwpLCBJ
-TCA9IDMyIGJpdHMKPiBbICAxMTkuMDYyNDUxXSAgIFNFVCA9IDAsIEZuViA9IDAKPiBbICAxMTku
-MDYyNDU0XSAgIEVBID0gMCwgUzFQVFcgPSAwCj4gWyAgMTE5LjA2MjQ1N10gRGF0YSBhYm9ydCBp
-bmZvOgo+IFsgIDExOS4wNjI0NjBdICAgSVNWID0gMCwgSVNTID0gMHgwMDAwMDA0Nwo+IFsgIDEx
-OS4wNjI0NjRdICAgQ00gPSAwLCBXblIgPSAxCj4gWyAgMTE5LjA2MjQ2OV0gc3dhcHBlciBwZ3Rh
-YmxlOiA0ayBwYWdlcywgMzktYml0IFZBcywgcGdkcD0wMDAwMDAwMDQxMDk5MDAwCj4gWyAgMTE5
-LjA2MjQ3M10gW2ZmZmZmZmMwMTczMzcwMDBdIHBnZD0wMDAwMDAwMTAwMTRhMDAzLAo+IHA0ZD0w
-MDAwMDAwMTAwMTRhMDAzLCBwdWQ9MDAwMDAwMDEwMDE0YTAwMywgcG1kPTAwMDAwMDAxMGJhNTkw
-MDMsCj4gcHRlPTAwMDAwMDAwMDAwMDAwMDAKPiBbICAxMTkuMDYyNDg5XSBJbnRlcm5hbCBlcnJv
-cjogT29wczogOTYwMDAwNDcgWyMxXSBQUkVFTVBUIFNNUAo+IFsgIDExOS4wNjI0OTRdIE1vZHVs
-ZXMgbGlua2VkIGluOiB2aG9zdF92c29jayB2aG9zdCB2aG9zdF9pb3RsYgo+IHZtd192c29ja192
-aXJ0aW9fdHJhbnNwb3J0X2NvbW1vbiB2c29jayByZmNvbW0gYWxnaWZfaGFzaAo+IGFsZ2lmX3Nr
-Y2lwaGVyIGFmX2FsZyB2ZXRoIHVpbnB1dCB4dF9jZ3JvdXAgbXRrX2RpcCBtdGtfY2FtX2lzcAo+
-IG10a192Y29kZWNfZW5jIG10a192Y29kZWNfZGVjIGhjaV91YXJ0IG10a19mZCBtdGtfbWRwMyB2
-NGwyX2gyNjQKPiBtdGtfdmNvZGVjX2NvbW1vbiBtdGtfdnB1IHh0X01BU1FVRVJBREUgbXRrX2pw
-ZWcgY3Jvc19lY19ycG1zZyBidHFjYQo+IHZpZGVvYnVmMl9kbWFfY29udGlnIHY0bDJfZndub2Rl
-IHY0bDJfbWVtMm1lbSBidHJ0bCBlbGFudHNfaTJjIG10a19zY3AKPiBtdGtfcnBtc2cgcnBtc2df
-Y29yZSBtdGtfc2NwX2lwaSBtdDgxODNfY2NpX2RldmZyZXEgaXA2dGFibGVfbmF0IGZ1c2UKPiA4
-MDIxcSBibHVldG9vdGggZWNkaF9nZW5lcmljIGVjYyBpaW9fdHJpZ19zeXNmcyBjcm9zX2VjX2xp
-ZF9hbmdsZQo+IGNyb3NfZWNfc2Vuc29ycyBjcm9zX2VjX3NlbnNvcnNfY29yZSBpbmR1c3RyaWFs
-aW9fdHJpZ2dlcmVkX2J1ZmZlcgo+IGtmaWZvX2J1ZiBjcm9zX2VjX3NlbnNvcmh1YiBjcm9zX2Vj
-X3R5cGVjIHR5cGVjIGhpZF9nb29nbGVfaGFtbWVyCj4gYXRoMTBrX3NkaW8gbHpvX3JsZSBsem9f
-Y29tcHJlc3MgYXRoMTBrX2NvcmUgYXRoIG1hYzgwMjExIHpyYW0KPiBjZmc4MDIxMSB1dmN2aWRl
-byB2aWRlb2J1ZjJfdm1hbGxvYyB2aWRlb2J1ZjJfbWVtb3BzIHZpZGVvYnVmMl92NGwyCj4gdmlk
-ZW9idWYyX2NvbW1vbiBjZGNfZXRoZXIgdXNibmV0IHI4MTUyIG1paSBqb3lkZXYKPiBbICAxMTku
-MDYyNjEzXSBDUFU6IDQgUElEOiA0MTYxIENvbW06IGNocm9tZSBUYWludGVkOiBHICAgICAgICBX
-Cj4gICAgNS4xMC4xMTIgIzEwNSAzOWYxMWJmZmRhMjI3ZWFhZTRjNzA0NzMzYjliZjAxZGIyMmQ4
-YjRkCj4gWyAgMTE5LjA2MjYxN10gSGFyZHdhcmUgbmFtZTogR29vZ2xlIGJ1cm5ldCBib2FyZCAo
-RFQpCj4gWyAgMTE5LjA2MjYyM10gcHN0YXRlOiAyMDQwMDAwNSAobnpDdiBkYWlmICtQQU4gLVVB
-TyAtVENPIEJUWVBFPS0tKQo+IFsgIDExOS4wNjI2MzZdIHBjIDogbHpvMXhfZGVjb21wcmVzc19z
-YWZlKzB4MWRjLzB4NTY0Cj4gWyAgMTE5LjA2MjY0M10gbHIgOiBsem9fdW5jb21wcmVzcysweDEz
-NC8weDFmMAo+IFsgIDExOS4wNjI2NDddIHNwIDogZmZmZmZmYzAxODM3Yjg2MAo+IFsgIDExOS4w
-NjI2NTBdIHgyOTogZmZmZmZmYzAxODM3Yjg2MCB4Mjg6IDAwMDAwMDAwMDAwMDAwMDAKPiBbICAx
-MTkuMDYyNjU2XSB4Mjc6IDAwMDAwMDAwMDAwMDU0NTEgeDI2OiBmZmZmZmZjMDE3MWM5NDQ1Cj4g
-WyAgMTE5LjA2MjY2Ml0geDI1OiAwMDAwMDAwMDAwMDAwMDAwIHgyNDogZmZmZmZmYzAxNzQzNzAw
-MAo+IFsgIDExOS4wNjI2NjhdIHgyMzogZmZmZmZmYzAxNzFjOTQ0ZiB4MjI6IGZmZmZmZmMwMTcx
-MzYwMDAKPiBbICAxMTkuMDYyNjczXSB4MjE6IGZmZmZmZmMwMTczMzZmZjEgeDIwOiBmZmZmZmZj
-MDE3MjM3MDAwCj4gWyAgMTE5LjA2MjY3OV0geDE5OiBmZmZmZmZjMDE4MzdiOGQwIHgxODogMDAw
-MDAwMDAwMDAwMDAwMAo+IFsgIDExOS4wNjI2ODRdIHgxNzogMDAwMDAwMDAwMDAwMDFlYiB4MTY6
-IDAwMDAwMDAwMDAwMDAwMTIKPiBbICAxMTkuMDYyNjg5XSB4MTU6IDAwMDAwMDAwMDAxMDAwMGYg
-eDE0OiBkNjAwMTIwMjAyMDAwMDAxCj4gWyAgMTE5LjA2MjY5NV0geDEzOiBmZmZmZmZjMDE3MzM2
-ZmYxIHgxMjogZmZmZmZmYzAxNzMzNmZmNAo+IFsgIDExOS4wNjI3MDBdIHgxMTogMDAwMDAwMDAw
-MDAwMDAwMiB4MTA6IDAxMDEwMTAxMDEwMTAwZmYKPiBbICAxMTkuMDYyNzA1XSB4OSA6IGZmZmZm
-ZmZmZmZmZmZmZmYgeDggOiBmZmZmZmZjMDE3MWM5NDRkCj4gWyAgMTE5LjA2MjcxMF0geDcgOiBk
-MTVkM2FhYWJkMjk0MzMwIHg2IDogMDIwNjM5NzExNWZlMjhhYgo+IFsgIDExOS4wNjI3MTVdIHg1
-IDogZmZmZmZmYzAxNzFjOTQ0ZiB4NCA6IDAwMDAwMDAwMDAwOTM0NGYKPiBbICAxMTkuMDYyNzIx
-XSB4MyA6IGZmZmZmZmMwMTgzN2I4ZDAgeDIgOiBmZmZmZmZjMDE3MjM3MDAwCj4gWyAgMTE5LjA2
-MjcyNl0geDEgOiAwMDAwMDAwMDAwMDkzNDRmIHgwIDogZmZmZmZmYzAxNzFjOTQ0Nwo+IFsgIDEx
-OS4wNjI3MzFdIENhbGwgdHJhY2U6Cj4gWyAgMTE5LjA2MjczOF0gIGx6bzF4X2RlY29tcHJlc3Nf
-c2FmZSsweDFkYy8weDU2NAo+IFsgIDExOS4wNjI3NDJdICBsem9fdW5jb21wcmVzcysweDEzNC8w
-eDFmMAo+IFsgIDExOS4wNjI3NDZdICBzcXVhc2hmc19kZWNvbXByZXNzKzB4NmMvMHhiNAo+IFsg
-IDExOS4wNjI3NTNdICBzcXVhc2hmc19yZWFkX2RhdGErMHgxYTgvMHgyOTgKPiBbICAxMTkuMDYy
-NzU4XSAgc3F1YXNoZnNfcmVhZGFoZWFkKzB4MzA4LzB4NDc0Cj4gWyAgMTE5LjA2Mjc2NV0gIHJl
-YWRfcGFnZXMrMHg3NC8weDI4MAo+IFsgIDExOS4wNjI3NjldICBwYWdlX2NhY2hlX3JhX3VuYm91
-bmRlZCsweDFkMC8weDIyOAo+IFsgIDExOS4wNjI3NzNdICBkb19wYWdlX2NhY2hlX3JhKzB4NDQv
-MHg1MAo+IFsgIDExOS4wNjI3NzldICBkb19zeW5jX21tYXBfcmVhZGFoZWFkKzB4MTg4LzB4MWEw
-Cj4gWyAgMTE5LjA2Mjc4M10gIGZpbGVtYXBfZmF1bHQrMHgxMDAvMHgzNTAKPiBbICAxMTkuMDYy
-Nzg5XSAgX19kb19mYXVsdCsweDQ4LzB4MTBjCj4gWyAgMTE5LjA2Mjc5M10gIGRvX2Nvd19mYXVs
-dCsweDU4LzB4MTJjCj4gWyAgMTE5LjA2Mjc5N10gIGhhbmRsZV9tbV9mYXVsdCsweDU0NC8weDkw
-NAo+IFsgIDExOS4wNjI4MDRdICBkb19wYWdlX2ZhdWx0KzB4MjYwLzB4Mzg0Cj4gWyAgMTE5LjA2
-MjgwOV0gIGRvX3RyYW5zbGF0aW9uX2ZhdWx0KzB4NDQvMHg1Ywo+IFsgIDExOS4wNjI4MTNdICBk
-b19tZW1fYWJvcnQrMHg0OC8weGI0Cj4gWyAgMTE5LjA2MjgxOV0gIGVsMF9kYSsweDI4LzB4MzQK
-PiBbICAxMTkuMDYyODI0XSAgZWwwX3N5bmNfY29tcGF0X2hhbmRsZXIrMHhiOC8weGNjCj4gWyAg
-MTE5LjA2MjgyOV0gIGVsMF9zeW5jX2NvbXBhdCsweDE4OC8weDFjMAo+IFsgIDExOS4wNjI4Mzdd
-IENvZGU6IGY5NDAwMWFlIGY5MDAwMmFlIGY5NDAwNWFlIDkxMDA0MWFkIChmOTAwMDZhZSkKPiBb
-ICAxMTkuMDYyODQyXSAtLS1bIGVuZCB0cmFjZSAzZTk4MjhjNzM2MGZkN2JlIF0tLS0KPiBbICAx
-MTkuMDkwNDM2XSBLZXJuZWwgcGFuaWMgLSBub3Qgc3luY2luZzogT29wczogRmF0YWwgZXhjZXB0
-aW9uCj4gWyAgMTE5LjA5MDQ1NV0gU01QOiBzdG9wcGluZyBzZWNvbmRhcnkgQ1BVcwo+IFsgIDEx
-OS4wOTA0NjddIEtlcm5lbCBPZmZzZXQ6IDB4MjcyOWMwMDAwMCBmcm9tIDB4ZmZmZmZmYzAxMDAw
-MDAwMAo+IFsgIDExOS4wOTA0NzFdIFBIWVNfT0ZGU0VUOiAweGZmZmZmZmQ4ODAwMDAwMDAKPiBb
-ICAxMTkuMDkwNDc3XSBDUFUgZmVhdHVyZXM6IDB4MDgyNDAwMDIsMjE4ODIwMGMKPiAKPiAxKSBU
-cmFjZXMgbmVhciB3aGVuIHRoZSBjcmFzaCBoYXBwZW5lZDoKPiBbICAgNzkuNDk1NTgwXSBCbG9j
-ayBAIDB4NjBlZWE5YywgY29tcHJlc3NlZCBzaXplIDY1NzQ0LCBzcmMgc2l6ZSAxMDQ4NTc2Cj4g
-WyAgIDgwLjM2MzU3M10gQmxvY2sgQCAweDFmOWYwMDAsIGNvbXByZXNzZWQgc2l6ZSAyMDA1OTgs
-IHNyYyBzaXplIDEwNDg1NzYKPiBbICAgODAuMzcxMjU2XSBCbG9jayBAIDB4MWZjZmY5NiwgY29t
-cHJlc3NlZCBzaXplIDgwNzcyLCBzcmMgc2l6ZSAxMDQ4NTc2Cj4gWyAgIDgwLjQyODM4OF0gQmxv
-Y2sgQCAweDFmZTNiMWEsIGNvbXByZXNzZWQgc2l6ZSA4Mzk0MSwgc3JjIHNpemUgMTA0ODU3Ngo+
-IFsgICA4MC40MzUzMTldIEJsb2NrIEAgMHgxZmY4MmZmLCBjb21wcmVzc2VkIHNpemUgNzc5MzYs
-IHNyYyBzaXplIDEwNDg1NzYKPiBbICAgODAuNzI0MzMxXSBCbG9jayBAIDB4NDUwMTAwMCwgY29t
-cHJlc3NlZCBzaXplIDM2NDA2OSwgc3JjIHNpemUgMTA0ODU3Ngo+IFsgICA4MC43Mzg2ODNdIEJs
-b2NrIEAgMHg0ZGNjZjI4LCBjb21wcmVzc2VkIHNpemUgNjAzMjE1LCBzcmMgc2l6ZSAyMDk3MTUy
-CgpTcmMgc2l6ZSAyMDk3MTUyIGlzIGNsZWFybHkgd3JvbmcsIGFzIHRoZSBtYXhpbXVtIGRhdGEg
-YmxvY2sgc2l6ZSBpcyAxIApNYnl0ZSBvciAxMDQ4NTc2LgoKVGhhdCBkZWJ1ZyBsaW5lIGNvbWVz
-IGZyb20KCmh0dHBzOi8vZWxpeGlyLmJvb3RsaW4uY29tL2xpbnV4L2xhdGVzdC9zb3VyY2UvZnMv
-c3F1YXNoZnMvYmxvY2suYyNMMTU2CgotLS0tClRSQUNFKCJCbG9jayBAIDB4JWxseCwgJXNjb21w
-cmVzc2VkIHNpemUgJWQsIHNyYyBzaXplICVkXG4iLAoJCWluZGV4LCBjb21wcmVzc2VkID8gIiIg
-OiAidW4iLCBsZW5ndGgsIG91dHB1dC0+bGVuZ3RoKTsKLS0tLQoKV2hpY2ggaW5kaWNhdGVzIHlv
-dXIgY29kZSBoYXMgY3JlYXRlZCBhIHBhZ2VfYWN0b3Igb2YgMiBNYnl0ZXMgaW4gc2l6ZQoob3V0
-cHV0LT5sZW5ndGgpLgoKVGhpcyBpcyBjb21wbGV0ZWx5IGluY29ycmVjdCwgYXMgdGhlIHBhZ2Vf
-YWN0b3Igc2hvdWxkIG5ldmVyIGJlIGxhcmdlcgp0aGFuIHRoZSBzaXplIG9mIHRoZSBibG9jayB0
-byBiZSByZWFkIGluIHF1ZXN0aW9uLiAgSW4gbW9zdCBjYXNlcyB0aGF0CndpbGwgYmUgbXNibGst
-PmJsb2NrX3NpemUsIGJ1dCBpdCBtYXkgYmUgbGVzcyBhdCB0aGUgZW5kIG9mIHRoZSBmaWxlLgoK
-WW91IGFwcGVhciB0byBiZSB0cnlpbmcgdG8gcmVhZCB0aGUgYW1vdW50IG9mIHJlYWRhaGVhZCBy
-ZXF1ZXN0ZWQuICBCdXQsCnlvdSBzaG91bGQgYWx3YXlzIGJlIHRyeWluZyB0byByZWFkIHRoZSBs
-ZXNzZXIgb2YgcmVhZGFoZWFkLCBhbmQgdGhlIApzaXplIG9mIHRoZSBibG9jayBpbiBxdWVzdGlv
-bi4KCkhvcGUgdGhhdCBoZWxwcy4KClBoaWxsaXAKCj4gCj4gSXQncyBhbHNvIG5vdGljZWQgdGhh
-dCB3aGVuIHRoZSBjcmFzaCBoYXBwZW5lZCwgbnJfcGFnZXMgb2J0YWluZWQgYnkKPiByZWFkYWhl
-YWRfY291bnQoKSBpcyA1MTIuCj4gbnJfcGFnZXMgPSByZWFkYWhlYWRfY291bnQocmFjdGwpOyAv
-LyB0aGlzIGxpbmUKPiAKPiAyKSBOb3JtYWwgY2FzZXMgdGhhdCB3b24ndCBjcmFzaDoKPiBbICAg
-MjIuNjUxNzUwXSBCbG9jayBAIDB4YjNiYmNhNiwgY29tcHJlc3NlZCBzaXplIDQyMTcyLCBzcmMg
-c2l6ZSAyNjIxNDQKPiBbICAgMjIuNjUzNTgwXSBCbG9jayBAIDB4YjNjNjE2MiwgY29tcHJlc3Nl
-ZCBzaXplIDI5ODE1LCBzcmMgc2l6ZSAyNjIxNDQKPiBbICAgMjIuNjU2NjkyXSBCbG9jayBAIDB4
-YjRhMjkzZiwgY29tcHJlc3NlZCBzaXplIDE3NDg0LCBzcmMgc2l6ZSAxMzEwNzIKPiBbICAgMjIu
-NjY2MDk5XSBCbG9jayBAIDB4YjU5Mzg4MSwgY29tcHJlc3NlZCBzaXplIDM5NzQyLCBzcmMgc2l6
-ZSAyNjIxNDQKPiBbICAgMjIuNjY4Njk5XSBCbG9jayBAIDB4YjU5ZDNiZiwgY29tcHJlc3NlZCBz
-aXplIDM3ODQxLCBzcmMgc2l6ZSAyNjIxNDQKPiBbICAgMjIuNjk1NzM5XSBCbG9jayBAIDB4MTM2
-OTg2NzMsIGNvbXByZXNzZWQgc2l6ZSA2NTkwNywgc3JjIHNpemUgMTMxMDcyCj4gWyAgIDIyLjY5
-ODYxOV0gQmxvY2sgQCAweDEzNmE4N2U2LCBjb21wcmVzc2VkIHNpemUgMzE1NSwgc3JjIHNpemUg
-MTMxMDcyCj4gWyAgIDIyLjcwMzQwMF0gQmxvY2sgQCAweGIxYmFiZTgsIGNvbXByZXNzZWQgc2l6
-ZSA5OTM5MSwgc3JjIHNpemUgMTMxMDcyCj4gWyAgIDIyLjcwNjI4OF0gQmxvY2sgQCAweDE1MTRh
-YmM2LCBjb21wcmVzc2VkIHNpemUgNDYyNywgc3JjIHNpemUgMTMxMDcyCj4gCj4gbnJfcGFnZXMg
-YXJlIG9ic2VydmVkIHRvIGJlIDMyLCA2NCwgMjU2Li4uIFRoZXNlIHdvbid0IGNhdXNlIGEgY3Jh
-c2guCj4gT3RoZXIgdmFsdWVzIChtYXhfcGFnZXMsIGJzaXplLCBibG9jay4uLikgbG9va3Mgbm9y
-bWFsCj4gCj4gSSdtIG5vdCBzdXJlIHdoeSB0aGUgY3Jhc2ggaGFwcGVuZWQsIGJ1dCBJIHRyaWVk
-IHRvIG1vZGlmeSB0aGUgbWFzawo+IGZvciBhIGJpdC4gQWZ0ZXIgbW9kaWZ5aW5nIHRoZSBtYXNr
-IHZhbHVlIHRvIGJlbG93LCB0aGUgY3Jhc2ggaXMgZ29uZQo+IChucl9wYWdlcyBhcmUgPD0yNTYp
-Lgo+IEJhc2VkIG9uIG15IHRlc3Rpbmcgb24gYSAzMDBLIHBhY2sgZmlsZSwgdGhlcmUncyBubyBw
-ZXJmb3JtYW5jZSBjaGFuZ2UuCj4gCj4gZGlmZiAtLWdpdCBhL2ZzL3NxdWFzaGZzL2ZpbGUuYyBi
-L2ZzL3NxdWFzaGZzL2ZpbGUuYwo+IGluZGV4IDIwZWM0OGNmOTdjNS4uZjZkOWI2Zjg4ZWQ5IDEw
-MDY0NAo+IC0tLSBhL2ZzL3NxdWFzaGZzL2ZpbGUuYwo+ICsrKyBiL2ZzL3NxdWFzaGZzL2ZpbGUu
-Ywo+IEBAIC00OTksOCArNDk5LDggQEAgc3RhdGljIHZvaWQgc3F1YXNoZnNfcmVhZGFoZWFkKHN0
-cnVjdAo+IHJlYWRhaGVhZF9jb250cm9sICpyYWN0bCkKPiAgIHsKPiAgICAgICAgICBzdHJ1Y3Qg
-aW5vZGUgKmlub2RlID0gcmFjdGwtPm1hcHBpbmctPmhvc3Q7Cj4gICAgICAgICAgc3RydWN0IHNx
-dWFzaGZzX3NiX2luZm8gKm1zYmxrID0gaW5vZGUtPmlfc2ItPnNfZnNfaW5mbzsKPiAtICAgICAg
-IHNpemVfdCBtYXNrID0gKDFVTCA8PCBtc2Jsay0+YmxvY2tfbG9nKSAtIDE7Cj4gICAgICAgICAg
-c2l6ZV90IHNoaWZ0ID0gbXNibGstPmJsb2NrX2xvZyAtIFBBR0VfU0hJRlQ7Cj4gKyAgICAgICBz
-aXplX3QgbWFzayA9ICgxVUwgPDwgc2hpZnQpIC0gMTsKPiAKPiAKPiBBbnkgcG9pbnRlcnMgYXJl
-IGFwcHJlY2lhdGVkLiBUaGFua3MhCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClNxdWFzaGZzLWRldmVsIG1haWxpbmcgbGlzdApTcXVhc2hmcy1kZXZl
-bEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlz
-dHMvbGlzdGluZm8vc3F1YXNoZnMtZGV2ZWwK
+--000000000000c4a4db05deca99fc
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, May 12, 2022 at 3:13 AM Phillip Lougher <phillip@squashfs.org.uk> w=
+rote:
+>
+> On 11/05/2022 16:12, Hsin-Yi Wang wrote:
+> > On Tue, May 10, 2022 at 9:19 PM Xiongwei Song <sxwjean@gmail.com> wrote=
+:
+> >>
+> >> On Tue, May 10, 2022 at 8:47 PM Hsin-Yi Wang <hsinyi@chromium.org> wro=
+te:
+> >>>
+> >>> On Tue, May 10, 2022 at 8:31 PM Xiongwei Song <sxwjean@gmail.com> wro=
+te:
+> >>>>
+> >>>> Hi Hsin-Yi,
+> >>>>
+> >>>> On Mon, May 9, 2022 at 10:29 PM Hsin-Yi Wang <hsinyi@chromium.org> w=
+rote:
+> >>>>>
+> >>>>> On Mon, May 9, 2022 at 9:21 PM Matthew Wilcox <willy@infradead.org>=
+ wrote:
+> >>>>>>
+> >>>>>> On Mon, May 09, 2022 at 08:43:45PM +0800, Xiongwei Song wrote:
+> >>>>>>> Hi Hsin-Yi and Matthew,
+> >>>>>>>
+> >>>>>>> With the patch from the attachment on linux 5.10, ran the command=
+ as I
+> >>>>>>> mentioned earlier,
+> >>>>>>> got the results below:
+> >>>>>>> 1:40.65 (1m + 40.65s)
+> >>>>>>> 1:10.12
+> >>>>>>> 1:11.10
+> >>>>>>> 1:11.47
+> >>>>>>> 1:11.59
+> >>>>>>> 1:11.94
+> >>>>>>> 1:11.86
+> >>>>>>> 1:12.04
+> >>>>>>> 1:12.21
+> >>>>>>> 1:12.06
+> >>>>>>>
+> >>>>>>> The performance has improved obviously, but compared to linux 4.1=
+8, the
+> >>>>>>> performance is not so good.
+> >>>>>>>
+> >>>>> I think you shouldn't compare the performance with 4.18 directly,
+> >>>>> since there might be other factors that impact the performance.
+> >>>>
+> >>>> Make sense.
+> >>>>
+> >>>>> I'd suggest comparing the same kernel version with:
+> >>>>> a) with this patch
+> >>>>> b) with c1f6925e1091 ("mm: put readahead pages in cache earlier") r=
+everted.
+> >>>>
+> >>>> With 9eec1d897139 ("squashfs: provide backing_dev_info in order to d=
+isable
+> >>>> read-ahead") reverted and applied 0001-WIP-squashfs-implement-readah=
+ead.patch,
+> >>>> test result on linux 5.18=EF=BC=9A
+> >>>> 1:41.51 (1m + 41.51s)
+> >>>> 1:08.11
+> >>>> 1:10.37
+> >>>> 1:11.17
+> >>>> 1:11.32
+> >>>> 1:11.59
+> >>>> 1:12.23
+> >>>> 1:12.08
+> >>>> 1:12.76
+> >>>> 1:12.51
+> >>>>
+> >>>> performance worse 1 ~ 2s than linux 5.18 vanilla.
+> >>>>
+> >>>
+> >>> Can you share the pack file you used for testing? Thanks
+> >>
+> >> You are saying the files that are put in squashfs partitions? If yes, =
+I can tell
+> >> I just put some dynamic libraries in partitions:
+> >> -rwxr-xr-x 1 root root  200680 Apr 20 03:57 ld-2.33.so
+> >> lrwxrwxrwx 1 root root      10 Apr 20 03:57 ld-linux-x86-64.so.2 -> ld=
+-2.33.so
+> >> -rwxr-xr-x 1 root root   18776 Apr 20 03:57 libanl-2.33.so
+> >> lrwxrwxrwx 1 root root      14 Apr 20 03:57 libanl.so.1 -> libanl-2.33=
+.so
+> >> lrwxrwxrwx 1 root root      17 Apr 20 04:08 libblkid.so.1 -> libblkid.=
+so.1.1.0
+> >> -rwxr-xr-x 1 root root  330776 Apr 20 04:08 libblkid.so.1.1.0
+> >> -rwxr-xr-x 1 root root 1823192 Apr 20 03:57 libc-2.33.so
+> >> ...... snip ......
+> >>
+> >> The number of files is 110(55 libs + 55 soft links to libs).  I have 9=
+0 squashfs
+> >> partitions which save the identical files. The space of each partition=
+ is 11M,
+> >> nothing special.
+> >>
+> >> Thanks.
+> >>
+> >
+> > I noticed that there's a crash at
+> > https://elixir.bootlin.com/linux/latest/source/lib/lzo/lzo1x_decompress=
+_safe.c#L218
+> > when testing on my system.
+> > (I have CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS enabled)
+> >
+> > Full logs:
+> > [  119.062420] Unable to handle kernel paging request at virtual
+> > address ffffffc017337000
+> > [  119.062437] Mem abort info:
+> > [  119.062442]   ESR =3D 0x96000047
+> > [  119.062447]   EC =3D 0x25: DABT (current EL), IL =3D 32 bits
+> > [  119.062451]   SET =3D 0, FnV =3D 0
+> > [  119.062454]   EA =3D 0, S1PTW =3D 0
+> > [  119.062457] Data abort info:
+> > [  119.062460]   ISV =3D 0, ISS =3D 0x00000047
+> > [  119.062464]   CM =3D 0, WnR =3D 1
+> > [  119.062469] swapper pgtable: 4k pages, 39-bit VAs, pgdp=3D0000000041=
+099000
+> > [  119.062473] [ffffffc017337000] pgd=3D000000010014a003,
+> > p4d=3D000000010014a003, pud=3D000000010014a003, pmd=3D000000010ba59003,
+> > pte=3D0000000000000000
+> > [  119.062489] Internal error: Oops: 96000047 [#1] PREEMPT SMP
+> > [  119.062494] Modules linked in: vhost_vsock vhost vhost_iotlb
+> > vmw_vsock_virtio_transport_common vsock rfcomm algif_hash
+> > algif_skcipher af_alg veth uinput xt_cgroup mtk_dip mtk_cam_isp
+> > mtk_vcodec_enc mtk_vcodec_dec hci_uart mtk_fd mtk_mdp3 v4l2_h264
+> > mtk_vcodec_common mtk_vpu xt_MASQUERADE mtk_jpeg cros_ec_rpmsg btqca
+> > videobuf2_dma_contig v4l2_fwnode v4l2_mem2mem btrtl elants_i2c mtk_scp
+> > mtk_rpmsg rpmsg_core mtk_scp_ipi mt8183_cci_devfreq ip6table_nat fuse
+> > 8021q bluetooth ecdh_generic ecc iio_trig_sysfs cros_ec_lid_angle
+> > cros_ec_sensors cros_ec_sensors_core industrialio_triggered_buffer
+> > kfifo_buf cros_ec_sensorhub cros_ec_typec typec hid_google_hammer
+> > ath10k_sdio lzo_rle lzo_compress ath10k_core ath mac80211 zram
+> > cfg80211 uvcvideo videobuf2_vmalloc videobuf2_memops videobuf2_v4l2
+> > videobuf2_common cdc_ether usbnet r8152 mii joydev
+> > [  119.062613] CPU: 4 PID: 4161 Comm: chrome Tainted: G        W
+> >    5.10.112 #105 39f11bffda227eaae4c704733b9bf01db22d8b4d
+> > [  119.062617] Hardware name: Google burnet board (DT)
+> > [  119.062623] pstate: 20400005 (nzCv daif +PAN -UAO -TCO BTYPE=3D--)
+> > [  119.062636] pc : lzo1x_decompress_safe+0x1dc/0x564
+> > [  119.062643] lr : lzo_uncompress+0x134/0x1f0
+> > [  119.062647] sp : ffffffc01837b860
+> > [  119.062650] x29: ffffffc01837b860 x28: 0000000000000000
+> > [  119.062656] x27: 0000000000005451 x26: ffffffc0171c9445
+> > [  119.062662] x25: 0000000000000000 x24: ffffffc017437000
+> > [  119.062668] x23: ffffffc0171c944f x22: ffffffc017136000
+> > [  119.062673] x21: ffffffc017336ff1 x20: ffffffc017237000
+> > [  119.062679] x19: ffffffc01837b8d0 x18: 0000000000000000
+> > [  119.062684] x17: 00000000000001eb x16: 0000000000000012
+> > [  119.062689] x15: 000000000010000f x14: d600120202000001
+> > [  119.062695] x13: ffffffc017336ff1 x12: ffffffc017336ff4
+> > [  119.062700] x11: 0000000000000002 x10: 01010101010100ff
+> > [  119.062705] x9 : ffffffffffffffff x8 : ffffffc0171c944d
+> > [  119.062710] x7 : d15d3aaabd294330 x6 : 0206397115fe28ab
+> > [  119.062715] x5 : ffffffc0171c944f x4 : 000000000009344f
+> > [  119.062721] x3 : ffffffc01837b8d0 x2 : ffffffc017237000
+> > [  119.062726] x1 : 000000000009344f x0 : ffffffc0171c9447
+> > [  119.062731] Call trace:
+> > [  119.062738]  lzo1x_decompress_safe+0x1dc/0x564
+> > [  119.062742]  lzo_uncompress+0x134/0x1f0
+> > [  119.062746]  squashfs_decompress+0x6c/0xb4
+> > [  119.062753]  squashfs_read_data+0x1a8/0x298
+> > [  119.062758]  squashfs_readahead+0x308/0x474
+> > [  119.062765]  read_pages+0x74/0x280
+> > [  119.062769]  page_cache_ra_unbounded+0x1d0/0x228
+> > [  119.062773]  do_page_cache_ra+0x44/0x50
+> > [  119.062779]  do_sync_mmap_readahead+0x188/0x1a0
+> > [  119.062783]  filemap_fault+0x100/0x350
+> > [  119.062789]  __do_fault+0x48/0x10c
+> > [  119.062793]  do_cow_fault+0x58/0x12c
+> > [  119.062797]  handle_mm_fault+0x544/0x904
+> > [  119.062804]  do_page_fault+0x260/0x384
+> > [  119.062809]  do_translation_fault+0x44/0x5c
+> > [  119.062813]  do_mem_abort+0x48/0xb4
+> > [  119.062819]  el0_da+0x28/0x34
+> > [  119.062824]  el0_sync_compat_handler+0xb8/0xcc
+> > [  119.062829]  el0_sync_compat+0x188/0x1c0
+> > [  119.062837] Code: f94001ae f90002ae f94005ae 910041ad (f90006ae)
+> > [  119.062842] ---[ end trace 3e9828c7360fd7be ]---
+> > [  119.090436] Kernel panic - not syncing: Oops: Fatal exception
+> > [  119.090455] SMP: stopping secondary CPUs
+> > [  119.090467] Kernel Offset: 0x2729c00000 from 0xffffffc010000000
+> > [  119.090471] PHYS_OFFSET: 0xffffffd880000000
+> > [  119.090477] CPU features: 0x08240002,2188200c
+> >
+> > 1) Traces near when the crash happened:
+> > [   79.495580] Block @ 0x60eea9c, compressed size 65744, src size 10485=
+76
+> > [   80.363573] Block @ 0x1f9f000, compressed size 200598, src size 1048=
+576
+> > [   80.371256] Block @ 0x1fcff96, compressed size 80772, src size 10485=
+76
+> > [   80.428388] Block @ 0x1fe3b1a, compressed size 83941, src size 10485=
+76
+> > [   80.435319] Block @ 0x1ff82ff, compressed size 77936, src size 10485=
+76
+> > [   80.724331] Block @ 0x4501000, compressed size 364069, src size 1048=
+576
+> > [   80.738683] Block @ 0x4dccf28, compressed size 603215, src size 2097=
+152
+>
+> Src size 2097152 is clearly wrong, as the maximum data block size is 1
+> Mbyte or 1048576.
+>
+> That debug line comes from
+>
+> https://elixir.bootlin.com/linux/latest/source/fs/squashfs/block.c#L156
+>
+> ----
+> TRACE("Block @ 0x%llx, %scompressed size %d, src size %d\n",
+>                 index, compressed ? "" : "un", length, output->length);
+> ----
+>
+> Which indicates your code has created a page_actor of 2 Mbytes in size
+> (output->length).
+>
+> This is completely incorrect, as the page_actor should never be larger
+> than the size of the block to be read in question.  In most cases that
+> will be msblk->block_size, but it may be less at the end of the file.
+>
+> You appear to be trying to read the amount of readahead requested.  But,
+> you should always be trying to read the lesser of readahead, and the
+> size of the block in question.
+>
+> Hope that helps.
+>
+> Phillip
+>
+Hi Phillip,
+Thanks for the explanation. After restricting the size feed to
+page_actor, the crash no longer happened.
+
+Hi Xiongwei,
+Can you test this version (sent as attachment) again? I've tested on
+my platform:
+- arm64
+- kernel 5.10
+- pack_data size ~ 300K
+- time ureadahead pack_data
+1. with c1f6925e1091 ("mm: put readahead pages in cache earlier") reverted:
+0.633s
+0.755s
+0.804s
+
+2. apply the patch:
+0.625s
+0.656s
+0.768s
+
+Hi Matthew,
+Thanks for reviewing the patch previously. Does this version look good
+to you? If so, I can send it to the list.
+
+
+Thanks for all of your help.
+
+> >
+> > It's also noticed that when the crash happened, nr_pages obtained by
+> > readahead_count() is 512.
+> > nr_pages =3D readahead_count(ractl); // this line
+> >
+> > 2) Normal cases that won't crash:
+> > [   22.651750] Block @ 0xb3bbca6, compressed size 42172, src size 26214=
+4
+> > [   22.653580] Block @ 0xb3c6162, compressed size 29815, src size 26214=
+4
+> > [   22.656692] Block @ 0xb4a293f, compressed size 17484, src size 13107=
+2
+> > [   22.666099] Block @ 0xb593881, compressed size 39742, src size 26214=
+4
+> > [   22.668699] Block @ 0xb59d3bf, compressed size 37841, src size 26214=
+4
+> > [   22.695739] Block @ 0x13698673, compressed size 65907, src size 1310=
+72
+> > [   22.698619] Block @ 0x136a87e6, compressed size 3155, src size 13107=
+2
+> > [   22.703400] Block @ 0xb1babe8, compressed size 99391, src size 13107=
+2
+> > [   22.706288] Block @ 0x1514abc6, compressed size 4627, src size 13107=
+2
+> >
+> > nr_pages are observed to be 32, 64, 256... These won't cause a crash.
+> > Other values (max_pages, bsize, block...) looks normal
+> >
+> > I'm not sure why the crash happened, but I tried to modify the mask
+> > for a bit. After modifying the mask value to below, the crash is gone
+> > (nr_pages are <=3D256).
+> > Based on my testing on a 300K pack file, there's no performance change.
+> >
+> > diff --git a/fs/squashfs/file.c b/fs/squashfs/file.c
+> > index 20ec48cf97c5..f6d9b6f88ed9 100644
+> > --- a/fs/squashfs/file.c
+> > +++ b/fs/squashfs/file.c
+> > @@ -499,8 +499,8 @@ static void squashfs_readahead(struct
+> > readahead_control *ractl)
+> >   {
+> >          struct inode *inode =3D ractl->mapping->host;
+> >          struct squashfs_sb_info *msblk =3D inode->i_sb->s_fs_info;
+> > -       size_t mask =3D (1UL << msblk->block_log) - 1;
+> >          size_t shift =3D msblk->block_log - PAGE_SHIFT;
+> > +       size_t mask =3D (1UL << shift) - 1;
+> >
+> >
+> > Any pointers are appreciated. Thanks!
+>
+
+--000000000000c4a4db05deca99fc
+Content-Type: text/x-patch; charset="US-ASCII"; 
+	name="0001-WIP-squashfs-implement-readahead.patch"
+Content-Disposition: attachment; 
+	filename="0001-WIP-squashfs-implement-readahead.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_l32mgxhk0>
+X-Attachment-Id: f_l32mgxhk0
+
+RnJvbSBkNTAyMjA2ODRiZWVkMmI2ZDM3MGQ1ZTYzYTdkZmIzMWEyYjA3ODhiIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBIc2luLVlpIFdhbmcgPGhzaW55aUBjaHJvbWl1bS5vcmc+CkRh
+dGU6IFN1biwgMTAgT2N0IDIwMjEgMjE6MjI6MjUgKzA4MDAKU3ViamVjdDogW1BBVENIXSBzcXVh
+c2hmczogaW1wbGVtZW50IHJlYWRhaGVhZAoKSW1wbGVtZW50IHJlYWRhaGVhZCBjYWxsYmFjayBm
+b3Igc3F1YXNoZnMuIEl0IHdpbGwgcmVhZCBkYXRhYmxvY2tzCndoaWNoIGNvdmVyIHBhZ2VzIGlu
+IHJlYWRhaGVhZCByZXF1ZXN0LiBGb3IgYSBmZXcgY2FzZXMgaXQgd2lsbApub3QgbWFyayBwYWdl
+IGFzIHVwdG9kYXRlLCBpbmNsdWRpbmc6Ci0gZmlsZSBlbmQgaXMgMC4KLSBjdXJyZW50IGJhdGNo
+IG9mIHBhZ2VzIGlzbid0IGluIHRoZSBzYW1lIGRhdGFibG9jayBvciBub3QgZW5vdWdoIGluIGEK
+ICBkYXRhYmxvY2suCk90aGVyd2lzZSBwYWdlcyB3aWxsIGJlIG1hcmtlZCBhcyB1cHRvZGF0ZS4g
+VGhlIHVuaGFuZGxlZCBwYWdlcyB3aWxsIGJlCnVwZGF0ZWQgYnkgcmVhZHBhZ2UgbGF0ZXIuCgpT
+aWduZWQtb2ZmLWJ5OiBIc2luLVlpIFdhbmcgPGhzaW55aUBjaHJvbWl1bS5vcmc+Ci0tLQogZnMv
+c3F1YXNoZnMvZmlsZS5jIHwgNzQgKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrLQogMSBmaWxlIGNoYW5nZWQsIDczIGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24o
+LSkKCmRpZmYgLS1naXQgYS9mcy9zcXVhc2hmcy9maWxlLmMgYi9mcy9zcXVhc2hmcy9maWxlLmMK
+aW5kZXggODlkNDkyOTE2ZGVhLi43Y2Q1N2UwZDg4ZGUgMTAwNjQ0Ci0tLSBhL2ZzL3NxdWFzaGZz
+L2ZpbGUuYworKysgYi9mcy9zcXVhc2hmcy9maWxlLmMKQEAgLTM5LDYgKzM5LDcgQEAKICNpbmNs
+dWRlICJzcXVhc2hmc19mc19zYi5oIgogI2luY2x1ZGUgInNxdWFzaGZzX2ZzX2kuaCIKICNpbmNs
+dWRlICJzcXVhc2hmcy5oIgorI2luY2x1ZGUgInBhZ2VfYWN0b3IuaCIKIAogLyoKICAqIExvY2F0
+ZSBjYWNoZSBzbG90IGluIHJhbmdlIFtvZmZzZXQsIGluZGV4XSBmb3Igc3BlY2lmaWVkIGlub2Rl
+LiAgSWYKQEAgLTQ5NCw3ICs0OTUsNzggQEAgc3RhdGljIGludCBzcXVhc2hmc19yZWFkcGFnZShz
+dHJ1Y3QgZmlsZSAqZmlsZSwgc3RydWN0IHBhZ2UgKnBhZ2UpCiAJcmV0dXJuIDA7CiB9CiAKK3N0
+YXRpYyB2b2lkIHNxdWFzaGZzX3JlYWRhaGVhZChzdHJ1Y3QgcmVhZGFoZWFkX2NvbnRyb2wgKnJh
+Y3RsKQoreworCXN0cnVjdCBpbm9kZSAqaW5vZGUgPSByYWN0bC0+bWFwcGluZy0+aG9zdDsKKwlz
+dHJ1Y3Qgc3F1YXNoZnNfc2JfaW5mbyAqbXNibGsgPSBpbm9kZS0+aV9zYi0+c19mc19pbmZvOwor
+CXNpemVfdCBtYXNrID0gKDFVTCA8PCBtc2Jsay0+YmxvY2tfbG9nKSAtIDE7CisJc2l6ZV90IHNo
+aWZ0ID0gbXNibGstPmJsb2NrX2xvZyAtIFBBR0VfU0hJRlQ7CisJbG9mZl90IHJlcV9lbmQgPSBy
+ZWFkYWhlYWRfcG9zKHJhY3RsKSArIHJlYWRhaGVhZF9sZW5ndGgocmFjdGwpOworCWxvZmZfdCBz
+dGFydCA9IHJlYWRhaGVhZF9wb3MocmFjdGwpICZ+IG1hc2s7CisJc2l6ZV90IGxlbiA9IHJlYWRh
+aGVhZF9sZW5ndGgocmFjdGwpICsgcmVhZGFoZWFkX3BvcyhyYWN0bCkgLSBzdGFydDsKKwlzdHJ1
+Y3Qgc3F1YXNoZnNfcGFnZV9hY3RvciAqYWN0b3I7CisJdW5zaWduZWQgaW50IG5yX3BhZ2VzID0g
+MDsKKwlzdHJ1Y3QgcGFnZSAqKnBhZ2VzOworCXU2NCBibG9jayA9IDA7CisJaW50IGJzaXplLCBy
+ZXMsIGksIGluZGV4OworCWludCBmaWxlX2VuZCA9IGlfc2l6ZV9yZWFkKGlub2RlKSA+PiBtc2Js
+ay0+YmxvY2tfbG9nOworCXVuc2lnbmVkIGludCBtYXhfcGFnZXMgPSAxVUwgPDwgc2hpZnQ7CisK
+KwlyZWFkYWhlYWRfZXhwYW5kKHJhY3RsLCBzdGFydCwgKGxlbiB8IG1hc2spICsgMSk7CisKKwlp
+ZiAocmVhZGFoZWFkX3BvcyhyYWN0bCkgKyByZWFkYWhlYWRfbGVuZ3RoKHJhY3RsKSA8IHJlcV9l
+bmQgfHwKKwkgICAgZmlsZV9lbmQgPT0gMCkKKwkJcmV0dXJuOworCisJbnJfcGFnZXMgPSBtaW4o
+cmVhZGFoZWFkX2NvdW50KHJhY3RsKSwgbWF4X3BhZ2VzKTsKKworCXBhZ2VzID0ga21hbGxvY19h
+cnJheShucl9wYWdlcywgc2l6ZW9mKHZvaWQgKiksIEdGUF9LRVJORUwpOworCWlmICghcGFnZXMp
+CisJCXJldHVybjsKKworCWFjdG9yID0gc3F1YXNoZnNfcGFnZV9hY3Rvcl9pbml0X3NwZWNpYWwo
+cGFnZXMsIG5yX3BhZ2VzLCAwKTsKKwlpZiAoIWFjdG9yKQorCQlnb3RvIG91dDsKKworCWZvciAo
+OzspIHsKKwkJbnJfcGFnZXMgPSBfX3JlYWRhaGVhZF9iYXRjaChyYWN0bCwgcGFnZXMsIG1heF9w
+YWdlcyk7CisJCWlmICghbnJfcGFnZXMpCisJCQlicmVhazsKKworCQlpZiAocmVhZGFoZWFkX3Bv
+cyhyYWN0bCkgPj0gaV9zaXplX3JlYWQoaW5vZGUpIHx8CisJCSAgICBucl9wYWdlcyA8IG1heF9w
+YWdlcykKKwkJCWdvdG8gc2tpcF9wYWdlczsKKworCQlpbmRleCA9IHBhZ2VzWzBdLT5pbmRleCA+
+PiBzaGlmdDsKKwkJYnNpemUgPSByZWFkX2Jsb2NrbGlzdChpbm9kZSwgaW5kZXgsICZibG9jayk7
+CisJCXJlcyA9IHNxdWFzaGZzX3JlYWRfZGF0YShpbm9kZS0+aV9zYiwgYmxvY2ssIGJzaXplLCBO
+VUxMLAorCQkJCQkgYWN0b3IpOworCisJCWlmIChyZXMgPj0gMCAmJiAocGFnZXNbbnJfcGFnZXMg
+LSAxXS0+aW5kZXggPj4gc2hpZnQpID09IGluZGV4KQorCQkJZm9yIChpID0gMDsgaSA8IG5yX3Bh
+Z2VzOyBpKyspCisJCQkJU2V0UGFnZVVwdG9kYXRlKHBhZ2VzW2ldKTsKKworCQlmb3IgKGkgPSAw
+OyBpIDwgbnJfcGFnZXM7IGkrKykgeworCQkJdW5sb2NrX3BhZ2UocGFnZXNbaV0pOworCQkJcHV0
+X3BhZ2UocGFnZXNbaV0pOworCQl9CisJfQorCisJa2ZyZWUoYWN0b3IpOworCXJldHVybjsKKwor
+c2tpcF9wYWdlczoKKwlmb3IgKGkgPSAwOyBpIDwgbnJfcGFnZXM7IGkrKykgeworCQl1bmxvY2tf
+cGFnZShwYWdlc1tpXSk7CisJCXB1dF9wYWdlKHBhZ2VzW2ldKTsKKwl9CisKKwlrZnJlZShhY3Rv
+cik7CitvdXQ6CisJa2ZyZWUocGFnZXMpOworfQogCiBjb25zdCBzdHJ1Y3QgYWRkcmVzc19zcGFj
+ZV9vcGVyYXRpb25zIHNxdWFzaGZzX2FvcHMgPSB7Ci0JLnJlYWRwYWdlID0gc3F1YXNoZnNfcmVh
+ZHBhZ2UKKwkucmVhZHBhZ2UgPSBzcXVhc2hmc19yZWFkcGFnZSwKKwkucmVhZGFoZWFkID0gc3F1
+YXNoZnNfcmVhZGFoZWFkCiB9OwotLSAKMi4zMS4wCgo=
+--000000000000c4a4db05deca99fc
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+
+--000000000000c4a4db05deca99fc
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Squashfs-devel mailing list
+Squashfs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/squashfs-devel
+
+--000000000000c4a4db05deca99fc--
+
