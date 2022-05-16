@@ -2,26 +2,26 @@ Return-Path: <squashfs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+squashfs-devel@lfdr.de
 Delivered-To: lists+squashfs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3353852E342
-	for <lists+squashfs-devel@lfdr.de>; Fri, 20 May 2022 05:45:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CA87252E33A
+	for <lists+squashfs-devel@lfdr.de>; Fri, 20 May 2022 05:45:16 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <squashfs-devel-bounces@lists.sourceforge.net>)
-	id 1nrtZj-0007IB-AR; Fri, 20 May 2022 03:45:13 +0000
+	id 1nrtZj-0007IH-Cn; Fri, 20 May 2022 03:45:13 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <hsinyi@chromium.org>) id 1nqYK7-0003rz-8L
- for squashfs-devel@lists.sourceforge.net; Mon, 16 May 2022 10:51:34 +0000
+ (envelope-from <hsinyi@chromium.org>) id 1nqYKK-0007R6-Bw
+ for squashfs-devel@lists.sourceforge.net; Mon, 16 May 2022 10:51:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5RbQ3j9RMbZ/D6MAR7ISAUvOQDvpOlhf1s/Zk6REvQs=; b=OBJRe9rPzUB9Nt07D6Mt5zwDrq
- KGaLXcaq8CDGslhrwsiD3k7GchPqyyNQK+F8YDnb1l1/sa/AYC3BTshZu8KL4zgU4tsSf4NwfDB6w
- Tkms9wmQ8lyDAamBCWRCpYLHHZYwjCUhbmyRdknQhDpPrkYU1pjfJ3RPbNjo6FXJoeLg=;
+ bh=JMk8CHB5bcq3ReSzg2cgECR0dlKU/tAyeAvoi2QnfNE=; b=h6U9F+Db+ocaH66Q9t65/EkAeD
+ f8W9uTsqxA3pf4hWYTvEwpITcSGLoTkk0AK+R28uSV2iaXo/N/qteJsXfh68D+GD+kmtvx8BWMqhW
+ 06eQu+utZ8xoRla37uoTI1Ax+dOn7GDoqTws0dFr251LlgquFqVDpRHmGtfUjBkQ8SLA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,90 +29,89 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=5RbQ3j9RMbZ/D6MAR7ISAUvOQDvpOlhf1s/Zk6REvQs=; b=Rh1eyf18gDa0uS5CqG7/masWOR
- teJ716etD7GS/ancV/Hydjz3VYg8V3vWAyYuRIsdfdlzE8qsXYmUzQvkIApxT/O3e5AqezZxbRQ8m
- NrgtPQGTKuxt3iLy1pM7hzB2gcxRHnNPpoKz4MlBayff0SB1IBDxO0rBYbybJSAvuu20=;
-Received: from mail-pg1-f176.google.com ([209.85.215.176])
+ bh=JMk8CHB5bcq3ReSzg2cgECR0dlKU/tAyeAvoi2QnfNE=; b=eHdw23+OEbCnmn2BXDMWO2yKXh
+ VEqMp2xqYjchlKbE6ln07BZnnj14GNDviR+5mSLQfoVasOl3L6BZs07aTd0kFfOGLRKSAGOkxlv/Q
+ jmU57xnjUnx+ribM7ufnOkYOJ7n0MFVd8hXR23TAgoviaj95PnS/eOgoPNF60jcgoPSU=;
+Received: from mail-pg1-f172.google.com ([209.85.215.172])
  by sfi-mx-1.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nqYK4-00GwvD-SD
- for squashfs-devel@lists.sourceforge.net; Mon, 16 May 2022 10:51:33 +0000
-Received: by mail-pg1-f176.google.com with SMTP id g184so13744205pgc.1
+ id 1nqYKH-00Gwvu-Tl
+ for squashfs-devel@lists.sourceforge.net; Mon, 16 May 2022 10:51:46 +0000
+Received: by mail-pg1-f172.google.com with SMTP id q76so13706854pgq.10
  for <squashfs-devel@lists.sourceforge.net>;
- Mon, 16 May 2022 03:51:32 -0700 (PDT)
+ Mon, 16 May 2022 03:51:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=5RbQ3j9RMbZ/D6MAR7ISAUvOQDvpOlhf1s/Zk6REvQs=;
- b=TZqROHTy4bHF74S5KUPgYAYiymslKKVBA7bRL3/HGi4JHQB8muBNwXApRa0cU+VWhS
- iDhqHMiS97n7lTt4aPXGafW1hSdMlSn0/MjzhUr5uDezSoKTsE2/fU3tuMWFAIQsDW57
- VoEjrIWGFnek4FgPEBYZGiUVXkUJq4gERo+VQ=
+ bh=JMk8CHB5bcq3ReSzg2cgECR0dlKU/tAyeAvoi2QnfNE=;
+ b=OKNynNPjFwGSD1DaPCEF49HEOaVfWkiddIt3TLXpzovZPm0w32mw1+sI5jGIZ53iqU
+ DL9zHg/3+jPPwXL2vHoPtL1DSdVsyH7bZNV/hZuu9cmfO6L1xO1Gfss1yn77yPBo7s1z
+ +wJTDMciFy2TsqHd/skAMTirRIHnkR7xPShJU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=5RbQ3j9RMbZ/D6MAR7ISAUvOQDvpOlhf1s/Zk6REvQs=;
- b=kKtGo/SoMRNhEWaWXeYyHqOqyPCYaEOmEbK1RJ+uLQOYN1HnBw4nZv/CUHPNjFzOzm
- 0EtvDomcxz831869BXBDgmr3gYDryjTX1gYBGi8/+kwjAaUmK4HCQ4qsD4v4ISmaw6qs
- mfsCjhF+y033LxIW5WpkynAhh6QQTTmJUoXTOLDOc5P4lXX4nW9CAe5UH8sRgNqZ1nPu
- JY+E4hpoE+LWOXLIBRhii00ytTpiaqAVj7LgvGB7FnR18OKiDDublRZyo0IDJa6NTao4
- 1fsbYCovEVXurER5y2/XSDHbYH35J92M8IS08Ymga984ZAuIV32p3MPb6McYhvp4zhDi
- OO6g==
-X-Gm-Message-State: AOAM533BvkadxIsaqOqhIoBS3DMiQ7u6U+/5+VFm0l86odJEKvESK5du
- 2VlXqn690lhSr4K8DPQUlrLqXQ==
-X-Google-Smtp-Source: ABdhPJyQ5XmFT7yQ/quMHs3G1SNLRmrs0Q+kvbBJA9PMECYOuXFf5iA+2PsREWr5Wz+K7aTd/M7V3Q==
-X-Received: by 2002:a63:5522:0:b0:3c5:e4be:5a49 with SMTP id
- j34-20020a635522000000b003c5e4be5a49mr14595263pgb.26.1652698286995; 
- Mon, 16 May 2022 03:51:26 -0700 (PDT)
+ bh=JMk8CHB5bcq3ReSzg2cgECR0dlKU/tAyeAvoi2QnfNE=;
+ b=D8Tv7kgvbahzUPgeYLH4mQsVvqah+vl01f1TgArRSoevfp/PfxEzjHg7wVdb3StXjt
+ YQoD5mHooewVpM+1/7GUJMptaJWn1mTNzAHQh5FWKKXPputx7crx62Qj+sJkbgR1EooX
+ v+piz8Z2tK+sXcUPlVu1waROq1W2T+QiIsCqZTguP8mIjsNudk+bAnkEydlARNx86lhb
+ 4gCXmMSLPAkSeIFL8Kmf2d5J4QG9/JorKSo5fFXmyNxsQ4It93NX+6g2Fm7pyZC3y44R
+ 5SAFUQfzjcqnyidyMe41nBU91bN1332TnfWp7BlPNfPvqcpgJgwQW4RjirMSpr5v3rPZ
+ pi6A==
+X-Gm-Message-State: AOAM532JXjOk+hCiKi5DK3DCtMEZAj/NQiDu1mOJ6xCLWfHWQs+z9mQ4
+ 0LafDFhcuQTzooZgfKOl/DOHbA==
+X-Google-Smtp-Source: ABdhPJxLUCazJwseAQ0wLAS5elWc0Q0J8Q3r6TfTavcCh6mUPnQw7yZb7qUH+IJgOAbR/PLOnZFxKw==
+X-Received: by 2002:a05:6a00:10cc:b0:506:e0:d6c3 with SMTP id
+ d12-20020a056a0010cc00b0050600e0d6c3mr17147886pfu.33.1652698300335; 
+ Mon, 16 May 2022 03:51:40 -0700 (PDT)
 Received: from hsinyi-z840.tpe.corp.google.com
  ([2401:fa00:1:10:cdcb:c865:6f65:d875])
  by smtp.gmail.com with ESMTPSA id
- o14-20020a655bce000000b003db8dd388afsm6332778pgr.10.2022.05.16.03.51.24
+ o14-20020a655bce000000b003db8dd388afsm6332778pgr.10.2022.05.16.03.51.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 May 2022 03:51:26 -0700 (PDT)
+ Mon, 16 May 2022 03:51:40 -0700 (PDT)
 From: Hsin-Yi Wang <hsinyi@chromium.org>
 To: Phillip Lougher <phillip@squashfs.org.uk>,
  Matthew Wilcox <willy@infradead.org>,
  Xiongwei Song <Xiongwei.Song@windriver.com>
-Date: Mon, 16 May 2022 18:51:01 +0800
-Message-Id: <20220516105100.1412740-2-hsinyi@chromium.org>
+Date: Mon, 16 May 2022 18:51:03 +0800
+Message-Id: <20220516105100.1412740-3-hsinyi@chromium.org>
 X-Mailer: git-send-email 2.36.0.550.gb090851708-goog
 In-Reply-To: <20220516105100.1412740-1-hsinyi@chromium.org>
 References: <20220516105100.1412740-1-hsinyi@chromium.org>
 MIME-Version: 1.0
-X-Spam-Score: -0.9 (/)
+X-Spam-Score: -0.5 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This reverts commit 9eec1d897139e5de287af5d559a02b811b844d82.
- Revert closing the readahead to squashfs since the readahead callback for
- squashfs is implemented. Suggested-by: Xiongwei Song <sxwjean@gmail.com>
- Signed-off-by: Hsin-Yi Wang <hsinyi@chromium.org> --- fs/squashfs/super.c
- | 33 1 file changed, 33 deletions(-) 
- Content analysis details:   (-0.9 points, 6.0 required)
+ Content preview: Implement readahead callback for squashfs. It will read
+ datablocks
+ which cover pages in readahead request. For a few cases it will not mark
+ page as uptodate, including: - file end is 0. - zero filled [...] 
+ Content analysis details:   (-0.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.215.176 listed in list.dnswl.org]
- 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ no trust [209.85.215.172 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
+ 0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.215.176 listed in wl.mailspike.net]
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ [209.85.215.172 listed in wl.mailspike.net]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nqYK4-00GwvD-SD
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.3 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nqYKH-00Gwvu-Tl
 X-Mailman-Approved-At: Fri, 20 May 2022 03:45:10 +0000
-Subject: [Squashfs-devel] [PATCH 1/2] Revert "squashfs: provide
- backing_dev_info in order to disable read-ahead"
+Subject: [Squashfs-devel] [PATCH 2/2] squashfs: implement readahead
 X-BeenThere: squashfs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -133,75 +132,142 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: squashfs-devel-bounces@lists.sourceforge.net
 
-This reverts commit 9eec1d897139e5de287af5d559a02b811b844d82.
+Implement readahead callback for squashfs. It will read datablocks
+which cover pages in readahead request. For a few cases it will
+not mark page as uptodate, including:
+- file end is 0.
+- zero filled blocks.
+- current batch of pages isn't in the same datablock or not enough in a
+  datablock.
+Otherwise pages will be marked as uptodate. The unhandled pages will be
+updated by readpage later.
 
-Revert closing the readahead to squashfs since the readahead callback
-for squashfs is implemented.
-
-Suggested-by: Xiongwei Song <sxwjean@gmail.com>
 Signed-off-by: Hsin-Yi Wang <hsinyi@chromium.org>
 ---
- fs/squashfs/super.c | 33 ---------------------------------
- 1 file changed, 33 deletions(-)
+Note that this patch was not formally sent to the list before. It's
+attached to email thread for discussion as it's still under development.
 
-diff --git a/fs/squashfs/super.c b/fs/squashfs/super.c
-index 6d594ba2ed28..32565dafa7f3 100644
---- a/fs/squashfs/super.c
-+++ b/fs/squashfs/super.c
-@@ -29,7 +29,6 @@
- #include <linux/module.h>
- #include <linux/magic.h>
- #include <linux/xattr.h>
--#include <linux/backing-dev.h>
- 
- #include "squashfs_fs.h"
+- v1:
+The patch outline was suggested by Matthew. It went through a few
+reviews by Matthew offline.
+
+- v2:
+https://lore.kernel.org/linux-mm/Yn5Yij9pRPCzDozt@casper.infradead.org/t/#m442435c149d411c5c9d8019cff5915419b04bf10
+This is a resend of v1.
+
+- v3:
+https://lore.kernel.org/linux-mm/Yn5Yij9pRPCzDozt@casper.infradead.org/t/#m55a709e6ba5ec59fe95323a67a7f3d6b1953e470
+Fix page actor size to avoid a crash from squashfs_decompress().
+Suggested by Phillip Lougher[1]
+[1] https://lore.kernel.org/linux-mm/Yn5Yij9pRPCzDozt@casper.infradead.org/t/#m687f82debb7667ff31982a05aef3eba081eb5039
+
+- v4:
+https://lore.kernel.org/linux-mm/Yn5Yij9pRPCzDozt@casper.infradead.org/t/#mf93267690ec2e841dade6a494fe72c84b61328d9
+Fix to free page after used. Suggested by Xiongwei Song[2]
+Refactor the skip page logic to possible improve the performance.
+Suggested by Phillip Lougher[3]
+[2] https://lore.kernel.org/linux-mm/Yn5Yij9pRPCzDozt@casper.infradead.org/t/#m0e7b33d167b1ef0eb39b9f41c32ed3f80dfced18
+[3] https://lore.kernel.org/linux-mm/Yn5Yij9pRPCzDozt@casper.infradead.org/t/#m1e0a8f8e4a98d79d14c81b66e197b6dc0a3b77a1
+---
+ fs/squashfs/file.c | 77 ++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 77 insertions(+)
+
+diff --git a/fs/squashfs/file.c b/fs/squashfs/file.c
+index a8e495d8eb86..91dfec792f4c 100644
+--- a/fs/squashfs/file.c
++++ b/fs/squashfs/file.c
+@@ -39,6 +39,7 @@
  #include "squashfs_fs_sb.h"
-@@ -113,24 +112,6 @@ static const struct squashfs_decompressor *supported_squashfs_filesystem(
- 	return decompressor;
+ #include "squashfs_fs_i.h"
+ #include "squashfs.h"
++#include "page_actor.h"
+ 
+ /*
+  * Locate cache slot in range [offset, index] for specified inode.  If
+@@ -495,7 +496,83 @@ static int squashfs_read_folio(struct file *file, struct folio *folio)
+ 	return 0;
  }
  
--static int squashfs_bdi_init(struct super_block *sb)
--{
--	int err;
--	unsigned int major = MAJOR(sb->s_dev);
--	unsigned int minor = MINOR(sb->s_dev);
--
--	bdi_put(sb->s_bdi);
--	sb->s_bdi = &noop_backing_dev_info;
--
--	err = super_setup_bdi_name(sb, "squashfs_%u_%u", major, minor);
--	if (err)
--		return err;
--
--	sb->s_bdi->ra_pages = 0;
--	sb->s_bdi->io_pages = 0;
--
--	return 0;
--}
++static void squashfs_readahead(struct readahead_control *ractl)
++{
++	struct inode *inode = ractl->mapping->host;
++	struct squashfs_sb_info *msblk = inode->i_sb->s_fs_info;
++	size_t mask = (1UL << msblk->block_log) - 1;
++	size_t shift = msblk->block_log - PAGE_SHIFT;
++	loff_t req_end = readahead_pos(ractl) + readahead_length(ractl);
++	loff_t start = readahead_pos(ractl) &~ mask;
++	size_t len = readahead_length(ractl) + readahead_pos(ractl) - start;
++	struct squashfs_page_actor *actor;
++	unsigned int nr_pages = 0;
++	struct page **pages;
++	u64 block = 0;
++	int bsize, res, i, index;
++	int file_end = i_size_read(inode) >> msblk->block_log;
++	unsigned int max_pages = 1UL << shift;
++
++	readahead_expand(ractl, start, (len | mask) + 1);
++
++	if (readahead_pos(ractl) + readahead_length(ractl) < req_end ||
++	    file_end == 0)
++		return;
++
++	pages = kmalloc_array(max_pages, sizeof(void *), GFP_KERNEL);
++	if (!pages)
++		return;
++
++	actor = squashfs_page_actor_init_special(pages, max_pages, 0);
++	if (!actor)
++		goto out;
++
++	for (;;) {
++		nr_pages = __readahead_batch(ractl, pages, max_pages);
++		if (!nr_pages)
++			break;
++
++		if (readahead_pos(ractl) >= i_size_read(inode) ||
++		    nr_pages < max_pages)
++			goto skip_pages;
++
++		index = pages[0]->index >> shift;
++		if ((pages[nr_pages - 1]->index >> shift) != index)
++			goto skip_pages;
++
++		bsize = read_blocklist(inode, index, &block);
++		if (bsize == 0)
++			goto skip_pages;
++
++		res = squashfs_read_data(inode->i_sb, block, bsize, NULL,
++					 actor);
++
++		if (res >= 0)
++			for (i = 0; i < nr_pages; i++)
++				SetPageUptodate(pages[i]);
++
++		for (i = 0; i < nr_pages; i++) {
++			unlock_page(pages[i]);
++			put_page(pages[i]);
++		}
++	}
++
++	kfree(actor);
++	kfree(pages);
++	return;
++
++skip_pages:
++	for (i = 0; i < nr_pages; i++) {
++		unlock_page(pages[i]);
++		put_page(pages[i]);
++	}
++
++	kfree(actor);
++out:
++	kfree(pages);
++}
  
- static int squashfs_fill_super(struct super_block *sb, struct fs_context *fc)
- {
-@@ -146,20 +127,6 @@ static int squashfs_fill_super(struct super_block *sb, struct fs_context *fc)
- 
- 	TRACE("Entered squashfs_fill_superblock\n");
- 
--	/*
--	 * squashfs provides 'backing_dev_info' in order to disable read-ahead. For
--	 * squashfs, I/O is not deferred, it is done immediately in read_folio,
--	 * which means the user would always have to wait their own I/O. So the effect
--	 * of readahead is very weak for squashfs. squashfs_bdi_init will set
--	 * sb->s_bdi->ra_pages and sb->s_bdi->io_pages to 0 and close readahead for
--	 * squashfs.
--	 */
--	err = squashfs_bdi_init(sb);
--	if (err) {
--		errorf(fc, "squashfs init bdi failed");
--		return err;
--	}
--
- 	sb->s_fs_info = kzalloc(sizeof(*msblk), GFP_KERNEL);
- 	if (sb->s_fs_info == NULL) {
- 		ERROR("Failed to allocate squashfs_sb_info\n");
+ const struct address_space_operations squashfs_aops = {
+ 	.read_folio = squashfs_read_folio
++	.readahead = squashfs_readahead
+ };
 -- 
 2.36.0.550.gb090851708-goog
 
