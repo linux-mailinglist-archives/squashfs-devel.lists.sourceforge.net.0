@@ -2,99 +2,108 @@ Return-Path: <squashfs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+squashfs-devel@lfdr.de
 Delivered-To: lists+squashfs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7692052E344
-	for <lists+squashfs-devel@lfdr.de>; Fri, 20 May 2022 05:45:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B242652E349
+	for <lists+squashfs-devel@lfdr.de>; Fri, 20 May 2022 05:45:19 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <squashfs-devel-bounces@lists.sourceforge.net>)
-	id 1nrtZl-0007NL-Cp; Fri, 20 May 2022 03:45:15 +0000
+	id 1nrtZl-0007NV-Ed; Fri, 20 May 2022 03:45:16 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <phillip@squashfs.org.uk>) id 1nqoOd-0002mk-29
- for squashfs-devel@lists.sourceforge.net; Tue, 17 May 2022 04:01:17 +0000
+ (envelope-from <hsinyi@chromium.org>) id 1nqs59-0006yx-Ua
+ for squashfs-devel@lists.sourceforge.net; Tue, 17 May 2022 07:57:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-Transfer-Encoding
+ :Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0ywUvyK+Dszp2X4vOivCGWZ6YlqiFabRmkG3CZZ0nWs=; b=WUimuRnsmvETOJ86pG6Bhsa0RL
- g67KMaUf26s2doT22AXFJF1o4Cfh8gYmFDxX/fzAiBebb9tQzQ5u1R2sWHGEY4krsc8VEl8F6KCW/
- hiowUN4oo2nBl8XtnfCebzR4c/kgfTF9INiK/V/DWueq9gottSc1X2x5VCDjoEkFvkx0=;
+ bh=WShrHtR7o1bEMN+GHtHpoPB1ADyCcz+AwfB1sJZyYR4=; b=WU5NjH9GPPiJVfDVjpmgS0B5xA
+ Fbj8JN4SH81xgpYTC1lsNyclcGeX21K8kECAC33/flHBE+1l+srVFu9JWIejX+NoxCxWISr6lBXrT
+ 97C/g0jVjBlNOC62EC6kGhMbRF9MfnLjxPloIr6ujb2C4uN3ThOby9/yxpcGBbDb/uOs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=0ywUvyK+Dszp2X4vOivCGWZ6YlqiFabRmkG3CZZ0nWs=; b=McBYZDs6gjDXLV/Cp0ei41PVkK
- UXNXsEuNTSv0edf30CrJGZeRSyff3k3ZnB7xalhjPe+diuwQVve15ywEuSe9kecxKAK/+1aOsMAsC
- F9zYYog3Z+ucbOU57hCnhz3EF7BoBhMmqSLNqOkG4FrKD4MZL5pFoE+e2i8deO2WONE8=;
-Received: from p3plsmtp06-04-2.prod.phx3.secureserver.net ([97.74.135.59]
- helo=p3plwbeout06-04.prod.phx3.secureserver.net)
+ bh=WShrHtR7o1bEMN+GHtHpoPB1ADyCcz+AwfB1sJZyYR4=; b=SUqwbm0xa9iDhg859s5yuxoIPp
+ KeQoiSmtPDGSRKbXlox4c1WpTa02yiVWG5I5Y+9+Od0sNTv1MxDOJeUmSdVBbm4sq+V5N+S4d94rb
+ 024+WJ5TZyoXGWOvC/szb37Y+DAAcTUBOcroU8rYBlP5XY1i2Qr+BWgw2SF1B9YOzc28=;
+Received: from mail-yb1-f177.google.com ([209.85.219.177])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nqoOa-0002Ab-FV
- for squashfs-devel@lists.sourceforge.net; Tue, 17 May 2022 04:01:17 +0000
-Received: from mailex.mailcore.me ([94.136.40.143]) by :WBEOUT: with ESMTP
- id qo5gnZICvwdwPqo5hnjQPJ; Mon, 16 May 2022 20:41:45 -0700
-X-CMAE-Analysis: v=2.4 cv=G5PZr/o5 c=1 sm=1 tr=0 ts=62831979
- a=EhJYbXVJKsomWlz4CTV+qA==:117 a=84ok6UeoqCVsigPHarzEiQ==:17
- a=ggZhUymU-5wA:10 a=IkcTkHD0fZMA:10 a=oZkIemNP1mAA:10 a=anyJmfQTAAAA:8
- a=NEAV23lmAAAA:8 a=i3X5FwGiAAAA:8 a=QyXUC8HyAAAA:8 a=i-5SCMXTAAAA:20
- a=qMDeoKeJ2IOt-7S2xNsA:9 a=QEXdDO2ut3YA:10 a=YJ_ntbLOlx1v6PCnmBeL:22
- a=mmqRlSCDY2ywfjPLJ4af:22
-X-SECURESERVER-ACCT: phillip@squashfs.org.uk  
-X-SID: qo5gnZICvwdwP
-Received: from 82-69-79-175.dsl.in-addr.zen.co.uk ([82.69.79.175]
- helo=[192.168.178.33])
- by smtp12.mailcore.me with esmtpa (Exim 4.94.2)
- (envelope-from <phillip@squashfs.org.uk>)
- id 1nqo5f-0006FM-HL; Tue, 17 May 2022 04:41:44 +0100
-Message-ID: <c3175517-4177-d4d8-0aeb-9c21bc748149@squashfs.org.uk>
-Date: Tue, 17 May 2022 04:41:39 +0100
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
+ id 1nqs59-00056Q-Ix
+ for squashfs-devel@lists.sourceforge.net; Tue, 17 May 2022 07:57:28 +0000
+Received: by mail-yb1-f177.google.com with SMTP id e78so10036543ybc.12
+ for <squashfs-devel@lists.sourceforge.net>;
+ Tue, 17 May 2022 00:57:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=WShrHtR7o1bEMN+GHtHpoPB1ADyCcz+AwfB1sJZyYR4=;
+ b=LOFlwn77BRGGTHQ9iEWKPwBc8EC7NIg2bDsjKTz7PFhls9SUyJa0RoGbGs4i0gbs2h
+ FhVaPs5DErd6RbgHLLK0Psn0eW45ltdzDAmbdKIaYF8kbVhy3CrR3d7qdO6TueERI14t
+ 1nslAb6aebvVqxtyL6KGKnnuTrLo4NW+MwcPU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=WShrHtR7o1bEMN+GHtHpoPB1ADyCcz+AwfB1sJZyYR4=;
+ b=iiVgAE39UXtTnhUqxtM9kBF2Z4eB6RiOavGoY/8Vfxp/HV0lkMGefYufv1z3E8c2HD
+ goE3J46ruRZeXMIDI4JRuj2Jpw0N1o5eKsup0kjjkx+fTGKMBocp8T48t5GrUgoV0kuv
+ Q79ZZhzmWphBUpf3G6XVTEbmc+BsMKaIxyAsm0s+zuyJcJdP+N6e2LrxLxo5FZ6yFicj
+ PHVFYKgIrp8K7oUskv51can3muM/sU8Y4IYHixrEW5ZocIiPsGtQvR2/FX8k1N3ga7hx
+ Kicg3yWShtTW0vz9NL2n3DdQbJlqgZ6a8WsFMaB++Rnh7YltkHDCQWiIsbaP8FMuBxgD
+ TI1Q==
+X-Gm-Message-State: AOAM533LUV2XhToqW+YsxxtT9VA3SCE1kRMZ+ZzZFUJNFJzKr4VgWiYl
+ XJ5cnZ2wUvbQ9NcfvYyRVwul1lEoFUWZ+ETwvDyKB7BUUS8QpA==
+X-Google-Smtp-Source: ABdhPJwEplLYKvh+UGWkRWwFL7aUrldDFea1pw9lk57FA3WLEL60dkwzpZTESwKPQX9FIONp5mTUpyvS1luMK3t7Bqs=
+X-Received: by 2002:a9f:3193:0:b0:35d:21ec:4ae1 with SMTP id
+ v19-20020a9f3193000000b0035d21ec4ae1mr7292105uad.100.1652773918317; Tue, 17
+ May 2022 00:51:58 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.9.0
-To: kernel test robot <lkp@intel.com>, Hsin-Yi Wang <hsinyi@chromium.org>,
- Matthew Wilcox <willy@infradead.org>,
- Xiongwei Song <Xiongwei.Song@windriver.com>
-References: <20220516105100.1412740-3-hsinyi@chromium.org>
- <202205162301.zVca8ZpM-lkp@intel.com>
-From: Phillip Lougher <phillip@squashfs.org.uk>
-In-Reply-To: <202205162301.zVca8ZpM-lkp@intel.com>
-X-Mailcore-Auth: 439999529
-X-Mailcore-Domain: 1394945
-X-123-reg-Authenticated: phillip@squashfs.org.uk  
-X-Originating-IP: 82.69.79.175
-X-CMAE-Envelope: MS4xfOpiU29BMZBn1OeD8Rldczr1w6w4M2/PTQ+yl6rjbkLUIefc90t05Rcu2/s0W3Qhmo6JFTnZSP6hbV7yNVYGOqa1o8QvVKQPPhTW8F4WcZaOQzFMbhud
- dFoyY7+UZoat346lFq5Gu6Bih7Vw9FbnoOMrQ3sgFBWJ/GtSFwjOMYscq361shmqVHfcJHGZ+BwEU7hSsBhGqCPpFbhTxDU2YRPaiqOtMVjFHXyBRLZwHlxq
-X-Spam-Score: -0.4 (/)
+References: <20220516105100.1412740-1-hsinyi@chromium.org>
+ <20220517033557.3492-1-phillip@squashfs.org.uk>
+In-Reply-To: <20220517033557.3492-1-phillip@squashfs.org.uk>
+From: Hsin-Yi Wang <hsinyi@chromium.org>
+Date: Tue, 17 May 2022 15:51:32 +0800
+Message-ID: <CAJMQK-g2G=yDC9GW9Kcpuia+kdOcH_-WpR8xyLvx+5w0BHJJmg@mail.gmail.com>
+To: Phillip Lougher <phillip@squashfs.org.uk>
+X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 16/05/2022 17:01, kernel test robot wrote: > Hi Hsin-Yi, 
- > > Thank you for the patch! Yet something to improve: > > [auto build test
- ERROR on next-20220513] > [cannot apply to akpm-mm/mm-everything [...] 
- Content analysis details:   (-0.4 points, 6.0 required)
+ Content preview:  On Tue, May 17,
+ 2022 at 11:36 AM Phillip Lougher <phillip@squashfs.org.uk>
+ wrote: > > Squashfs_readahead uses the "file direct" version of the page
+ > actor, and so build it unconditionally. > > Report [...] 
+ Content analysis details:   (-0.3 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [97.74.135.59 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.219.177 listed in list.dnswl.org]
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [97.74.135.59 listed in wl.mailspike.net]
+ [209.85.219.177 listed in wl.mailspike.net]
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
- -0.4 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1nqoOa-0002Ab-FV
-X-Mailman-Approved-At: Fri, 20 May 2022 03:45:11 +0000
-Subject: Re: [Squashfs-devel] [PATCH 2/2] squashfs: implement readahead
+ -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nqs59-00056Q-Ix
+X-Mailman-Approved-At: Fri, 20 May 2022 03:45:10 +0000
+Subject: Re: [Squashfs-devel] [PATCH 3/2] squashfs: always build "file
+ direct" version of page actor
 X-BeenThere: squashfs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,155 +115,108 @@ List-Post: <mailto:squashfs-devel@lists.sourceforge.net>
 List-Help: <mailto:squashfs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/squashfs-devel>, 
  <mailto:squashfs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: "squashfs-devel @ lists . sourceforge . net"
- <squashfs-devel@lists.sourceforge.net>, kbuild-all@lists.01.org,
- Zhang Yi <yi.zhang@huawei.com>, linux-kernel@vger.kernel.org,
- Linux Memory Management List <linux-mm@kvack.org>,
- Zheng Liang <zhengliang6@huawei.com>, Hou Tao <houtao1@huawei.com>,
- Andrew Morton <akpm@linux-foundation.org>, Miao Xie <miaoxie@huawei.com>
+Cc: Xiongwei.Song@windriver.com, kernel test robot <lkp@intel.com>,
+ squashfs-devel@lists.sourceforge.net, yi.zhang@huawei.com,
+ linux-kernel@vger.kernel.org, willy@infradead.org, linux-mm@kvack.org,
+ zhengliang6@huawei.com, houtao1@huawei.com, akpm@linux-foundation.org,
+ miaoxie@huawei.com
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: squashfs-devel-bounces@lists.sourceforge.net
 
-On 16/05/2022 17:01, kernel test robot wrote:
-> Hi Hsin-Yi,
-> 
-> Thank you for the patch! Yet something to improve:
-> 
-> [auto build test ERROR on next-20220513]
-> [cannot apply to akpm-mm/mm-everything v5.18-rc7 v5.18-rc6 v5.18-rc5 v5.18-rc7]
-> [If your patch is applied to the wrong git tree, kindly drop us a note.
-> And when submitting patch, we suggest to use '--base' as documented in
-> https://git-scm.com/docs/git-format-patch]
-
-This is fixed by
-
-[PATCH 3/2] squashfs: always build "file direct" version of page actor
-
-Which I have just sent.
-
-Phillip
-
-> 
-> url:    https://github.com/intel-lab-lkp/linux/commits/Hsin-Yi-Wang/Implement-readahead-for-squashfs/20220516-185438
-> base:    1e1b28b936aed946122b4e0991e7144fdbbfd77e
-> config: m68k-allyesconfig (https://download.01.org/0day-ci/archive/20220516/202205162301.zVca8ZpM-lkp@intel.com/config)
-> compiler: m68k-linux-gcc (GCC) 11.3.0
-> reproduce (this is a W=1 build):
->          wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
->          chmod +x ~/bin/make.cross
->          # https://github.com/intel-lab-lkp/linux/commit/573e1f2ced0df097c30c595d5bf5a9e7a5fcb8d5
->          git remote add linux-review https://github.com/intel-lab-lkp/linux
->          git fetch --no-tags linux-review Hsin-Yi-Wang/Implement-readahead-for-squashfs/20220516-185438
->          git checkout 573e1f2ced0df097c30c595d5bf5a9e7a5fcb8d5
->          # save the config file
->          mkdir build_dir && cp config build_dir/.config
->          COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-11.3.0 make.cross W=1 O=build_dir ARCH=m68k SHELL=/bin/bash
-> 
-> If you fix the issue, kindly add following tag as appropriate
+On Tue, May 17, 2022 at 11:36 AM Phillip Lougher
+<phillip@squashfs.org.uk> wrote:
+>
+> Squashfs_readahead uses the "file direct" version of the page
+> actor, and so build it unconditionally.
+>
 > Reported-by: kernel test robot <lkp@intel.com>
-> 
-> All errors (new ones prefixed by >>):
-> 
->     fs/squashfs/file.c: In function 'squashfs_readahead':
->>> fs/squashfs/file.c:526:17: error: implicit declaration of function 'squashfs_page_actor_init_special'; did you mean 'squashfs_page_actor_init'? [-Werror=implicit-function-declaration]
->       526 |         actor = squashfs_page_actor_init_special(pages, max_pages, 0);
->           |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
->           |                 squashfs_page_actor_init
->     fs/squashfs/file.c:526:15: warning: assignment to 'struct squashfs_page_actor *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
->       526 |         actor = squashfs_page_actor_init_special(pages, max_pages, 0);
->           |               ^
->     fs/squashfs/file.c: At top level:
->>> fs/squashfs/file.c:577:9: error: request for member 'readahead' in something not a structure or union
->       577 |         .readahead = squashfs_readahead
->           |         ^
->     cc1: some warnings being treated as errors
-> 
-> 
-> vim +526 fs/squashfs/file.c
-> 
->     498	
->     499	static void squashfs_readahead(struct readahead_control *ractl)
->     500	{
->     501		struct inode *inode = ractl->mapping->host;
->     502		struct squashfs_sb_info *msblk = inode->i_sb->s_fs_info;
->     503		size_t mask = (1UL << msblk->block_log) - 1;
->     504		size_t shift = msblk->block_log - PAGE_SHIFT;
->     505		loff_t req_end = readahead_pos(ractl) + readahead_length(ractl);
->     506		loff_t start = readahead_pos(ractl) &~ mask;
->     507		size_t len = readahead_length(ractl) + readahead_pos(ractl) - start;
->     508		struct squashfs_page_actor *actor;
->     509		unsigned int nr_pages = 0;
->     510		struct page **pages;
->     511		u64 block = 0;
->     512		int bsize, res, i, index;
->     513		int file_end = i_size_read(inode) >> msblk->block_log;
->     514		unsigned int max_pages = 1UL << shift;
->     515	
->     516		readahead_expand(ractl, start, (len | mask) + 1);
->     517	
->     518		if (readahead_pos(ractl) + readahead_length(ractl) < req_end ||
->     519		    file_end == 0)
->     520			return;
->     521	
->     522		pages = kmalloc_array(max_pages, sizeof(void *), GFP_KERNEL);
->     523		if (!pages)
->     524			return;
->     525	
->   > 526		actor = squashfs_page_actor_init_special(pages, max_pages, 0);
->     527		if (!actor)
->     528			goto out;
->     529	
->     530		for (;;) {
->     531			nr_pages = __readahead_batch(ractl, pages, max_pages);
->     532			if (!nr_pages)
->     533				break;
->     534	
->     535			if (readahead_pos(ractl) >= i_size_read(inode) ||
->     536			    nr_pages < max_pages)
->     537				goto skip_pages;
->     538	
->     539			index = pages[0]->index >> shift;
->     540			if ((pages[nr_pages - 1]->index >> shift) != index)
->     541				goto skip_pages;
->     542	
->     543			bsize = read_blocklist(inode, index, &block);
->     544			if (bsize == 0)
->     545				goto skip_pages;
->     546	
->     547			res = squashfs_read_data(inode->i_sb, block, bsize, NULL,
->     548						 actor);
->     549	
->     550			if (res >= 0)
->     551				for (i = 0; i < nr_pages; i++)
->     552					SetPageUptodate(pages[i]);
->     553	
->     554			for (i = 0; i < nr_pages; i++) {
->     555				unlock_page(pages[i]);
->     556				put_page(pages[i]);
->     557			}
->     558		}
->     559	
->     560		kfree(actor);
->     561		kfree(pages);
->     562		return;
->     563	
->     564	skip_pages:
->     565		for (i = 0; i < nr_pages; i++) {
->     566			unlock_page(pages[i]);
->     567			put_page(pages[i]);
->     568		}
->     569	
->     570		kfree(actor);
->     571	out:
->     572		kfree(pages);
->     573	}
->     574	
->     575	const struct address_space_operations squashfs_aops = {
->     576		.read_folio = squashfs_read_folio
->   > 577		.readahead = squashfs_readahead
-> 
+> Signed-off-by: Phillip Lougher <phillip@squashfs.org.uk>
+Tested-by: Hsin-Yi Wang <hsinyi@chromium.org>
 
+Tested with CONFIG_SQUASHFS_FILE_DIRECT unselected. I'll pick this
+patch to the series. Thanks
+
+> ---
+>  fs/squashfs/Makefile     |  4 ++--
+>  fs/squashfs/page_actor.h | 41 ----------------------------------------
+>  2 files changed, 2 insertions(+), 43 deletions(-)
+>
+> diff --git a/fs/squashfs/Makefile b/fs/squashfs/Makefile
+> index 7bd9b8b856d0..477c89a519ee 100644
+> --- a/fs/squashfs/Makefile
+> +++ b/fs/squashfs/Makefile
+> @@ -5,9 +5,9 @@
+>
+>  obj-$(CONFIG_SQUASHFS) += squashfs.o
+>  squashfs-y += block.o cache.o dir.o export.o file.o fragment.o id.o inode.o
+> -squashfs-y += namei.o super.o symlink.o decompressor.o
+> +squashfs-y += namei.o super.o symlink.o decompressor.o page_actor.o
+>  squashfs-$(CONFIG_SQUASHFS_FILE_CACHE) += file_cache.o
+> -squashfs-$(CONFIG_SQUASHFS_FILE_DIRECT) += file_direct.o page_actor.o
+> +squashfs-$(CONFIG_SQUASHFS_FILE_DIRECT) += file_direct.o
+>  squashfs-$(CONFIG_SQUASHFS_DECOMP_SINGLE) += decompressor_single.o
+>  squashfs-$(CONFIG_SQUASHFS_DECOMP_MULTI) += decompressor_multi.o
+>  squashfs-$(CONFIG_SQUASHFS_DECOMP_MULTI_PERCPU) += decompressor_multi_percpu.o
+> diff --git a/fs/squashfs/page_actor.h b/fs/squashfs/page_actor.h
+> index 2e3073ace009..26e07373af8a 100644
+> --- a/fs/squashfs/page_actor.h
+> +++ b/fs/squashfs/page_actor.h
+> @@ -6,46 +6,6 @@
+>   * Phillip Lougher <phillip@squashfs.org.uk>
+>   */
+>
+> -#ifndef CONFIG_SQUASHFS_FILE_DIRECT
+> -struct squashfs_page_actor {
+> -       void    **page;
+> -       int     pages;
+> -       int     length;
+> -       int     next_page;
+> -};
+> -
+> -static inline struct squashfs_page_actor *squashfs_page_actor_init(void **page,
+> -       int pages, int length)
+> -{
+> -       struct squashfs_page_actor *actor = kmalloc(sizeof(*actor), GFP_KERNEL);
+> -
+> -       if (actor == NULL)
+> -               return NULL;
+> -
+> -       actor->length = length ? : pages * PAGE_SIZE;
+> -       actor->page = page;
+> -       actor->pages = pages;
+> -       actor->next_page = 0;
+> -       return actor;
+> -}
+> -
+> -static inline void *squashfs_first_page(struct squashfs_page_actor *actor)
+> -{
+> -       actor->next_page = 1;
+> -       return actor->page[0];
+> -}
+> -
+> -static inline void *squashfs_next_page(struct squashfs_page_actor *actor)
+> -{
+> -       return actor->next_page == actor->pages ? NULL :
+> -               actor->page[actor->next_page++];
+> -}
+> -
+> -static inline void squashfs_finish_page(struct squashfs_page_actor *actor)
+> -{
+> -       /* empty */
+> -}
+> -#else
+>  struct squashfs_page_actor {
+>         union {
+>                 void            **buffer;
+> @@ -76,4 +36,3 @@ static inline void squashfs_finish_page(struct squashfs_page_actor *actor)
+>         actor->squashfs_finish_page(actor);
+>  }
+>  #endif
+> -#endif
+> --
+> 2.34.1
+>
 
 
 _______________________________________________
