@@ -2,26 +2,26 @@ Return-Path: <squashfs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+squashfs-devel@lfdr.de
 Delivered-To: lists+squashfs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3CA6D52E343
+	by mail.lfdr.de (Postfix) with ESMTPS id 7692052E344
 	for <lists+squashfs-devel@lfdr.de>; Fri, 20 May 2022 05:45:18 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <squashfs-devel-bounces@lists.sourceforge.net>)
-	id 1nrtZl-0007NB-Az; Fri, 20 May 2022 03:45:15 +0000
+	id 1nrtZl-0007NL-Cp; Fri, 20 May 2022 03:45:15 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <phillip@squashfs.org.uk>) id 1nqo4j-0002Sf-9l
- for squashfs-devel@lists.sourceforge.net; Tue, 17 May 2022 03:40:43 +0000
+ (envelope-from <phillip@squashfs.org.uk>) id 1nqoOd-0002mk-29
+ for squashfs-devel@lists.sourceforge.net; Tue, 17 May 2022 04:01:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3i2TkAHzW6zF265nZKVj6H90uiIas6VOZoGfNZS4Gbs=; b=NI6DrJ5acHPzNomQBg7t+llmdX
- CguKvgUwGCihvhvJwlOfjALuKD25saXNuFrRhVBzSx1UgWPQEnFcbTfNVdXu7ajjNu/39PETpoDxt
- P3FjafjlU2Eac4mGEgYJKvE8r2r7LPOp0qsFfOG6nZcRuo5peDQpZELsbWSYON9l6hWc=;
+ bh=0ywUvyK+Dszp2X4vOivCGWZ6YlqiFabRmkG3CZZ0nWs=; b=WUimuRnsmvETOJ86pG6Bhsa0RL
+ g67KMaUf26s2doT22AXFJF1o4Cfh8gYmFDxX/fzAiBebb9tQzQ5u1R2sWHGEY4krsc8VEl8F6KCW/
+ hiowUN4oo2nBl8XtnfCebzR4c/kgfTF9INiK/V/DWueq9gottSc1X2x5VCDjoEkFvkx0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -29,32 +29,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=3i2TkAHzW6zF265nZKVj6H90uiIas6VOZoGfNZS4Gbs=; b=CUmEzYLlAUgyuQD0t8rwBiww5d
- 2jMJmDS+IcB/ycglU8XE0uLGKo1Khv7zWJwngdT1rpu9ChhUhaLXzdtiwL7J0rUW4wN/I6xtuWq0D
- XGVcBjnH4JXj4IT+6M9a+kH0byj7A7MJ5xO64hIm1cQIi0qLwTXFhNiJVQj/Ssu2fZ5k=;
-Received: from p3plsmtp27-01-2.prod.phx3.secureserver.net ([216.69.139.46]
- helo=p3plwbeout27-01.prod.phx3.secureserver.net)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=0ywUvyK+Dszp2X4vOivCGWZ6YlqiFabRmkG3CZZ0nWs=; b=McBYZDs6gjDXLV/Cp0ei41PVkK
+ UXNXsEuNTSv0edf30CrJGZeRSyff3k3ZnB7xalhjPe+diuwQVve15ywEuSe9kecxKAK/+1aOsMAsC
+ F9zYYog3Z+ucbOU57hCnhz3EF7BoBhMmqSLNqOkG4FrKD4MZL5pFoE+e2i8deO2WONE8=;
+Received: from p3plsmtp06-04-2.prod.phx3.secureserver.net ([97.74.135.59]
+ helo=p3plwbeout06-04.prod.phx3.secureserver.net)
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.94.2)
- id 1nqo4g-001ye4-RE
- for squashfs-devel@lists.sourceforge.net; Tue, 17 May 2022 03:40:43 +0000
-Received: from mailex.mailcore.me ([94.136.40.144]) by :WBEOUT: with ESMTP
- id qo4anmLM2kMRvqo4bnmabZ; Mon, 16 May 2022 20:40:37 -0700
-X-CMAE-Analysis: v=2.4 cv=Ks6IZUaN c=1 sm=1 tr=0 ts=62831935
- a=wXHyRMViKMYRd//SnbHIqA==:117 a=84ok6UeoqCVsigPHarzEiQ==:17
+ id 1nqoOa-0002Ab-FV
+ for squashfs-devel@lists.sourceforge.net; Tue, 17 May 2022 04:01:17 +0000
+Received: from mailex.mailcore.me ([94.136.40.143]) by :WBEOUT: with ESMTP
+ id qo5gnZICvwdwPqo5hnjQPJ; Mon, 16 May 2022 20:41:45 -0700
+X-CMAE-Analysis: v=2.4 cv=G5PZr/o5 c=1 sm=1 tr=0 ts=62831979
+ a=EhJYbXVJKsomWlz4CTV+qA==:117 a=84ok6UeoqCVsigPHarzEiQ==:17
  a=ggZhUymU-5wA:10 a=IkcTkHD0fZMA:10 a=oZkIemNP1mAA:10 a=anyJmfQTAAAA:8
  a=NEAV23lmAAAA:8 a=i3X5FwGiAAAA:8 a=QyXUC8HyAAAA:8 a=i-5SCMXTAAAA:20
- a=7XGxkfBbjmLJC-YlxtgA:9 a=QEXdDO2ut3YA:10 a=YJ_ntbLOlx1v6PCnmBeL:22
+ a=qMDeoKeJ2IOt-7S2xNsA:9 a=QEXdDO2ut3YA:10 a=YJ_ntbLOlx1v6PCnmBeL:22
  a=mmqRlSCDY2ywfjPLJ4af:22
 X-SECURESERVER-ACCT: phillip@squashfs.org.uk  
-X-SID: qo4anmLM2kMRv
+X-SID: qo5gnZICvwdwP
 Received: from 82-69-79-175.dsl.in-addr.zen.co.uk ([82.69.79.175]
  helo=[192.168.178.33])
- by smtp10.mailcore.me with esmtpa (Exim 4.94.2)
+ by smtp12.mailcore.me with esmtpa (Exim 4.94.2)
  (envelope-from <phillip@squashfs.org.uk>)
- id 1nqo4Z-00039O-7W; Tue, 17 May 2022 04:40:36 +0100
-Message-ID: <33ebeb79-c428-8920-35e3-712f9db6eb28@squashfs.org.uk>
-Date: Tue, 17 May 2022 04:40:31 +0100
+ id 1nqo5f-0006FM-HL; Tue, 17 May 2022 04:41:44 +0100
+Message-ID: <c3175517-4177-d4d8-0aeb-9c21bc748149@squashfs.org.uk>
+Date: Tue, 17 May 2022 04:41:39 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.9.0
@@ -62,34 +62,37 @@ To: kernel test robot <lkp@intel.com>, Hsin-Yi Wang <hsinyi@chromium.org>,
  Matthew Wilcox <willy@infradead.org>,
  Xiongwei Song <Xiongwei.Song@windriver.com>
 References: <20220516105100.1412740-3-hsinyi@chromium.org>
- <202205162245.LVgJF5HH-lkp@intel.com>
+ <202205162301.zVca8ZpM-lkp@intel.com>
 From: Phillip Lougher <phillip@squashfs.org.uk>
-In-Reply-To: <202205162245.LVgJF5HH-lkp@intel.com>
+In-Reply-To: <202205162301.zVca8ZpM-lkp@intel.com>
 X-Mailcore-Auth: 439999529
 X-Mailcore-Domain: 1394945
 X-123-reg-Authenticated: phillip@squashfs.org.uk  
 X-Originating-IP: 82.69.79.175
-X-CMAE-Envelope: MS4xfHMkcmG0mnZObydCByK0Dmibe/QWjRF4wqU4pz2uhmvaDi5JwSBrlVxxMbxaNdTHQ/DzOF5CTLuCquCYeBpDDv6PAWRe4ig2l/CRynwhjlY6B3seRklo
- mmwPcSLq2t1+w/OJ6S47KQeAQ6Nzqme6aY09f7Kt1rs3wxTGhjPnvE6a3uzPtaGIOuvFCowUIqyuaNFkmahoSZ4aaM1BwSjfHNNhxD6w1B2cwsLjRHmJ3PCq
-X-Spam-Score: -2.0 (--)
+X-CMAE-Envelope: MS4xfOpiU29BMZBn1OeD8Rldczr1w6w4M2/PTQ+yl6rjbkLUIefc90t05Rcu2/s0W3Qhmo6JFTnZSP6hbV7yNVYGOqa1o8QvVKQPPhTW8F4WcZaOQzFMbhud
+ dFoyY7+UZoat346lFq5Gu6Bih7Vw9FbnoOMrQ3sgFBWJ/GtSFwjOMYscq361shmqVHfcJHGZ+BwEU7hSsBhGqCPpFbhTxDU2YRPaiqOtMVjFHXyBRLZwHlxq
+X-Spam-Score: -0.4 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 16/05/2022 15:21, kernel test robot wrote: > Hi Hsin-Yi, 
- > > Thank you for the patch! Perhaps something to improve: > > [auto build
- test WARNING on next-20220513] > [cannot apply to akpm-mm/mm-ever [...] 
- Content analysis details:   (-2.0 points, 6.0 required)
+ Content preview:  On 16/05/2022 17:01, kernel test robot wrote: > Hi Hsin-Yi, 
+ > > Thank you for the patch! Yet something to improve: > > [auto build test
+ ERROR on next-20220513] > [cannot apply to akpm-mm/mm-everything [...] 
+ Content analysis details:   (-0.4 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [216.69.139.46 listed in list.dnswl.org]
+ no trust [97.74.135.59 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -2.0 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1nqo4g-001ye4-RE
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [97.74.135.59 listed in wl.mailspike.net]
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.4 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1nqoOa-0002Ab-FV
 X-Mailman-Approved-At: Fri, 20 May 2022 03:45:11 +0000
 Subject: Re: [Squashfs-devel] [PATCH 2/2] squashfs: implement readahead
 X-BeenThere: squashfs-devel@lists.sourceforge.net
@@ -113,17 +116,16 @@ Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: squashfs-devel-bounces@lists.sourceforge.net
 
-On 16/05/2022 15:21, kernel test robot wrote:
+On 16/05/2022 17:01, kernel test robot wrote:
 > Hi Hsin-Yi,
 > 
-> Thank you for the patch! Perhaps something to improve:
+> Thank you for the patch! Yet something to improve:
 > 
-> [auto build test WARNING on next-20220513]
+> [auto build test ERROR on next-20220513]
 > [cannot apply to akpm-mm/mm-everything v5.18-rc7 v5.18-rc6 v5.18-rc5 v5.18-rc7]
 > [If your patch is applied to the wrong git tree, kindly drop us a note.
 > And when submitting patch, we suggest to use '--base' as documented in
 > https://git-scm.com/docs/git-format-patch]
-> 
 
 This is fixed by
 
@@ -133,9 +135,10 @@ Which I have just sent.
 
 Phillip
 
+> 
 > url:    https://github.com/intel-lab-lkp/linux/commits/Hsin-Yi-Wang/Implement-readahead-for-squashfs/20220516-185438
 > base:    1e1b28b936aed946122b4e0991e7144fdbbfd77e
-> config: m68k-allyesconfig (https://download.01.org/0day-ci/archive/20220516/202205162245.LVgJF5HH-lkp@intel.com/config)
+> config: m68k-allyesconfig (https://download.01.org/0day-ci/archive/20220516/202205162301.zVca8ZpM-lkp@intel.com/config)
 > compiler: m68k-linux-gcc (GCC) 11.3.0
 > reproduce (this is a W=1 build):
 >          wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
@@ -146,23 +149,23 @@ Phillip
 >          git checkout 573e1f2ced0df097c30c595d5bf5a9e7a5fcb8d5
 >          # save the config file
 >          mkdir build_dir && cp config build_dir/.config
->          COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-11.3.0 make.cross W=1 O=build_dir ARCH=m68k SHELL=/bin/bash fs/squashfs/
+>          COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-11.3.0 make.cross W=1 O=build_dir ARCH=m68k SHELL=/bin/bash
 > 
 > If you fix the issue, kindly add following tag as appropriate
 > Reported-by: kernel test robot <lkp@intel.com>
 > 
-> All warnings (new ones prefixed by >>):
+> All errors (new ones prefixed by >>):
 > 
 >     fs/squashfs/file.c: In function 'squashfs_readahead':
->     fs/squashfs/file.c:526:17: error: implicit declaration of function 'squashfs_page_actor_init_special'; did you mean 'squashfs_page_actor_init'? [-Werror=implicit-function-declaration]
+>>> fs/squashfs/file.c:526:17: error: implicit declaration of function 'squashfs_page_actor_init_special'; did you mean 'squashfs_page_actor_init'? [-Werror=implicit-function-declaration]
 >       526 |         actor = squashfs_page_actor_init_special(pages, max_pages, 0);
 >           |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 >           |                 squashfs_page_actor_init
->>> fs/squashfs/file.c:526:15: warning: assignment to 'struct squashfs_page_actor *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+>     fs/squashfs/file.c:526:15: warning: assignment to 'struct squashfs_page_actor *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
 >       526 |         actor = squashfs_page_actor_init_special(pages, max_pages, 0);
 >           |               ^
 >     fs/squashfs/file.c: At top level:
->     fs/squashfs/file.c:577:9: error: request for member 'readahead' in something not a structure or union
+>>> fs/squashfs/file.c:577:9: error: request for member 'readahead' in something not a structure or union
 >       577 |         .readahead = squashfs_readahead
 >           |         ^
 >     cc1: some warnings being treated as errors
@@ -247,6 +250,9 @@ Phillip
 >     572		kfree(pages);
 >     573	}
 >     574	
+>     575	const struct address_space_operations squashfs_aops = {
+>     576		.read_folio = squashfs_read_folio
+>   > 577		.readahead = squashfs_readahead
 > 
 
 
