@@ -2,26 +2,26 @@ Return-Path: <squashfs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+squashfs-devel@lfdr.de
 Delivered-To: lists+squashfs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D4630531540
-	for <lists+squashfs-devel@lfdr.de>; Mon, 23 May 2022 19:30:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 081E0531543
+	for <lists+squashfs-devel@lfdr.de>; Mon, 23 May 2022 19:30:28 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.94.2)
 	(envelope-from <squashfs-devel-bounces@lists.sourceforge.net>)
-	id 1ntBsq-0000zG-Td; Mon, 23 May 2022 17:30:21 +0000
+	id 1ntBsq-0000zK-Uk; Mon, 23 May 2022 17:30:21 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <hsinyi@chromium.org>) id 1nt22p-0001FN-Ua
- for squashfs-devel@lists.sourceforge.net; Mon, 23 May 2022 06:59:59 +0000
+ (envelope-from <hsinyi@chromium.org>) id 1nt23O-0000MI-8H
+ for squashfs-devel@lists.sourceforge.net; Mon, 23 May 2022 07:00:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=HDi9xEtp8+cj5bsf5JN5+R5BFytv9jkvX5VZGd9dnU0=; b=AipWeP3Gn4ZG7u8Jqtq5SDaUjT
- EAK3UHogLSYbc6hzqaQlMTDTmdImJGzHFtzFWruIBMdwahbXNgVqY8sjIYGzGuGfl/Gem6swthjik
- TC1ZaNtgrED9nit7LWM9e2p4zWp8mpzOqa/9Ux1NmAl1SBKEoP9f2ST9QHrmSPBkP+O4=;
+ bh=l9zzjHGygGfmD2mjiCjABBiOJyHxbV3Xb2gkS3Lpi4w=; b=CSQG17QpVS2HkxxK/M2GdJVIHC
+ FPQn6gNslLb7q4p4euP2ApDOVZWI6Za1ajDZ8S/23v6Q5kI1T8ZiPG6/McNGgg6j4GSMMllAlTqHc
+ QlVEVljGh+4AIiL/uTjFDKvxvj+j1mombTyMLprhy64lQ3EowTd4ptr11c+q0bz/tFnM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:
@@ -29,91 +29,94 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=HDi9xEtp8+cj5bsf5JN5+R5BFytv9jkvX5VZGd9dnU0=; b=WceKXeyny30/VHI3cwdIopHopO
- xf4q5j9AamYijLtrvuV9EeAnEt5p18BxOPsVOM1ujL6dHhzzTGJ0pZskYtc2SCuPdwYIYZqI/jTWy
- ek2MhelOD0KNCpsIvDDkNIBV09k335vIDy99b9ogk6v4vLHxc5JoAQyVbEeoaxJUYktw=;
-Received: from mail-pf1-f176.google.com ([209.85.210.176])
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ bh=l9zzjHGygGfmD2mjiCjABBiOJyHxbV3Xb2gkS3Lpi4w=; b=UZFaOUR2pMK6bSEm/2dnQchN/L
+ ZE7AHZ/YNUg7QYhJlukhOZAH5Nqpgri0HBX/5zCI7clrup0rMvbIZfZOCIfrJiPuy/WwFkTxj4x7S
+ P+ac2JTBRIjfQ3HquY7FMsMvmHcNx6bLVzR4TbcfsSZWHn+d2/YaBIb7aVNT2DYTzzJE=;
+Received: from mail-pj1-f45.google.com ([209.85.216.45])
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.94.2)
- id 1nt22n-001xcg-Oi
- for squashfs-devel@lists.sourceforge.net; Mon, 23 May 2022 06:59:58 +0000
-Received: by mail-pf1-f176.google.com with SMTP id c14so12885949pfn.2
+ id 1nt22y-0005cc-Hg
+ for squashfs-devel@lists.sourceforge.net; Mon, 23 May 2022 07:00:15 +0000
+Received: by mail-pj1-f45.google.com with SMTP id
+ nk9-20020a17090b194900b001df2fcdc165so16704059pjb.0
  for <squashfs-devel@lists.sourceforge.net>;
- Sun, 22 May 2022 23:59:57 -0700 (PDT)
+ Mon, 23 May 2022 00:00:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=HDi9xEtp8+cj5bsf5JN5+R5BFytv9jkvX5VZGd9dnU0=;
- b=UxqkeG4TS7Vls3G5OKJGYepxuYjCZ6IqBoXYMtw9AN7M89IC4p4tPHJspPyVwwNDPz
- bYcgjDax771MYz9EiTay7QZhCfg2Pvkqx1v/ArsV2Sxu74SUvjVz2R6Eo8P7Gd8o/X5d
- FpFXd96eS2on1YHqFDjZE6a9RnvvkboSSOBSo=
+ bh=l9zzjHGygGfmD2mjiCjABBiOJyHxbV3Xb2gkS3Lpi4w=;
+ b=iQ6M1fZ5Q3+FC+7blG98I3zIIvX/yTF2CLpnO+Hh13i/JAHcQd87xBGJTrWupW27XH
+ Sb1AwdIpu2meybIIwwOeh6fZAOUOQu5fRyD4FaoWpcCzLONtTAcyZs5cXuuRotq2WTUE
+ 3xdrV3vWw3+v0DzRExLgBNJncwKj+Sm+Aj8vY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=HDi9xEtp8+cj5bsf5JN5+R5BFytv9jkvX5VZGd9dnU0=;
- b=dmV9F+O1Y6tJUNPV0YhLN+KOVuGCtWQTwHviRm234RkTTTeIog30/PcM67/HhQU4kq
- l+mo4l666KmPQlO4rYG8Ofe0wQCYHKndjnuJ6uVmeUkQsD5uo1MI6qazHU8hIPN1VVWL
- lXZ9sD698MepDzV3rEGjwT1LLwWhW4N4l/Zy1zPE/Bp2sbH/mWnGTqA1HPN0NaidCMk1
- EYEPtF5ZerVTeBjHXNzDiDrlwxUQkwWCBqLUAaT5IK/MKKj0l5ntRXZjHFPn5q70jUDP
- Hl1y5GexGLIUCTkVY32TP1wO+39GCOZXFcje5m+v+NykAA2kUO4oqCtbNtfShkd/IIG9
- w5XQ==
-X-Gm-Message-State: AOAM531qKT6yhm3IMQeJIBf2aj7YjI+41H7N40fA56Y8SyYZSA5C1q/j
- Bw1yX8ZvA/hyQvr+rZmT2l6yQA==
-X-Google-Smtp-Source: ABdhPJxTXxgVtmCDvjsu+UF9iPAHjiAob+1BBg8pK++x+mFwZJSzqMQrBWqk7s5ILPFs5E8RXtjNgQ==
-X-Received: by 2002:a05:6a00:8cb:b0:510:9ec4:8f85 with SMTP id
- s11-20020a056a0008cb00b005109ec48f85mr22585467pfu.24.1653289191034; 
- Sun, 22 May 2022 23:59:51 -0700 (PDT)
+ bh=l9zzjHGygGfmD2mjiCjABBiOJyHxbV3Xb2gkS3Lpi4w=;
+ b=vl6yDAQxHemGxhAK0Muv+xhKDVy1T/Ki6VpbKHLYkisaNV1iAsIUPrtcMZ3NG00N7n
+ zZdYNX9mjpqInYJUPDrv19tOnpR26XeSX5bqgrAZReEoPZiIbwETd9D5Tkk/IC1JdDQU
+ qr+b0WlIIia/mVhvMXnPN98GlfD3/TQQGLKY3SaFSKfWCUDS31EXdst03bhAFtKJtIOc
+ w1hfqspXqzDt5Ezw9Ajy5lMI9ViIHVdek03rIZL/RKvqfiOhd9kJuqgUEHKVDFTXxIq7
+ uRUg2yQGWpQFcZ+qllbEQW+guU7gc9lgUwWxmWzJj5m2P+d0Mf1uBgYyTgQWfanNus+M
+ 95qw==
+X-Gm-Message-State: AOAM531s/+vVtpk64C71Yvh9/7JSGcfmXwv0hsmohY9lShhUwZERHxVN
+ 1jfh9IQxS6rt3yNb7DSTHevspg==
+X-Google-Smtp-Source: ABdhPJyuPsrnOB4bRdIX3zgGhGWxkP1cXNBva/WVX5JNyJKxhRqlesxK7b7121frjUkQT2vBRVSNVQ==
+X-Received: by 2002:a17:90a:1b6c:b0:1df:6940:e856 with SMTP id
+ q99-20020a17090a1b6c00b001df6940e856mr25130152pjq.240.1653289201243; 
+ Mon, 23 May 2022 00:00:01 -0700 (PDT)
 Received: from hsinyi-z840.tpe.corp.google.com
  ([2401:fa00:1:10:76d5:494d:1690:d003])
  by smtp.gmail.com with ESMTPSA id
- m2-20020a629402000000b005180f4733a8sm3099527pfe.106.2022.05.22.23.59.48
+ m2-20020a629402000000b005180f4733a8sm3099527pfe.106.2022.05.22.23.59.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 22 May 2022 23:59:50 -0700 (PDT)
+ Mon, 23 May 2022 00:00:00 -0700 (PDT)
 From: Hsin-Yi Wang <hsinyi@chromium.org>
 To: Phillip Lougher <phillip@squashfs.org.uk>,
  Matthew Wilcox <willy@infradead.org>,
  Xiongwei Song <Xiongwei.Song@windriver.com>
-Date: Mon, 23 May 2022 14:59:09 +0800
-Message-Id: <20220523065909.883444-2-hsinyi@chromium.org>
+Date: Mon, 23 May 2022 14:59:11 +0800
+Message-Id: <20220523065909.883444-3-hsinyi@chromium.org>
 X-Mailer: git-send-email 2.36.1.124.g0e6072fb45-goog
 In-Reply-To: <20220523065909.883444-1-hsinyi@chromium.org>
 References: <20220523065909.883444-1-hsinyi@chromium.org>
 MIME-Version: 1.0
-X-Spam-Score: -0.9 (/)
+X-Spam-Score: -0.8 (/)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This reverts commit 9eec1d897139e5de287af5d559a02b811b844d82.
- Revert closing the readahead to squashfs since the readahead callback for
- squashfs is implemented. Suggested-by: Xiongwei Song
- <Xiongwei.Song@windriver.com>
- Signed-off-by: Hsin-Yi Wang <hsinyi@chromium.org> --- fs/squashfs/super.c
- | 33 1 file changed, 33 deletions( [...] 
- Content analysis details:   (-0.9 points, 6.0 required)
+ Content preview: From: Phillip Lougher <phillip@squashfs.org.uk>
+ Squashfs_readahead
+ uses the "file direct" version of the page actor,
+ and so build it unconditionally.
+ Reported-by: kernel test robot <lkp@intel.com> Signed-off-by: Phillip Lougher
+ <phillip@squashfs.org.uk> Signed-off-by: Hsin-Yi Wang <hsinyi@chromium.org>
+ --- fs/squashfs/Makefile | 4 ++-- fs/squashfs/ [...] 
+ Content analysis details:   (-0.8 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.45 listed in wl.mailspike.net]
+ -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
+ no trust [209.85.216.45 listed in list.dnswl.org]
+ 0.0 T_SPF_TEMPERROR        SPF: test of record failed (temperror)
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 SPF_PASS               SPF: sender matches SPF record
- -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.210.176 listed in wl.mailspike.net]
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
- valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
- -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [209.85.210.176 listed in list.dnswl.org]
- -0.7 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1nt22n-001xcg-Oi
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -0.6 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1nt22y-0005cc-Hg
 X-Mailman-Approved-At: Mon, 23 May 2022 17:30:18 +0000
-Subject: [Squashfs-devel] [PATCH v3 1/3] Revert "squashfs: provide
- backing_dev_info in order to disable read-ahead"
+Subject: [Squashfs-devel] [PATCH v3 2/3] squashfs: always build "file
+ direct" version of page actor
 X-BeenThere: squashfs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -134,75 +137,91 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: squashfs-devel-bounces@lists.sourceforge.net
 
-This reverts commit 9eec1d897139e5de287af5d559a02b811b844d82.
+From: Phillip Lougher <phillip@squashfs.org.uk>
 
-Revert closing the readahead to squashfs since the readahead callback
-for squashfs is implemented.
+Squashfs_readahead uses the "file direct" version of the page
+actor, and so build it unconditionally.
 
-Suggested-by: Xiongwei Song <Xiongwei.Song@windriver.com>
+Reported-by: kernel test robot <lkp@intel.com>
+Signed-off-by: Phillip Lougher <phillip@squashfs.org.uk>
 Signed-off-by: Hsin-Yi Wang <hsinyi@chromium.org>
 ---
- fs/squashfs/super.c | 33 ---------------------------------
- 1 file changed, 33 deletions(-)
+ fs/squashfs/Makefile     |  4 ++--
+ fs/squashfs/page_actor.h | 41 ----------------------------------------
+ 2 files changed, 2 insertions(+), 43 deletions(-)
 
-diff --git a/fs/squashfs/super.c b/fs/squashfs/super.c
-index 6d594ba2ed28..32565dafa7f3 100644
---- a/fs/squashfs/super.c
-+++ b/fs/squashfs/super.c
-@@ -29,7 +29,6 @@
- #include <linux/module.h>
- #include <linux/magic.h>
- #include <linux/xattr.h>
--#include <linux/backing-dev.h>
+diff --git a/fs/squashfs/Makefile b/fs/squashfs/Makefile
+index 7bd9b8b856d0..477c89a519ee 100644
+--- a/fs/squashfs/Makefile
++++ b/fs/squashfs/Makefile
+@@ -5,9 +5,9 @@
  
- #include "squashfs_fs.h"
- #include "squashfs_fs_sb.h"
-@@ -113,24 +112,6 @@ static const struct squashfs_decompressor *supported_squashfs_filesystem(
- 	return decompressor;
- }
+ obj-$(CONFIG_SQUASHFS) += squashfs.o
+ squashfs-y += block.o cache.o dir.o export.o file.o fragment.o id.o inode.o
+-squashfs-y += namei.o super.o symlink.o decompressor.o
++squashfs-y += namei.o super.o symlink.o decompressor.o page_actor.o
+ squashfs-$(CONFIG_SQUASHFS_FILE_CACHE) += file_cache.o
+-squashfs-$(CONFIG_SQUASHFS_FILE_DIRECT) += file_direct.o page_actor.o
++squashfs-$(CONFIG_SQUASHFS_FILE_DIRECT) += file_direct.o
+ squashfs-$(CONFIG_SQUASHFS_DECOMP_SINGLE) += decompressor_single.o
+ squashfs-$(CONFIG_SQUASHFS_DECOMP_MULTI) += decompressor_multi.o
+ squashfs-$(CONFIG_SQUASHFS_DECOMP_MULTI_PERCPU) += decompressor_multi_percpu.o
+diff --git a/fs/squashfs/page_actor.h b/fs/squashfs/page_actor.h
+index 2e3073ace009..26e07373af8a 100644
+--- a/fs/squashfs/page_actor.h
++++ b/fs/squashfs/page_actor.h
+@@ -6,46 +6,6 @@
+  * Phillip Lougher <phillip@squashfs.org.uk>
+  */
  
--static int squashfs_bdi_init(struct super_block *sb)
+-#ifndef CONFIG_SQUASHFS_FILE_DIRECT
+-struct squashfs_page_actor {
+-	void	**page;
+-	int	pages;
+-	int	length;
+-	int	next_page;
+-};
+-
+-static inline struct squashfs_page_actor *squashfs_page_actor_init(void **page,
+-	int pages, int length)
 -{
--	int err;
--	unsigned int major = MAJOR(sb->s_dev);
--	unsigned int minor = MINOR(sb->s_dev);
+-	struct squashfs_page_actor *actor = kmalloc(sizeof(*actor), GFP_KERNEL);
 -
--	bdi_put(sb->s_bdi);
--	sb->s_bdi = &noop_backing_dev_info;
+-	if (actor == NULL)
+-		return NULL;
 -
--	err = super_setup_bdi_name(sb, "squashfs_%u_%u", major, minor);
--	if (err)
--		return err;
--
--	sb->s_bdi->ra_pages = 0;
--	sb->s_bdi->io_pages = 0;
--
--	return 0;
+-	actor->length = length ? : pages * PAGE_SIZE;
+-	actor->page = page;
+-	actor->pages = pages;
+-	actor->next_page = 0;
+-	return actor;
 -}
- 
- static int squashfs_fill_super(struct super_block *sb, struct fs_context *fc)
- {
-@@ -146,20 +127,6 @@ static int squashfs_fill_super(struct super_block *sb, struct fs_context *fc)
- 
- 	TRACE("Entered squashfs_fill_superblock\n");
- 
--	/*
--	 * squashfs provides 'backing_dev_info' in order to disable read-ahead. For
--	 * squashfs, I/O is not deferred, it is done immediately in read_folio,
--	 * which means the user would always have to wait their own I/O. So the effect
--	 * of readahead is very weak for squashfs. squashfs_bdi_init will set
--	 * sb->s_bdi->ra_pages and sb->s_bdi->io_pages to 0 and close readahead for
--	 * squashfs.
--	 */
--	err = squashfs_bdi_init(sb);
--	if (err) {
--		errorf(fc, "squashfs init bdi failed");
--		return err;
--	}
 -
- 	sb->s_fs_info = kzalloc(sizeof(*msblk), GFP_KERNEL);
- 	if (sb->s_fs_info == NULL) {
- 		ERROR("Failed to allocate squashfs_sb_info\n");
+-static inline void *squashfs_first_page(struct squashfs_page_actor *actor)
+-{
+-	actor->next_page = 1;
+-	return actor->page[0];
+-}
+-
+-static inline void *squashfs_next_page(struct squashfs_page_actor *actor)
+-{
+-	return actor->next_page == actor->pages ? NULL :
+-		actor->page[actor->next_page++];
+-}
+-
+-static inline void squashfs_finish_page(struct squashfs_page_actor *actor)
+-{
+-	/* empty */
+-}
+-#else
+ struct squashfs_page_actor {
+ 	union {
+ 		void		**buffer;
+@@ -76,4 +36,3 @@ static inline void squashfs_finish_page(struct squashfs_page_actor *actor)
+ 	actor->squashfs_finish_page(actor);
+ }
+ #endif
+-#endif
 -- 
 2.36.1.124.g0e6072fb45-goog
 
