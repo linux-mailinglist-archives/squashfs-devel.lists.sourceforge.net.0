@@ -1,89 +1,101 @@
 Return-Path: <squashfs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+squashfs-devel@lfdr.de
 Delivered-To: lists+squashfs-devel@lfdr.de
-Received: from lists.sourceforge.net (unknown [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50A536C423A
-	for <lists+squashfs-devel@lfdr.de>; Wed, 22 Mar 2023 06:40:01 +0100 (CET)
+Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
+	by mail.lfdr.de (Postfix) with ESMTPS id AE6117013FA
+	for <lists+squashfs-devel@lfdr.de>; Sat, 13 May 2023 04:32:17 +0200 (CEST)
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <squashfs-devel-bounces@lists.sourceforge.net>)
-	id 1perCQ-0002zL-Cx;
-	Wed, 22 Mar 2023 05:39:52 +0000
+	id 1pxf3L-0005HR-GC;
+	Sat, 13 May 2023 02:32:11 +0000
 Received: from [172.30.20.202] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <phillip@squashfs.org.uk>) id 1perCN-0002zE-Ux
+ (envelope-from <phillip@squashfs.org.uk>) id 1pxf3K-0005HK-Rn
  for squashfs-devel@lists.sourceforge.net;
- Wed, 22 Mar 2023 05:39:49 +0000
+ Sat, 13 May 2023 02:32:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qbVJ8+wKlqzUM6OHyP4DT1R9BlPqwCniGekJWPGB+xw=; b=JnuTeHGUNT6gmKmBQ/OkuRqK1O
- UUcKB++mlNSn0yzYUTUwamXiHBrNL//uaeh8jUG2PHthz9GciNgmgZ9ShuJdEx9pseDWzN26vBzr7
- hbP8CxZiB7PUrqtgBT+vVl8r71gayL7tcArMrIlFsEV49cyM+jI2XEW1vuWi2gG7lEZY=;
+ bh=TcepAJhWlITQ8QDpeckjN6rlBJoq+2qGASPvszYS2bU=; b=hn00WbpbtMevZzRXd1qQ5BHKcc
+ vIc6ljwUYS8nJQV6KfhxZTgGcZ+EmVNJ+r5F8/4D+1aEwwSgEWcU0UVerYEg0XtZYhQSdGLsPkzGV
+ +4nyLUOE98wzosNZ+MCp7LUs0WSr+eEDQugDOkGkJ1cNGJqWmStloa0MvEIKCR1GEji4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=qbVJ8+wKlqzUM6OHyP4DT1R9BlPqwCniGekJWPGB+xw=; b=l
- lyzISHJIrZUvzgB4ibtaYn8uw6dQWnjp7DxTL0jRTXceY5DKD1pvrraguE2bZwK5aw9pORQeNCSiU
- IpV/xqHVfkI/M0WHYTIByBC1JQDIDQz4rLwszfh7g6fKJSaeEOepQjWdh3IYYYRixs/Rc1F4Lhp2/
- eVqspNH7IJmR8Wr0=;
-Received: from p3plsmtp26-04-2.prod.phx3.secureserver.net ([216.69.139.30]
- helo=p3plwbeout26-04.prod.phx3.secureserver.net)
- by sfi-mx-1.v28.lw.sourceforge.com with esmtps
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=TcepAJhWlITQ8QDpeckjN6rlBJoq+2qGASPvszYS2bU=; b=GDyQ6AEWguShd5ujyI6m2ENtmy
+ h8bM5XIm3A8jf1DWPdmN7iJg6DNmWpPqhU89VE4kZM1MB98hR4y84LqDMXvWeGpEmjzO3kIYrp4Nn
+ nlse5bH07b4W8BIOgc3NRWVbuVHUaEa0HtUFD94U8Tx6nich5eeo+P254LdxQDCmv9qA=;
+Received: from p3plsmtp16-02-2.prod.phx3.secureserver.net ([173.201.193.56]
+ helo=p3plwbeout16-02.prod.phx3.secureserver.net)
+ by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1perCP-00GFMw-4q for squashfs-devel@lists.sourceforge.net;
- Wed, 22 Mar 2023 05:39:49 +0000
+ id 1pxf3F-0004Vc-RY for squashfs-devel@lists.sourceforge.net;
+ Sat, 13 May 2023 02:32:10 +0000
 Received: from mailex.mailcore.me ([94.136.40.144]) by :WBEOUT: with ESMTP
- id eqtXpcLuQJzPreqtXp8nzP; Tue, 21 Mar 2023 22:20:20 -0700
-X-CMAE-Analysis: v=2.4 cv=OJjiYQWB c=1 sm=1 tr=0 ts=641a9014
+ id xekDp4tTuUojTxekEponvJ; Fri, 12 May 2023 19:12:26 -0700
+X-CMAE-Analysis: v=2.4 cv=MoSXV0We c=1 sm=1 tr=0 ts=645ef20a
  a=wXHyRMViKMYRd//SnbHIqA==:117 a=84ok6UeoqCVsigPHarzEiQ==:17
- a=ggZhUymU-5wA:10 a=k__wU0fu6RkA:10 a=FP58Ms26AAAA:8 a=NEAV23lmAAAA:8
- a=dnHKQ0aXFSJ-3baA9N4A:9 a=jGIlq7wQ_eTbAL2R:21
+ a=ggZhUymU-5wA:10 a=IkcTkHD0fZMA:10 a=P0xRbXHiH_UA:10 a=3-RhneuVAAAA:8
+ a=FXvPX3liAAAA:8 a=VwQbUJbxAAAA:8 a=HEUgJizi0IQopOyZ0BIA:9 a=QEXdDO2ut3YA:10
+ a=VLVLkjT_5ZicWzSuYqSo:22 a=UObqyxdv-6Yh2QiB9mM_:22 a=AjGcO6oz07-iQ99wixmX:22
 X-SECURESERVER-ACCT: phillip@squashfs.org.uk  
-X-SID: eqtXpcLuQJzPr
+X-SID: xekDp4tTuUojT
 Received: from 82-69-79-175.dsl.in-addr.zen.co.uk ([82.69.79.175]
- helo=phoenix.fritz.box)
+ helo=[192.168.178.87])
  by smtp11.mailcore.me with esmtpa (Exim 4.94.2)
  (envelope-from <phillip@squashfs.org.uk>)
- id 1peqtW-0004WB-LA; Wed, 22 Mar 2023 05:20:19 +0000
-From: Phillip Lougher <phillip@squashfs.org.uk>
-To: linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- squashfs-devel@lists.sourceforge.net
-Date: Wed, 22 Mar 2023 05:26:15 +0000
-Message-Id: <20230322052615.28048-1-phillip@squashfs.org.uk>
-X-Mailer: git-send-email 2.35.1
+ id 1pxekD-000150-2w; Sat, 13 May 2023 03:12:26 +0100
+Message-ID: <da96ff78-db3f-903c-cf8c-e1cfd430a4e8@squashfs.org.uk>
+Date: Sat, 13 May 2023 03:12:23 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+To: Vincent Whitchurch <vincent.whitchurch@axis.com>,
+ Andrew Morton <akpm@linux-foundation.org>
+References: <20230510-squashfs-cache-v2-1-42a501a17569@axis.com>
+Content-Language: en-GB
+From: Phillip Lougher <phillip@squashfs.org.uk>
+In-Reply-To: <20230510-squashfs-cache-v2-1-42a501a17569@axis.com>
 X-Mailcore-Auth: 439999529
 X-Mailcore-Domain: 1394945
 X-123-reg-Authenticated: phillip@squashfs.org.uk  
 X-Originating-IP: 82.69.79.175
-X-CMAE-Envelope: MS4xfMPCzaJF8Ipm2fZlBomGzdaRNYxkjIyUzpXS504TZry5qBJ6DnXYKPApL0xS01flhnlmyIxv79L01ztfsUZVcKsOKnh4G1H+qNSZwPAg6UzUQ1HOBL0g
- qccOrqmytk/vzTgXx9prF2LyB6Bx3LmjReKk4OuFp7oBtaoX442wqHpVwSC+FsYDgc8HCOD4CPReYzJIdk+Tjej/cJ+UZEEv5IEvQSukm3jH22JFXdpOvmVK
-X-Spam-Score: 0.0 (/)
+X-CMAE-Envelope: MS4xfEhUCspXdReHehxfBywcfs+/u7hjch7oqsdAHeEfIuWZfw5cp5wTVWpVnRCsG9hqmvSZ9oINhkY9cbsivDRbAMWFYxWyAk+Tnl7o+N7xY1yOzyKnVDeN
+ BBND8fWG23OMMi6wSIFHQlvliV+ERJn0en3X3DmdcUnpQJp8JDtVUgFli4b1Smu77x9TP1zUBtSjxcBqWaY6sg4+dVsQd5AbNwYb1kpoaVdne+VhubM2vGS8
+X-Spam-Score: -1.9 (-)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi, I'm pleased to announce the release of Squashfs tools
- 4.6. The release can be downloaded either from Sourceforge, or GitHub. 
- Content analysis details:   (0.0 points, 6.0 required)
+ Content preview:  On 12/05/2023 14:18,
+ Vincent Whitchurch wrote: > Before commit
+ 93e72b3c612adcaca1 ("squashfs: migrate from ll_rw_block > usage to BIO"),
+ compressed blocks read by squashfs were cached in the > page ca [...] 
+ Content analysis details:   (-1.9 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.0 RCVD_IN_DNSWL_NONE     RBL: Sender listed at https://www.dnswl.org/,
- no trust [216.69.139.30 listed in list.dnswl.org]
+ no trust [173.201.193.56 listed in list.dnswl.org]
+ -0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [173.201.193.56 listed in wl.mailspike.net]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
-X-Headers-End: 1perCP-00GFMw-4q
-Subject: [Squashfs-devel] [ANN] Squashfs-tools 4.6 released
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.0 T_SCC_BODY_TEXT_LINE   No description available.
+ -1.8 NICE_REPLY_A           Looks like a legit reply (A)
+X-Headers-End: 1pxf3F-0004Vc-RY
+Subject: Re: [Squashfs-devel] [PATCH v2] squashfs: cache partial compressed
+ blocks
 X-BeenThere: squashfs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -95,156 +107,168 @@ List-Post: <mailto:squashfs-devel@lists.sourceforge.net>
 List-Help: <mailto:squashfs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/squashfs-devel>, 
  <mailto:squashfs-devel-request@lists.sourceforge.net?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: kernel@axis.com, linux-kernel@vger.kernel.org,
+ squashfs-devel@lists.sourceforge.net, Philippe Liard <pliard@google.com>,
+ hch@lst.de
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: squashfs-devel-bounces@lists.sourceforge.net
 
-Hi,
-
-I'm pleased to announce the release of Squashfs tools 4.6.
-
-The release can be downloaded either from Sourceforge, or GitHub.
-
-https://sourceforge.net/projects/squashfs/files/latest/download
-
-https://github.com/plougher/squashfs-tools/archive/refs/tags/4.6.tar.gz
-
-A summary of the changes is below.  Please see the README-4.6 file in
-the release tarball for more information and the USAGE files.
-
-Phillip
-
-1. Summary of changes
----------------------
-
-1. Extended attribute handling improved in Mksquashfs and Sqfstar
-
-	1.1.New -xattrs-exclude option to exclude extended attributes from files
-	    using a regular expression.
-	1.2 New -xattrs-include option to include extended attributes from files
-	    using a regular expression.
-	1.3 New -xattrs-add option to add extended attributes to files.
-	1.4 New Pseudo file xattr definition to add extended attributes to
-	    files.
-	1.5 New xattrs-add Action to add extended attributes to files
-	    (Mksquashfs only).
-
-2. Extended attribute handling improved in Unsquashfs
-
-	2.1 New -xattrs-exclude option to exclude extended attributes from files
-	    using a regular expression.
-	2.2 New -xattrs-include option to include extended attributes from files
-	     using a regular expression.
-	2.3 Extended attributes are now supported in Pseudo file output.
-
-3. Other major improvements
-
-	3.1 Unsquashfs can now output Pseudo files to standard out.
-	3.2 Mksquashfs can now input Pseudo files from standard in.
-	3.3 Squashfs filesystems can now be converted (different block size
-	    compression etc) without unpacking to an intermediate filesystem or
-	    mounting, by piping the output of Unsquashfs to Mksquashfs.
-	3.4 Pseudo files are now supported by Sqfstar.
-	3.5 "Non-anchored" excludes are now supported by Unsquashfs.
-
-4. Mksquashfs minor improvements
-
-	4.1 A new -max-depth option has been added, which limits the depth
-	    Mksquashfs descends when creating the filesystem.
-	4.2 A new -mem-percent option which allows memory for caches to be
-	    specified as a percentage of physical RAM, rather than requiring an
-	    absolute value.
-	4.3 A new -percentage option added which rather than generating the full
-	    progress-bar instead outputs a percentage.  This can be used with
-	    dialog --gauge etc.
-	4.4 -mkfs-time, -all-time and -root-time options now take a human date
-	    string, in addition to the seconds since the epoch of 1970 00:00
-	    UTC.  For example "now", "last week", "Wed Mar 8 05:55:01 GMT 2023"
-	    are supported.
-	4.5 -root-uid, -root-gid, -force-uid and -force-gid options now take a
-	    user/group name in addition to the integer uid/gid.
-	4.6 A new -mem-default option which displays default memory usage for
-	    caches in Mbytes.
-	4.7 A new -no-compression option which produces no compression, and it
-	    is a short-cut for -noI, -noD, -noF and -noX.
-	4.8 A new -pseudo-override option which makes pseudo file uids and gids
-	    override -all-root, -force-uid and -force-gid options.  Normally
-	    these options take precedence.
-
-5. Unsquashfs minor improvements
-
-	5.1 New -all-time option which sets all file timestamps to <time>,
-	    rather than the time stored in the filesystem inode.  <time> can be
-	    an integer indicating seconds since the epoch (1970-01-01) or a
-	    human string value such as "now", "last week", or
-	    "Wed Feb 15 21:02:39 GMT 2023".
-	5.2 New -full-precision option which uses full precision when displaying
-	    times including seconds.  Use with -linfo, -lls, -lln and -llc
-	    options.
-	5.3 New -match option where Unsquashfs will abort if any extract file
-	    does not match on anything, and can not be resolved.
-	5.4 New -percentage option added which rather than generating the full
-	    progress-bar instead outputs a percentage.  This can be used with
-	    dialog --gauge etc.
-
-6. Sqfstar minor improvements
-
-	6.1 New -ignore-zeros option added which allows tar files to be
-	    concatenated together and fed to Sqfstar.  Normally a tarfile has
-	    two consecutive 512 byte blocks filled with zeros which means EOF
-	    and Sqfstar will stop reading after the first tar file on
-	    encountering them. This option makes Sqfstar ignore the zero filled
-	    blocks.
-	6.2 A new -mem-percent option which allows memory for caches to be
-	    specified as a percentage of physical RAM, rather than requiring an
-	    absolute value.
-	6.3 A new -percentage option added which rather than generating the full
-	    progress-bar instead outputs a percentage.  This can be used with
-	    dialog --gauge etc.
-	6.4 -mkfs-time, -all-time and -root-time options now take a human date
-	     string, in addition to the seconds since the epoch of 1970 00:00
-	     UTC.  For example "now", "last week", "Wed Mar 8 05:55:01 GMT 2023"
-	     are supported.
-	6.5 -root-uid, -root-gid, -force-uid and -force-gid options now take a
-	     user/group name in addition to the integer uid/gid.
-	6.6 A new -mem-default option which displays default memory usage for
-	    caches in Mbytes.
-	6.7 A new -no-compression option which produces no compression, and it
-	    is a short-cut for -noI, -noD, -noF and -noX.
-	6.8 A new -pseudo-override option which makes pseudo file uids and gids
-	    override -all-root, -force-uid and -force-gid options.  Normally
-	    these options take precedence.
-	6.9 Do not abort if ZERO filled blocks indicating end of the TAR archive
-	    are missing.
-
-7. Other minor improvements
-
-	7.1 If Mksquashfs/Unsquashfs fails to execute generating the manpages
-	    because they have been cross-compiled, fall back to using the
-	    pre-built manpages.
-	7.2 Add new Makefile configure option USE_PREBUILT_MANPAGES to always
-	    use pre-built manpages rather than generating them when "make
-	    install" is run.
-
-8. Major bug fixes
-
-	8.1 Following a symlink in Sqfscat or where -follow-symlinks option is
-	    given with Unsquashfs, incorrectly triggered the corrupted
-	    filesystem loop detection code.
-	8.2 In Unsquashfs if a file was not writable it could not add extended
-	    attributes to it.
-	8.3 Sqfstar would incorrectly reject compressor specific options that
-	    have an argument.
-	8.4 Sqfstar would incorrectly strip pathname components in PAX header
-	    linkpath if symbolic.
-	8.5 Sqfstar -root-uid, -root-gid and -root-time options were documented
-	    but not implemented.
-	8.6 Mksquashfs -one-file-system option would not create empty mount
-	    point directory when filesystem boundary crossed.
-	8.7 Mksquashfs did not check the close() return result.
-
-
-_______________________________________________
-Squashfs-devel mailing list
-Squashfs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/squashfs-devel
+T24gMTIvMDUvMjAyMyAxNDoxOCwgVmluY2VudCBXaGl0Y2h1cmNoIHdyb3RlOgo+IEJlZm9yZSBj
+b21taXQgOTNlNzJiM2M2MTJhZGNhY2ExICgic3F1YXNoZnM6IG1pZ3JhdGUgZnJvbSBsbF9yd19i
+bG9jawo+IHVzYWdlIHRvIEJJTyIpLCBjb21wcmVzc2VkIGJsb2NrcyByZWFkIGJ5IHNxdWFzaGZz
+IHdlcmUgY2FjaGVkIGluIHRoZQo+IHBhZ2UgY2FjaGUsIGJ1dCB0aGF0IGlzIG5vdCB0aGUgY2Fz
+ZSBhZnRlciB0aGF0IGNvbW1pdC4gIFRoYXQgaGFzIGxlYWQKPiB0byBzcXVhc2hmcyBoYXZpbmcg
+dG8gcmUtcmVhZCBhIGxvdCBvZiBzZWN0b3JzIGZyb20gZGlzay9mbGFzaC4KCkdvb2QgY2F0Y2gu
+wqAgSSB3YXNuJ3QgYXdhcmUgb2YgdGhhdCByZWdyZXNzaW9uLgoKPiBGb3IgZXhhbXBsZSwgdGhl
+IGZpcnN0IHNlY3RvcnMgb2YgZXZlcnkgbWV0YWRhdGEgYmxvY2sgbmVlZCB0byBiZSByZWFkCj4g
+dHdpY2UgZnJvbSB0aGUgZGlzay4gIE9uY2UgcGFydGlhbGx5IHRvIHJlYWQgdGhlIGxlbmd0aCwg
+YW5kIGEKPiBzZWNvbmQgdGltZSB0byByZWFkIHRoZSBibG9jayBpdHNlbGYuICBBbHNvLCBpbiBs
+aW5lYXIgcmVhZHMgb2YgbGFyZ2UKPiBmaWxlcywgdGhlIGxhc3Qgc2VjdG9ycyBvZiBvbmUgZGF0
+YSBibG9jayBhcmUgcmUtcmVhZCBmcm9tIGRpc2sgd2hlbgo+IHJlYWRpbmcgdGhlIG5leHQgZGF0
+YSBibG9jaywgc2luY2UgdGhlIGNvbXByZXNzZWQgYmxvY2tzIGFyZSBvZiB2YXJpYWJsZQo+IHNp
+emVzIGFuZCBub3QgYWxpZ25lZCB0byBkZXZpY2UgYmxvY2tzLiAgVGhpcyBleHRyYSBJL08gcmVz
+dWx0cyBpbiBhCj4gZGVncmFkZSBpbiByZWFkIHBlcmZvcm1hbmNlIG9mLCBmb3IgZXhhbXBsZSwg
+fjE2JSBpbiBvbmUgc2NlbmFyaW8gb24gbXkKPiBBUk0gcGxhdGZvcm0gdXNpbmcgc3F1YXNoZnMg
+d2l0aCBkbS12ZXJpdHkgYW5kIE5BTkQuCj4KPiBTaW5jZSB0aGUgZGVjb21wcmVzc2VkIGRhdGEg
+aXMgY2FjaGVkIGluIHRoZSBwYWdlIGNhY2hlIG9yIHNxdWFzaGZzJwo+IGludGVybmFsIG1ldGFk
+YXRhIGFuZCBmcmFnbWVudCBjYWNoZXMsIGNhY2hpbmcgX2FsbF8gY29tcHJlc3NlZCBwYWdlcwo+
+IHdvdWxkIGxlYWQgdG8gYSBsb3Qgb2YgZG91YmxlIGNhY2hpbmcgYW5kIGlzIHVuZGVzaXJhYmxl
+LiAgQnV0IG1ha2UgdGhlCj4gY29kZSBjYWNoZSBhbnkgZGlzayBibG9ja3Mgd2hpY2ggd2VyZSBv
+bmx5IHBhcnRpYWxseSByZXF1ZXN0ZWQsIHNpbmNlCj4gdGhlc2UgYXJlIHRoZSBvbmVzIGxpa2Vs
+eSB0byBpbmNsdWRlIGRhdGEgd2hpY2ggaXMgbmVlZGVkIGJ5IG90aGVyIGZpbGUKPiBzeXN0ZW0g
+YmxvY2tzLiAgVGhpcyByZXN0b3JlcyByZWFkIHBlcmZvcm1hbmNlIGluIG15IHRlc3Qgc2NlbmFy
+aW8uCj4KPiBUaGUgY29tcHJlc3NlZCBibG9jayBjYWNoaW5nIGlzIG9ubHkgYXBwbGllZCB3aGVu
+IHRoZSBkaXNrIGJsb2NrIHNpemUgaXMKPiBlcXVhbCB0byB0aGUgcGFnZSBzaXplLCB0byBhdm9p
+ZCBoYXZpbmcgdG8gZGVhbCB3aXRoIGNhY2hpbmcgc3ViLXBhZ2UKPiByZWFkcy4KPgo+IFNpZ25l
+ZC1vZmYtYnk6IFZpbmNlbnQgV2hpdGNodXJjaCA8dmluY2VudC53aGl0Y2h1cmNoQGF4aXMuY29t
+PgoKUGF0Y2ggbG9va3MgZ29vZC4KClJldmlld2VkLWJ5OiBQaGlsbGlwIExvdWdoZXIgPHBoaWxs
+aXBAc3F1YXNoZnMub3JnLnVrPgoKCj4gLS0tCj4gQ2hhbmdlcyBpbiB2MjoKPiAtIERvIG5vdCBy
+ZW1vdmUgc3RhdGljIGZyb20gc3F1YXNoZnNfYmlvX3JlYWQoKQo+IC0gTGluayB0byB2MTogaHR0
+cHM6Ly9sb3JlLmtlcm5lbC5vcmcvci8yMDIzMDUxMC1zcXVhc2hmcy1jYWNoZS12MS0xLTNiNmJi
+MGU3ZDk1MkBheGlzLmNvbQo+IC0tLQo+ICAgZnMvc3F1YXNoZnMvYmxvY2suYyAgICAgICAgICB8
+IDExNiArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKy0tCj4gICBmcy9z
+cXVhc2hmcy9zcXVhc2hmc19mc19zYi5oIHwgICAxICsKPiAgIGZzL3NxdWFzaGZzL3N1cGVyLmMg
+ICAgICAgICAgfCAgMTIgKysrKysKPiAgIDMgZmlsZXMgY2hhbmdlZCwgMTI2IGluc2VydGlvbnMo
+KyksIDMgZGVsZXRpb25zKC0pCj4KPiBkaWZmIC0tZ2l0IGEvZnMvc3F1YXNoZnMvYmxvY2suYyBi
+L2ZzL3NxdWFzaGZzL2Jsb2NrLmMKPiBpbmRleCBiZWQzYmI4YjI3ZmEuLmQ3NTBmNzI3MTFmYSAx
+MDA2NDQKPiAtLS0gYS9mcy9zcXVhc2hmcy9ibG9jay5jCj4gKysrIGIvZnMvc3F1YXNoZnMvYmxv
+Y2suYwo+IEBAIC03NiwxMCArNzYsMTAxIEBAIHN0YXRpYyBpbnQgY29weV9iaW9fdG9fYWN0b3Io
+c3RydWN0IGJpbyAqYmlvLAo+ICAgCXJldHVybiBjb3BpZWRfYnl0ZXM7Cj4gICB9Cj4gICAKPiAr
+c3RhdGljIGludCBzcXVhc2hmc19iaW9fcmVhZF9jYWNoZWQoc3RydWN0IGJpbyAqZnVsbGJpbywg
+c3RydWN0IGFkZHJlc3Nfc3BhY2UgKmNhY2hlX21hcHBpbmcsCj4gKwkJCQkgICAgdTY0IGluZGV4
+LCBpbnQgbGVuZ3RoLCB1NjQgcmVhZF9zdGFydCwgdTY0IHJlYWRfZW5kLAo+ICsJCQkJICAgIGlu
+dCBwYWdlX2NvdW50KQo+ICt7Cj4gKwlzdHJ1Y3QgcGFnZSAqaGVhZF90b19jYWNoZSA9IE5VTEws
+ICp0YWlsX3RvX2NhY2hlID0gTlVMTDsKPiArCXN0cnVjdCBibG9ja19kZXZpY2UgKmJkZXYgPSBm
+dWxsYmlvLT5iaV9iZGV2Owo+ICsJc3RydWN0IGJ2ZWNfaXRlcl9hbGwgaXRlcl9hbGw7Cj4gKwlz
+dHJ1Y3QgYmlvICpiaW8gPSBOVUxMOwo+ICsJaW50IHByZXZfaW9faWR4ID0gLTE7Cj4gKwlzdHJ1
+Y3QgYmlvX3ZlYyAqYnY7Cj4gKwlpbnQgaWR4ID0gMDsKPiArCWludCBlcnIgPSAwOwo+ICsKPiAr
+CWJpb19mb3JfZWFjaF9zZWdtZW50X2FsbChidiwgZnVsbGJpbywgaXRlcl9hbGwpIHsKPiArCQlz
+dHJ1Y3QgcGFnZSAqcGFnZSA9IGJ2LT5idl9wYWdlOwo+ICsJCWludCByZXRsZW47Cj4gKwo+ICsJ
+CWlmIChwYWdlLT5tYXBwaW5nID09IGNhY2hlX21hcHBpbmcgJiYgUGFnZVVwdG9kYXRlKHBhZ2Up
+KSB7Cj4gKwkJCWlkeCsrOwo+ICsJCQljb250aW51ZTsKPiArCQl9Cj4gKwo+ICsJCS8qCj4gKwkJ
+ICogV2Ugb25seSB1c2UgdGhpcyB3aGVuIHRoZSBkZXZpY2UgYmxvY2sgc2l6ZSBpcyB0aGUgc2Ft
+ZSBhcwo+ICsJCSAqIHRoZSBwYWdlIHNpemUsIHNvIHJlYWRfc3RhcnQgYW5kIHJlYWRfZW5kIGNv
+dmVyIGZ1bGwgcGFnZXMuCj4gKwkJICoKPiArCQkgKiBDb21wYXJlIHRoZXNlIHRvIHRoZSBvcmln
+aW5hbCByZXF1aXJlZCBpbmRleCBhbmQgbGVuZ3RoIHRvCj4gKwkJICogb25seSBjYWNoZSBwYWdl
+cyB3aGljaCB3ZXJlIHJlcXVlc3RlZCBwYXJ0aWFsbHksIHNpbmNlIHRoZXNlCj4gKwkJICogYXJl
+IHRoZSBvbmVzIHdoaWNoIGFyZSBsaWtlbHkgdG8gYmUgbmVlZGVkIHdoZW4gcmVhZGluZwo+ICsJ
+CSAqIGFkamFjZW50IGJsb2Nrcy4KPiArCQkgKi8KPiArCQlpZiAoaWR4ID09IDAgJiYgaW5kZXgg
+IT0gcmVhZF9zdGFydCkKPiArCQkJaGVhZF90b19jYWNoZSA9IHBhZ2U7Cj4gKwkJZWxzZSBpZiAo
+aWR4ID09IHBhZ2VfY291bnQgLSAxICYmIGluZGV4ICsgbGVuZ3RoICE9IHJlYWRfZW5kKQo+ICsJ
+CQl0YWlsX3RvX2NhY2hlID0gcGFnZTsKPiArCj4gKwkJaWYgKCFiaW8gfHwgaWR4ICE9IHByZXZf
+aW9faWR4ICsgMSkgewo+ICsJCQl1bnNpZ25lZCBpbnQgcmVtYWluaW5nX3BhZ2VzOwo+ICsJCQl1
+bnNpZ25lZCBpbnQgdGhpc19ucl9wYWdlczsKPiArCj4gK3N1Ym1pdF9hbmRfcmV0cnk6Cj4gKwkJ
+CXJlbWFpbmluZ19wYWdlcyA9IHBhZ2VfY291bnQgLSBpZHg7Cj4gKwkJCXRoaXNfbnJfcGFnZXMg
+PSBtaW4ocmVtYWluaW5nX3BhZ2VzLCBCSU9fTUFYX1ZFQ1MpOwo+ICsJCQliaW8gPSBibGtfbmV4
+dF9iaW8oYmlvLCBiZGV2LCB0aGlzX25yX3BhZ2VzLCBSRVFfT1BfUkVBRCwKPiArCQkJCQkgICBH
+RlBfTk9JTyk7Cj4gKwkJCWJpby0+YmlfaXRlci5iaV9zZWN0b3IgPSBmdWxsYmlvLT5iaV9pdGVy
+LmJpX3NlY3RvciArCj4gKwkJCQkJCSBpZHggKiAoUEFHRV9TSVpFIC8gU0VDVE9SX1NJWkUpOwo+
+ICsJCX0KPiArCj4gKwkJcmV0bGVuID0gYmlvX2FkZF9wYWdlKGJpbywgYnYtPmJ2X3BhZ2UsIGJ2
+LT5idl9sZW4sIGJ2LT5idl9vZmZzZXQpOwo+ICsJCWlmIChyZXRsZW4gIT0gYnYtPmJ2X2xlbikK
+PiArCQkJZ290byBzdWJtaXRfYW5kX3JldHJ5Owo+ICsKPiArCQlwcmV2X2lvX2lkeCA9IGlkeDsK
+PiArCQlpZHgrKzsKPiArCX0KPiArCj4gKwlpZiAoYmlvKSB7Cj4gKwkJZXJyID0gc3VibWl0X2Jp
+b193YWl0KGJpbyk7Cj4gKwkJYmlvX3B1dChiaW8pOwo+ICsJfQo+ICsKPiArCWlmIChlcnIpCj4g
+KwkJcmV0dXJuIGVycjsKPiArCj4gKwlpZiAoaGVhZF90b19jYWNoZSkgewo+ICsJCWludCByZXQg
+PSBhZGRfdG9fcGFnZV9jYWNoZV9scnUoaGVhZF90b19jYWNoZSwgY2FjaGVfbWFwcGluZywKPiAr
+CQkJCQkJcmVhZF9zdGFydCwgR0ZQX05PSU8pOwo+ICsKPiArCQlpZiAoIXJldCkgewo+ICsJCQlT
+ZXRQYWdlVXB0b2RhdGUoaGVhZF90b19jYWNoZSk7Cj4gKwkJCXVubG9ja19wYWdlKGhlYWRfdG9f
+Y2FjaGUpOwo+ICsJCX0KPiArCj4gKwl9Cj4gKwo+ICsJaWYgKHRhaWxfdG9fY2FjaGUpIHsKPiAr
+CQlpbnQgcmV0ID0gYWRkX3RvX3BhZ2VfY2FjaGVfbHJ1KHRhaWxfdG9fY2FjaGUsIGNhY2hlX21h
+cHBpbmcsCj4gKwkJCQkJCXJlYWRfZW5kIC0gUEFHRV9TSVpFLCBHRlBfTk9JTyk7Cj4gKwo+ICsJ
+CWlmICghcmV0KSB7Cj4gKwkJCVNldFBhZ2VVcHRvZGF0ZSh0YWlsX3RvX2NhY2hlKTsKPiArCQkJ
+dW5sb2NrX3BhZ2UodGFpbF90b19jYWNoZSk7Cj4gKwkJfQo+ICsJfQo+ICsKPiArCXJldHVybiAw
+Owo+ICt9Cj4gKwo+ICAgc3RhdGljIGludCBzcXVhc2hmc19iaW9fcmVhZChzdHJ1Y3Qgc3VwZXJf
+YmxvY2sgKnNiLCB1NjQgaW5kZXgsIGludCBsZW5ndGgsCj4gICAJCQkgICAgIHN0cnVjdCBiaW8g
+KipiaW9wLCBpbnQgKmJsb2NrX29mZnNldCkKPiAgIHsKPiAgIAlzdHJ1Y3Qgc3F1YXNoZnNfc2Jf
+aW5mbyAqbXNibGsgPSBzYi0+c19mc19pbmZvOwo+ICsJc3RydWN0IGlub2RlICpjYWNoZV9pbm9k
+ZSA9IG1zYmxrLT5jYWNoZV9pbm9kZTsKPiArCXN0cnVjdCBhZGRyZXNzX3NwYWNlICpjYWNoZV9t
+YXBwaW5nID0gY2FjaGVfaW5vZGUgPyBjYWNoZV9pbm9kZS0+aV9tYXBwaW5nIDogTlVMTDsKPiAg
+IAljb25zdCB1NjQgcmVhZF9zdGFydCA9IHJvdW5kX2Rvd24oaW5kZXgsIG1zYmxrLT5kZXZibGtz
+aXplKTsKPiAgIAljb25zdCBzZWN0b3JfdCBibG9jayA9IHJlYWRfc3RhcnQgPj4gbXNibGstPmRl
+dmJsa3NpemVfbG9nMjsKPiAgIAljb25zdCB1NjQgcmVhZF9lbmQgPSByb3VuZF91cChpbmRleCAr
+IGxlbmd0aCwgbXNibGstPmRldmJsa3NpemUpOwo+IEBAIC05OSwxMyArMTkwLDI3IEBAIHN0YXRp
+YyBpbnQgc3F1YXNoZnNfYmlvX3JlYWQoc3RydWN0IHN1cGVyX2Jsb2NrICpzYiwgdTY0IGluZGV4
+LCBpbnQgbGVuZ3RoLAo+ICAgCWZvciAoaSA9IDA7IGkgPCBwYWdlX2NvdW50OyArK2kpIHsKPiAg
+IAkJdW5zaWduZWQgaW50IGxlbiA9Cj4gICAJCQltaW5fdCh1bnNpZ25lZCBpbnQsIFBBR0VfU0la
+RSAtIG9mZnNldCwgdG90YWxfbGVuKTsKPiAtCQlzdHJ1Y3QgcGFnZSAqcGFnZSA9IGFsbG9jX3Bh
+Z2UoR0ZQX05PSU8pOwo+ICsJCXN0cnVjdCBwYWdlICpwYWdlID0gTlVMTDsKPiArCj4gKwkJaWYg
+KGNhY2hlX21hcHBpbmcpCj4gKwkJCXBhZ2UgPSBmaW5kX2dldF9wYWdlKGNhY2hlX21hcHBpbmcs
+Cj4gKwkJCQkJICAgICByZWFkX3N0YXJ0ICsgaSAqIFBBR0VfU0laRSk7Cj4gKwkJaWYgKCFwYWdl
+KQo+ICsJCQlwYWdlID0gYWxsb2NfcGFnZShHRlBfTk9JTyk7Cj4gICAKPiAgIAkJaWYgKCFwYWdl
+KSB7Cj4gICAJCQllcnJvciA9IC1FTk9NRU07Cj4gICAJCQlnb3RvIG91dF9mcmVlX2JpbzsKPiAg
+IAkJfQo+IC0JCWlmICghYmlvX2FkZF9wYWdlKGJpbywgcGFnZSwgbGVuLCBvZmZzZXQpKSB7Cj4g
+Kwo+ICsJCWlmIChjYWNoZV9tYXBwaW5nKSB7Cj4gKwkJCS8qCj4gKwkJCSAqIFVzZSB0aGUgX18g
+dmVyc2lvbiB0byBhdm9pZCBtZXJnaW5nIHNpbmNlIHdlIG5lZWQKPiArCQkJICogZWFjaCBwYWdl
+IHRvIGJlIHNlcGFyYXRlIHdoZW4gd2UgY2hlY2sgZm9yIGFuZCBhdm9pZAo+ICsJCQkgKiBjYWNo
+ZWQgcGFnZXMuCj4gKwkJCSAqLwo+ICsJCQlfX2Jpb19hZGRfcGFnZShiaW8sIHBhZ2UsIGxlbiwg
+b2Zmc2V0KTsKPiArCQl9IGVsc2UgaWYgKCFiaW9fYWRkX3BhZ2UoYmlvLCBwYWdlLCBsZW4sIG9m
+ZnNldCkpIHsKPiAgIAkJCWVycm9yID0gLUVJTzsKPiAgIAkJCWdvdG8gb3V0X2ZyZWVfYmlvOwo+
+ICAgCQl9Cj4gQEAgLTExMyw3ICsyMTgsMTIgQEAgc3RhdGljIGludCBzcXVhc2hmc19iaW9fcmVh
+ZChzdHJ1Y3Qgc3VwZXJfYmxvY2sgKnNiLCB1NjQgaW5kZXgsIGludCBsZW5ndGgsCj4gICAJCXRv
+dGFsX2xlbiAtPSBsZW47Cj4gICAJfQo+ICAgCj4gLQllcnJvciA9IHN1Ym1pdF9iaW9fd2FpdChi
+aW8pOwo+ICsJaWYgKGNhY2hlX21hcHBpbmcpCj4gKwkJZXJyb3IgPSBzcXVhc2hmc19iaW9fcmVh
+ZF9jYWNoZWQoYmlvLCBjYWNoZV9tYXBwaW5nLCBpbmRleCwKPiArCQkJCQkJIGxlbmd0aCwgcmVh
+ZF9zdGFydCwgcmVhZF9lbmQsCj4gKwkJCQkJCSBwYWdlX2NvdW50KTsKPiArCWVsc2UKPiArCQll
+cnJvciA9IHN1Ym1pdF9iaW9fd2FpdChiaW8pOwo+ICAgCWlmIChlcnJvcikKPiAgIAkJZ290byBv
+dXRfZnJlZV9iaW87Cj4gICAKPiBkaWZmIC0tZ2l0IGEvZnMvc3F1YXNoZnMvc3F1YXNoZnNfZnNf
+c2IuaCBiL2ZzL3NxdWFzaGZzL3NxdWFzaGZzX2ZzX3NiLmgKPiBpbmRleCA3MmY2ZjRiMzc4NjMu
+LmRmZWU2NTg0NWQ0OCAxMDA2NDQKPiAtLS0gYS9mcy9zcXVhc2hmcy9zcXVhc2hmc19mc19zYi5o
+Cj4gKysrIGIvZnMvc3F1YXNoZnMvc3F1YXNoZnNfZnNfc2IuaAo+IEBAIC00Nyw2ICs0Nyw3IEBA
+IHN0cnVjdCBzcXVhc2hmc19zYl9pbmZvIHsKPiAgIAlzdHJ1Y3Qgc3F1YXNoZnNfY2FjaGUJCQkq
+YmxvY2tfY2FjaGU7Cj4gICAJc3RydWN0IHNxdWFzaGZzX2NhY2hlCQkJKmZyYWdtZW50X2NhY2hl
+Owo+ICAgCXN0cnVjdCBzcXVhc2hmc19jYWNoZQkJCSpyZWFkX3BhZ2U7Cj4gKwlzdHJ1Y3QgaW5v
+ZGUJCQkJKmNhY2hlX2lub2RlOwo+ICAgCWludAkJCQkJbmV4dF9tZXRhX2luZGV4Owo+ICAgCV9f
+bGU2NAkJCQkJKmlkX3RhYmxlOwo+ICAgCV9fbGU2NAkJCQkJKmZyYWdtZW50X2luZGV4Owo+IGRp
+ZmYgLS1naXQgYS9mcy9zcXVhc2hmcy9zdXBlci5jIGIvZnMvc3F1YXNoZnMvc3VwZXIuYwo+IGlu
+ZGV4IGUwOTBmYWU0OGU2OC4uNjRkNmJjOTU5NTBiIDEwMDY0NAo+IC0tLSBhL2ZzL3NxdWFzaGZz
+L3N1cGVyLmMKPiArKysgYi9mcy9zcXVhc2hmcy9zdXBlci5jCj4gQEAgLTMyOSw2ICszMjksMTYg
+QEAgc3RhdGljIGludCBzcXVhc2hmc19maWxsX3N1cGVyKHN0cnVjdCBzdXBlcl9ibG9jayAqc2Is
+IHN0cnVjdCBmc19jb250ZXh0ICpmYykKPiAgIAkJZ290byBmYWlsZWRfbW91bnQ7Cj4gICAJfQo+
+ICAgCj4gKwlpZiAobXNibGstPmRldmJsa3NpemUgPT0gUEFHRV9TSVpFKSB7Cj4gKwkJbXNibGst
+PmNhY2hlX2lub2RlID0gbmV3X2lub2RlKHNiKTsKPiArCQlpZiAobXNibGstPmNhY2hlX2lub2Rl
+ID09IE5VTEwpCj4gKwkJCWdvdG8gZmFpbGVkX21vdW50Owo+ICsKPiArCQlzZXRfbmxpbmsobXNi
+bGstPmNhY2hlX2lub2RlLCAxKTsKPiArCQltc2Jsay0+Y2FjaGVfaW5vZGUtPmlfc2l6ZSA9IE9G
+RlNFVF9NQVg7Cj4gKwkJbWFwcGluZ19zZXRfZ2ZwX21hc2sobXNibGstPmNhY2hlX2lub2RlLT5p
+X21hcHBpbmcsIEdGUF9OT0ZTKTsKPiArCX0KPiArCj4gICAJbXNibGstPnN0cmVhbSA9IHNxdWFz
+aGZzX2RlY29tcHJlc3Nvcl9zZXR1cChzYiwgZmxhZ3MpOwo+ICAgCWlmIChJU19FUlIobXNibGst
+PnN0cmVhbSkpIHsKPiAgIAkJZXJyID0gUFRSX0VSUihtc2Jsay0+c3RyZWFtKTsKPiBAQCAtNDU0
+LDYgKzQ2NCw3IEBAIHN0YXRpYyBpbnQgc3F1YXNoZnNfZmlsbF9zdXBlcihzdHJ1Y3Qgc3VwZXJf
+YmxvY2sgKnNiLCBzdHJ1Y3QgZnNfY29udGV4dCAqZmMpCj4gICAJc3F1YXNoZnNfY2FjaGVfZGVs
+ZXRlKG1zYmxrLT5ibG9ja19jYWNoZSk7Cj4gICAJc3F1YXNoZnNfY2FjaGVfZGVsZXRlKG1zYmxr
+LT5mcmFnbWVudF9jYWNoZSk7Cj4gICAJc3F1YXNoZnNfY2FjaGVfZGVsZXRlKG1zYmxrLT5yZWFk
+X3BhZ2UpOwo+ICsJaXB1dChtc2Jsay0+Y2FjaGVfaW5vZGUpOwo+ICAgCW1zYmxrLT50aHJlYWRf
+b3BzLT5kZXN0cm95KG1zYmxrKTsKPiAgIAlrZnJlZShtc2Jsay0+aW5vZGVfbG9va3VwX3RhYmxl
+KTsKPiAgIAlrZnJlZShtc2Jsay0+ZnJhZ21lbnRfaW5kZXgpOwo+IEBAIC01NzIsNiArNTgzLDcg
+QEAgc3RhdGljIHZvaWQgc3F1YXNoZnNfcHV0X3N1cGVyKHN0cnVjdCBzdXBlcl9ibG9jayAqc2Ip
+Cj4gICAJCXNxdWFzaGZzX2NhY2hlX2RlbGV0ZShzYmktPmJsb2NrX2NhY2hlKTsKPiAgIAkJc3F1
+YXNoZnNfY2FjaGVfZGVsZXRlKHNiaS0+ZnJhZ21lbnRfY2FjaGUpOwo+ICAgCQlzcXVhc2hmc19j
+YWNoZV9kZWxldGUoc2JpLT5yZWFkX3BhZ2UpOwo+ICsJCWlwdXQoc2JpLT5jYWNoZV9pbm9kZSk7
+Cj4gICAJCXNiaS0+dGhyZWFkX29wcy0+ZGVzdHJveShzYmkpOwo+ICAgCQlrZnJlZShzYmktPmlk
+X3RhYmxlKTsKPiAgIAkJa2ZyZWUoc2JpLT5mcmFnbWVudF9pbmRleCk7Cj4KPiAtLS0KPiBiYXNl
+LWNvbW1pdDogNDU3MzkxYjAzODAzMzVkNWU5YTViYWJkZWM5MGFjNTM5MjhiMjNiNAo+IGNoYW5n
+ZS1pZDogMjAyMzA1MTAtc3F1YXNoZnMtY2FjaGUtN2EzYjllNzM1NWMxCj4KPiBCZXN0IHJlZ2Fy
+ZHMsCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KU3F1
+YXNoZnMtZGV2ZWwgbWFpbGluZyBsaXN0ClNxdWFzaGZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdl
+Lm5ldApodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9zcXVhc2hm
+cy1kZXZlbAo=
