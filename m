@@ -2,98 +2,94 @@ Return-Path: <squashfs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+squashfs-devel@lfdr.de
 Delivered-To: lists+squashfs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D3B27955718
-	for <lists+squashfs-devel@lfdr.de>; Sat, 17 Aug 2024 12:05:01 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE93A955717
+	for <lists+squashfs-devel@lfdr.de>; Sat, 17 Aug 2024 12:04:59 +0200 (CEST)
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <squashfs-devel-bounces@lists.sourceforge.net>)
-	id 1sfGIq-0005vj-0s;
-	Sat, 17 Aug 2024 10:04:56 +0000
+	id 1sfGIo-0004M5-9W;
+	Sat, 17 Aug 2024 10:04:53 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <lizetao1@huawei.com>) id 1sfGIk-0005vY-03
+ (envelope-from <lizetao1@huawei.com>) id 1sfGIk-0004Lv-4E
  for squashfs-devel@lists.sourceforge.net;
- Sat, 17 Aug 2024 10:04:50 +0000
+ Sat, 17 Aug 2024 10:04:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=77c0kfK/JkE/jJMiA8TmdX/Mnm8CCVLN/sX3sEvrK3Y=; b=Z0F80fCdMW6AzjjAZclsUpL1Wb
- 4G1yG3zLm8FbNz9dHElbuzbuMAtFTl50ZDURJXZxCLaJsy8MDBm9xHpF3A+qy0goyBGI9RYqhOLZ0
- 3sHP9j4RN5mf61mNXnmmtUzTMEACjXZGzlJ/4rzd3fwS7rZmYMx3xyhowFfRD3hhDNxg=;
+ bh=5gtoyu7lWd4yu6SneDd4m7mQ2YAgo56/11vKObDp60Y=; b=gxz4JTKtlCtLLwHBn83+mgPA8z
+ yqX/VQ/cBSRZqQcDIfEpvPZeTa+iKz6xkwI4saGzs79A1ftB+tBdb7OyVXuTjZa1AcbcVDM4Z3enO
+ v6Jokx+TdUiqbPfsxO5xj6WZ+5ZSxX/HVEAiDrrkdMBjV5kI1au8d36TlYarPk7D+8vo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=77c0kfK/JkE/jJMiA8TmdX/Mnm8CCVLN/sX3sEvrK3Y=; b=B
- HGjag41CrJeMJ+W9PQq7vE4onji151AbW+uacKp5xUTarltyk9rGVDPYZvBO1wMwLZeyw6IusdM7Z
- qqqxCy73Y8FH87zRI1pqXp6KSLvgB+89RyoqIqnWhDFq0UEiGEBPHCKyhtR93IV1cO3hmc8bvjA7T
- oWknpAtfKwGNE4aI=;
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=5gtoyu7lWd4yu6SneDd4m7mQ2YAgo56/11vKObDp60Y=; b=PYHV79NKHjxMoT/l8rq2pShCfg
+ ub3E7LgJDIOW5vFD8ptIxYeUMeo2BtXt+pA0rslPcBg3NJJvNh7DelVW9la1jLPhvJ4dwrDeZGS2q
+ 9R+v9LudrLOStwJ3n74s9pdGqA4JLl6qkdZEp118b1QPygHeK3LBAhXpXkP1K6aIVJfE=;
 Received: from szxga04-in.huawei.com ([45.249.212.190])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sfGIi-00076k-8U for squashfs-devel@lists.sourceforge.net;
+ id 1sfGIi-00076l-45 for squashfs-devel@lists.sourceforge.net;
  Sat, 17 Aug 2024 10:04:49 +0000
-Received: from mail.maildlp.com (unknown [172.19.88.163])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4WmDqd5925z20lsM;
- Sat, 17 Aug 2024 17:59:57 +0800 (CST)
+Received: from mail.maildlp.com (unknown [172.19.162.112])
+ by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4WmDqH3RzZz2CmjH;
+ Sat, 17 Aug 2024 17:59:39 +0800 (CST)
 Received: from kwepemd500012.china.huawei.com (unknown [7.221.188.25])
- by mail.maildlp.com (Postfix) with ESMTPS id EE583180043;
- Sat, 17 Aug 2024 18:04:34 +0800 (CST)
+ by mail.maildlp.com (Postfix) with ESMTPS id 4BC2D140154;
+ Sat, 17 Aug 2024 18:04:35 +0800 (CST)
 Received: from huawei.com (10.90.53.73) by kwepemd500012.china.huawei.com
  (7.221.188.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.34; Sat, 17 Aug
  2024 18:04:34 +0800
 To: <phillip@squashfs.org.uk>, <willy@infradead.org>
-Date: Sat, 17 Aug 2024 18:11:45 +0800
-Message-ID: <20240817101146.2347378-1-lizetao1@huawei.com>
+Date: Sat, 17 Aug 2024 18:11:46 +0800
+Message-ID: <20240817101146.2347378-2-lizetao1@huawei.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240817101146.2347378-1-lizetao1@huawei.com>
+References: <20240817101146.2347378-1-lizetao1@huawei.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.90.53.73]
 X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
  kwepemd500012.china.huawei.com (7.221.188.25)
-X-Spam-Score: -0.0 (/)
+X-Spam-Score: -5.0 (-----)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-1.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-2.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  convert to use folio, so that we can get rid of 'page->index'
- to prepare for removal of 'index' field in structure page [1]. [1]:
- https://lore.kernel.org/all/Zp8fgUSIBGQ1TN0D@casper.infradead.org/
- Cc: Matthew Wilcox <willy@infradead.org> Signed-off-by: Li Zetao
- <lizetao1@huawei.com>
- --- fs/squashfs/file.c | 31 ++++++++++++++++ fs/squashfs/file_cache.c | 2
- +- fs/squashfs/squashfs. [...] 
- Content analysis details:   (-0.0 points, 6.0 required)
+ Content preview:  In order to remote page APIs and index field in structure
+ page [1], this patch convert squashfs_read_folio to use folio APIs, switch
+ from kmap_atomic to kmap_local and use folio_end_read() to set upto [...]
+ Content analysis details:   (-5.0 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_VALIDITY_CERTIFIED_BLOCKED RBL: ADMINISTRATOR NOTICE:
- The query to Validity was blocked.  See
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+ high trust [45.249.212.190 listed in list.dnswl.org]
+ 0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
+ query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [45.249.212.190 listed in sa-accredit.habeas.com]
+ [45.249.212.190 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
  [45.249.212.190 listed in bl.score.senderscore.com]
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to
- DNSWL was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [45.249.212.190 listed in list.dnswl.org]
  -0.0 SPF_PASS               SPF: sender matches SPF record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1sfGIi-00076k-8U
-Subject: [Squashfs-devel] [PATCH -next 1/2] squashfs: convert
- squashfs_copy_cache() to use folio
+X-Headers-End: 1sfGIi-00076l-45
+Subject: [Squashfs-devel] [PATCH -next 2/2] squashfs: convert
+ squashfs_read_folio to use folio APIs
 X-BeenThere: squashfs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,121 +108,81 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: squashfs-devel-bounces@lists.sourceforge.net
 
-convert to use folio, so that we can get rid of 'page->index' to
-prepare for removal of 'index' field in structure page [1].
+In order to remote page APIs and index field in structure page [1],
+this patch convert squashfs_read_folio to use folio APIs, switch from
+kmap_atomic to kmap_local and use folio_end_read() to set uptodate
+and unlock folio.
 
 [1]: https://lore.kernel.org/all/Zp8fgUSIBGQ1TN0D@casper.infradead.org/
 
 Cc: Matthew Wilcox <willy@infradead.org>
 Signed-off-by: Li Zetao <lizetao1@huawei.com>
 ---
- fs/squashfs/file.c       | 31 ++++++++++++++++---------------
- fs/squashfs/file_cache.c |  2 +-
- fs/squashfs/squashfs.h   |  2 +-
- 3 files changed, 18 insertions(+), 17 deletions(-)
+ fs/squashfs/file.c | 27 ++++++++++++---------------
+ 1 file changed, 12 insertions(+), 15 deletions(-)
 
 diff --git a/fs/squashfs/file.c b/fs/squashfs/file.c
-index a8c1e7f9a609..893043ecf973 100644
+index 893043ecf973..8c80d77a6115 100644
 --- a/fs/squashfs/file.c
 +++ b/fs/squashfs/file.c
-@@ -378,13 +378,13 @@ void squashfs_fill_page(struct page *page, struct squashfs_cache_entry *buffer,
- }
+@@ -446,10 +446,9 @@ static int squashfs_readpage_sparse(struct page *page, int expected)
  
- /* Copy data into page cache  */
--void squashfs_copy_cache(struct page *page, struct squashfs_cache_entry *buffer,
-+void squashfs_copy_cache(struct folio *folio, struct squashfs_cache_entry *buffer,
- 	int bytes, int offset)
+ static int squashfs_read_folio(struct file *file, struct folio *folio)
  {
+-	struct page *page = &folio->page;
 -	struct inode *inode = page->mapping->host;
 +	struct inode *inode = folio_inode(folio);
  	struct squashfs_sb_info *msblk = inode->i_sb->s_fs_info;
- 	int i, mask = (1 << (msblk->block_log - PAGE_SHIFT)) - 1;
--	int start_index = page->index & ~mask, end_index = start_index | mask;
-+	int start_index = folio->index & ~mask, end_index = start_index | mask;
+-	int index = page->index >> (msblk->block_log - PAGE_SHIFT);
++	int index = folio->index >> (msblk->block_log - PAGE_SHIFT);
+ 	int file_end = i_size_read(inode) >> msblk->block_log;
+ 	int expected = index == file_end ?
+ 			(i_size_read(inode) & (msblk->block_size - 1)) :
+@@ -457,10 +456,10 @@ static int squashfs_read_folio(struct file *file, struct folio *folio)
+ 	int res = 0;
+ 	void *pageaddr;
  
- 	/*
- 	 * Loop copying datablock into pages.  As the datablock likely covers
-@@ -394,25 +394,26 @@ void squashfs_copy_cache(struct page *page, struct squashfs_cache_entry *buffer,
- 	 */
- 	for (i = start_index; i <= end_index && bytes > 0; i++,
- 			bytes -= PAGE_SIZE, offset += PAGE_SIZE) {
--		struct page *push_page;
-+		struct folio *push_folio;
- 		int avail = buffer ? min_t(int, bytes, PAGE_SIZE) : 0;
+-	TRACE("Entered squashfs_readpage, page index %lx, start block %llx\n",
+-				page->index, squashfs_i(inode)->start);
++	TRACE("Entered squashfs_readpage, folio index %lx, start block %llx\n",
++				folio->index, squashfs_i(inode)->start);
  
- 		TRACE("bytes %d, i %d, available_bytes %d\n", bytes, i, avail);
+-	if (page->index >= ((i_size_read(inode) + PAGE_SIZE - 1) >>
++	if (folio->index >= ((i_size_read(inode) + PAGE_SIZE - 1) >>
+ 					PAGE_SHIFT))
+ 		goto out;
  
--		push_page = (i == page->index) ? page :
--			grab_cache_page_nowait(page->mapping, i);
--
--		if (!push_page)
-+		push_folio = (i == folio->index) ? folio :
-+			__filemap_get_folio(folio->mapping, i,
-+					    FGP_LOCK|FGP_CREAT|FGP_NOFS|FGP_NOWAIT,
-+					    mapping_gfp_mask(folio->mapping));
-+		if (IS_ERR(push_folio))
- 			continue;
+@@ -473,23 +472,21 @@ static int squashfs_read_folio(struct file *file, struct folio *folio)
+ 			goto out;
  
--		if (PageUptodate(push_page))
-+		if (folio_test_uptodate(push_folio))
- 			goto skip_page;
+ 		if (res == 0)
+-			res = squashfs_readpage_sparse(page, expected);
++			res = squashfs_readpage_sparse(&folio->page, expected);
+ 		else
+-			res = squashfs_readpage_block(page, block, res, expected);
++			res = squashfs_readpage_block(&folio->page, block, res, expected);
+ 	} else
+-		res = squashfs_readpage_fragment(page, expected);
++		res = squashfs_readpage_fragment(&folio->page, expected);
  
--		squashfs_fill_page(push_page, buffer, offset, avail);
-+		squashfs_fill_page(folio_file_page(push_folio, i), buffer, offset, avail);
- skip_page:
--		unlock_page(push_page);
--		if (i != page->index)
--			put_page(push_page);
-+		folio_unlock(push_folio);
-+		if (i != folio->index)
-+			folio_put(push_folio);
- 	}
- }
+ 	if (!res)
+ 		return 0;
  
-@@ -430,7 +431,7 @@ static int squashfs_readpage_fragment(struct page *page, int expected)
- 			squashfs_i(inode)->fragment_block,
- 			squashfs_i(inode)->fragment_size);
- 	else
--		squashfs_copy_cache(page, buffer, expected,
-+		squashfs_copy_cache(page_folio(page), buffer, expected,
- 			squashfs_i(inode)->fragment_offset);
+ out:
+-	pageaddr = kmap_atomic(page);
++	pageaddr = kmap_local_folio(folio, 0);
+ 	memset(pageaddr, 0, PAGE_SIZE);
+-	kunmap_atomic(pageaddr);
+-	flush_dcache_page(page);
+-	if (res == 0)
+-		SetPageUptodate(page);
+-	unlock_page(page);
++	kunmap_local(pageaddr);
++	flush_dcache_folio(folio);
++	folio_end_read(folio, res == 0);
  
- 	squashfs_cache_put(buffer);
-@@ -439,7 +440,7 @@ static int squashfs_readpage_fragment(struct page *page, int expected)
- 
- static int squashfs_readpage_sparse(struct page *page, int expected)
- {
--	squashfs_copy_cache(page, NULL, expected, 0);
-+	squashfs_copy_cache(page_folio(page), NULL, expected, 0);
- 	return 0;
- }
- 
-diff --git a/fs/squashfs/file_cache.c b/fs/squashfs/file_cache.c
-index 54c17b7c85fd..23d585025882 100644
---- a/fs/squashfs/file_cache.c
-+++ b/fs/squashfs/file_cache.c
-@@ -29,7 +29,7 @@ int squashfs_readpage_block(struct page *page, u64 block, int bsize, int expecte
- 		ERROR("Unable to read page, block %llx, size %x\n", block,
- 			bsize);
- 	else
--		squashfs_copy_cache(page, buffer, expected, 0);
-+		squashfs_copy_cache(page_folio(page), buffer, expected, 0);
- 
- 	squashfs_cache_put(buffer);
  	return res;
-diff --git a/fs/squashfs/squashfs.h b/fs/squashfs/squashfs.h
-index 5a756e6790b5..a31bd5e9c8bf 100644
---- a/fs/squashfs/squashfs.h
-+++ b/fs/squashfs/squashfs.h
-@@ -68,7 +68,7 @@ extern __le64 *squashfs_read_fragment_index_table(struct super_block *,
- 
- /* file.c */
- void squashfs_fill_page(struct page *, struct squashfs_cache_entry *, int, int);
--void squashfs_copy_cache(struct page *, struct squashfs_cache_entry *, int,
-+void squashfs_copy_cache(struct folio *, struct squashfs_cache_entry *, int,
- 				int);
- 
- /* file_xxx.c */
+ }
 -- 
 2.34.1
 
