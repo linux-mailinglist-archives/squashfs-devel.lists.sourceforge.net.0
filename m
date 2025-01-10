@@ -2,94 +2,97 @@ Return-Path: <squashfs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+squashfs-devel@lfdr.de
 Delivered-To: lists+squashfs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE93A955717
-	for <lists+squashfs-devel@lfdr.de>; Sat, 17 Aug 2024 12:04:59 +0200 (CEST)
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id A5C08A0978D
+	for <lists+squashfs-devel@lfdr.de>; Fri, 10 Jan 2025 17:33:28 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <squashfs-devel-bounces@lists.sourceforge.net>)
-	id 1sfGIo-0004M5-9W;
-	Sat, 17 Aug 2024 10:04:53 +0000
+	id 1tWHwl-0005zM-Aq;
+	Fri, 10 Jan 2025 16:33:19 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <lizetao1@huawei.com>) id 1sfGIk-0004Lv-4E
+ (envelope-from <willy@infradead.org>) id 1tWHwi-0005zG-LC
  for squashfs-devel@lists.sourceforge.net;
- Sat, 17 Aug 2024 10:04:49 +0000
+ Fri, 10 Jan 2025 16:33:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :References:In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5gtoyu7lWd4yu6SneDd4m7mQ2YAgo56/11vKObDp60Y=; b=gxz4JTKtlCtLLwHBn83+mgPA8z
- yqX/VQ/cBSRZqQcDIfEpvPZeTa+iKz6xkwI4saGzs79A1ftB+tBdb7OyVXuTjZa1AcbcVDM4Z3enO
- v6Jokx+TdUiqbPfsxO5xj6WZ+5ZSxX/HVEAiDrrkdMBjV5kI1au8d36TlYarPk7D+8vo=;
+ bh=m6Bun1CPydSCXcEYLw8nRgLr5kgwzReIIu7xc3wV6j0=; b=Q+IM9Ch/RHFfBQKa3GpNwHte66
+ mz1SD47IzETNAkV7SBCIEHZzH7eJY4MNOfpjVIYcbyIfulAVAECviNr3AD92ImUSTqUzC2q6cqQlM
+ Cfu+++CfDfJlJihlCPFiEXjEeR5Tv1qUiDWsoaOCsV9wapRswNaC+3USPkxxOrFSnOMw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=5gtoyu7lWd4yu6SneDd4m7mQ2YAgo56/11vKObDp60Y=; b=PYHV79NKHjxMoT/l8rq2pShCfg
- ub3E7LgJDIOW5vFD8ptIxYeUMeo2BtXt+pA0rslPcBg3NJJvNh7DelVW9la1jLPhvJ4dwrDeZGS2q
- 9R+v9LudrLOStwJ3n74s9pdGqA4JLl6qkdZEp118b1QPygHeK3LBAhXpXkP1K6aIVJfE=;
-Received: from szxga04-in.huawei.com ([45.249.212.190])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=m6Bun1CPydSCXcEYLw8nRgLr5kgwzReIIu7xc3wV6j0=; b=l
+ uN5sUrsElx/7n5TzJsT0RHGa8kuM+8gU1WBoTVIZTEFhucKKWKbgJOVCMMbdTlItwPxXW77jEUsLk
+ 8/HNArs5LPNooiT7j2FkvhYDZfp6cEbc452fUtLLxKi7YH1dpyGwqYt53LH1md+Kqy/gNBk7B4Mkl
+ gVYs+Mjl9Mi9NJd8=;
+Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1sfGIi-00076l-45 for squashfs-devel@lists.sourceforge.net;
- Sat, 17 Aug 2024 10:04:49 +0000
-Received: from mail.maildlp.com (unknown [172.19.162.112])
- by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4WmDqH3RzZz2CmjH;
- Sat, 17 Aug 2024 17:59:39 +0800 (CST)
-Received: from kwepemd500012.china.huawei.com (unknown [7.221.188.25])
- by mail.maildlp.com (Postfix) with ESMTPS id 4BC2D140154;
- Sat, 17 Aug 2024 18:04:35 +0800 (CST)
-Received: from huawei.com (10.90.53.73) by kwepemd500012.china.huawei.com
- (7.221.188.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.34; Sat, 17 Aug
- 2024 18:04:34 +0800
-To: <phillip@squashfs.org.uk>, <willy@infradead.org>
-Date: Sat, 17 Aug 2024 18:11:46 +0800
-Message-ID: <20240817101146.2347378-2-lizetao1@huawei.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240817101146.2347378-1-lizetao1@huawei.com>
-References: <20240817101146.2347378-1-lizetao1@huawei.com>
+ id 1tWHwg-0005Rm-JO for squashfs-devel@lists.sourceforge.net;
+ Fri, 10 Jan 2025 16:33:16 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
+ Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:In-Reply-To:References;
+ bh=m6Bun1CPydSCXcEYLw8nRgLr5kgwzReIIu7xc3wV6j0=; b=ePKsIj26Sv78SsRSF/7lp4syKG
+ ZA3LIIuT/cPSkx4FB3+pHi+bIxezX5z1oe7nYUuL+7BzRBUd8npUmaLQUweAwji9333wwEKTYhLTk
+ 3VKjPYbSrY/rNOZCit4u8hlLG4OZle13gAFRwWlSn1vy7DK72m6blWgDpbGBR7yJpCnc6v/bpdV2n
+ d5gobM/Vjr1C80uCLWjhM8MLLudSDNic6hXQLhr4CFuSBrx5nGPmEwuvZfVe/cKSpder/1Vvsvixy
+ WP6dMAceDOI1oWDtX3E275lX1FBoGSrF0bcUo08CEFPUneYyVNOLO4h9cV9lZskrW7ivf/xKP/VB4
+ kW88swlA==;
+Received: from willy by casper.infradead.org with local (Exim 4.98 #2 (Red Hat
+ Linux)) id 1tWHwU-0000000E2XG-0rOl; Fri, 10 Jan 2025 16:33:02 +0000
+From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
+To: Andrew Morton <akpm@linux-foundation.org>
+Date: Fri, 10 Jan 2025 16:32:57 +0000
+Message-ID: <20250110163300.3346321-1-willy@infradead.org>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
-X-Originating-IP: [10.90.53.73]
-X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
- kwepemd500012.china.huawei.com (7.221.188.25)
-X-Spam-Score: -5.0 (-----)
+X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
- running on the system "util-spamd-2.v13.lw.sourceforge.com", 
+ running on the system "util-spamd-1.v13.lw.sourceforge.com", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  In order to remote page APIs and index field in structure
- page [1], this patch convert squashfs_read_folio to use folio APIs, switch
- from kmap_atomic to kmap_local and use folio_end_read() to set upto [...]
- Content analysis details:   (-5.0 points, 6.0 required)
+ Content preview:  We only need to assert that the uptodate flag is clear if
+ we're going to set it. This hasn't been a problem before now because we have
+ only used folio_end_read() when completing with an error, but it' [...] 
+ Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
- high trust [45.249.212.190 listed in list.dnswl.org]
  0.0 RCVD_IN_VALIDITY_SAFE_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [45.249.212.190 listed in sa-trusted.bondedsender.org]
+ [90.155.50.34 listed in sa-trusted.bondedsender.org]
  0.0 RCVD_IN_VALIDITY_RPBL_BLOCKED RBL: ADMINISTRATOR NOTICE: The
  query to Validity was blocked.  See
  https://knowledge.validity.com/hc/en-us/articles/20961730681243
  for more information.
- [45.249.212.190 listed in bl.score.senderscore.com]
- -0.0 SPF_PASS               SPF: sender matches SPF record
+ [90.155.50.34 listed in bl.score.senderscore.com]
+ -2.3 RCVD_IN_DNSWL_MED      RBL: Sender listed at https://www.dnswl.org/,
+ medium trust [90.155.50.34 listed in list.dnswl.org]
+ 0.0 SPF_NONE               SPF: sender does not publish an SPF Record
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
- -0.0 T_SCC_BODY_TEXT_LINE   No description available.
-X-Headers-End: 1sfGIi-00076l-45
-Subject: [Squashfs-devel] [PATCH -next 2/2] squashfs: convert
- squashfs_read_folio to use folio APIs
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
+ author's domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+ valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+X-Headers-End: 1tWHwg-0005Rm-JO
+Subject: [Squashfs-devel] [PATCH 1/2] mm: Fix assertion in folio_end_read()
 X-BeenThere: squashfs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -101,90 +104,38 @@ List-Post: <mailto:squashfs-devel@lists.sourceforge.net>
 List-Help: <mailto:squashfs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/squashfs-devel>, 
  <mailto:squashfs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Li Zetao via Squashfs-devel <squashfs-devel@lists.sourceforge.net>
-Reply-To: Li Zetao <lizetao1@huawei.com>
-Cc: squashfs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org
+Cc: linux-fsdevel@vger.kernel.org,
+ "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
+ squashfs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: squashfs-devel-bounces@lists.sourceforge.net
 
-In order to remote page APIs and index field in structure page [1],
-this patch convert squashfs_read_folio to use folio APIs, switch from
-kmap_atomic to kmap_local and use folio_end_read() to set uptodate
-and unlock folio.
+We only need to assert that the uptodate flag is clear if we're going
+to set it.  This hasn't been a problem before now because we have only
+used folio_end_read() when completing with an error, but it's convenient
+to use it in squashfs if we discover the folio is already uptodate.
 
-[1]: https://lore.kernel.org/all/Zp8fgUSIBGQ1TN0D@casper.infradead.org/
-
-Cc: Matthew Wilcox <willy@infradead.org>
-Signed-off-by: Li Zetao <lizetao1@huawei.com>
+Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 ---
- fs/squashfs/file.c | 27 ++++++++++++---------------
- 1 file changed, 12 insertions(+), 15 deletions(-)
+ mm/filemap.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/squashfs/file.c b/fs/squashfs/file.c
-index 893043ecf973..8c80d77a6115 100644
---- a/fs/squashfs/file.c
-+++ b/fs/squashfs/file.c
-@@ -446,10 +446,9 @@ static int squashfs_readpage_sparse(struct page *page, int expected)
+diff --git a/mm/filemap.c b/mm/filemap.c
+index 12ba297bb85e..3b1eefa9aab8 100644
+--- a/mm/filemap.c
++++ b/mm/filemap.c
+@@ -1505,7 +1505,7 @@ void folio_end_read(struct folio *folio, bool success)
+ 	/* Must be in bottom byte for x86 to work */
+ 	BUILD_BUG_ON(PG_uptodate > 7);
+ 	VM_BUG_ON_FOLIO(!folio_test_locked(folio), folio);
+-	VM_BUG_ON_FOLIO(folio_test_uptodate(folio), folio);
++	VM_BUG_ON_FOLIO(success && folio_test_uptodate(folio), folio);
  
- static int squashfs_read_folio(struct file *file, struct folio *folio)
- {
--	struct page *page = &folio->page;
--	struct inode *inode = page->mapping->host;
-+	struct inode *inode = folio_inode(folio);
- 	struct squashfs_sb_info *msblk = inode->i_sb->s_fs_info;
--	int index = page->index >> (msblk->block_log - PAGE_SHIFT);
-+	int index = folio->index >> (msblk->block_log - PAGE_SHIFT);
- 	int file_end = i_size_read(inode) >> msblk->block_log;
- 	int expected = index == file_end ?
- 			(i_size_read(inode) & (msblk->block_size - 1)) :
-@@ -457,10 +456,10 @@ static int squashfs_read_folio(struct file *file, struct folio *folio)
- 	int res = 0;
- 	void *pageaddr;
- 
--	TRACE("Entered squashfs_readpage, page index %lx, start block %llx\n",
--				page->index, squashfs_i(inode)->start);
-+	TRACE("Entered squashfs_readpage, folio index %lx, start block %llx\n",
-+				folio->index, squashfs_i(inode)->start);
- 
--	if (page->index >= ((i_size_read(inode) + PAGE_SIZE - 1) >>
-+	if (folio->index >= ((i_size_read(inode) + PAGE_SIZE - 1) >>
- 					PAGE_SHIFT))
- 		goto out;
- 
-@@ -473,23 +472,21 @@ static int squashfs_read_folio(struct file *file, struct folio *folio)
- 			goto out;
- 
- 		if (res == 0)
--			res = squashfs_readpage_sparse(page, expected);
-+			res = squashfs_readpage_sparse(&folio->page, expected);
- 		else
--			res = squashfs_readpage_block(page, block, res, expected);
-+			res = squashfs_readpage_block(&folio->page, block, res, expected);
- 	} else
--		res = squashfs_readpage_fragment(page, expected);
-+		res = squashfs_readpage_fragment(&folio->page, expected);
- 
- 	if (!res)
- 		return 0;
- 
- out:
--	pageaddr = kmap_atomic(page);
-+	pageaddr = kmap_local_folio(folio, 0);
- 	memset(pageaddr, 0, PAGE_SIZE);
--	kunmap_atomic(pageaddr);
--	flush_dcache_page(page);
--	if (res == 0)
--		SetPageUptodate(page);
--	unlock_page(page);
-+	kunmap_local(pageaddr);
-+	flush_dcache_folio(folio);
-+	folio_end_read(folio, res == 0);
- 
- 	return res;
- }
+ 	if (likely(success))
+ 		mask |= 1 << PG_uptodate;
 -- 
-2.34.1
+2.45.2
 
 
 
