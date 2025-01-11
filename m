@@ -2,63 +2,65 @@ Return-Path: <squashfs-devel-bounces@lists.sourceforge.net>
 X-Original-To: lists+squashfs-devel@lfdr.de
 Delivered-To: lists+squashfs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F4DAA0978C
-	for <lists+squashfs-devel@lfdr.de>; Fri, 10 Jan 2025 17:33:28 +0100 (CET)
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	by mail.lfdr.de (Postfix) with ESMTPS id 08FBCA0A526
+	for <lists+squashfs-devel@lfdr.de>; Sat, 11 Jan 2025 18:58:58 +0100 (CET)
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <squashfs-devel-bounces@lists.sourceforge.net>)
-	id 1tWHwk-0005Cv-Jv;
-	Fri, 10 Jan 2025 16:33:19 +0000
+	id 1tWfl1-0005O4-MQ;
+	Sat, 11 Jan 2025 17:58:47 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <willy@infradead.org>) id 1tWHwi-0005Co-Lc
+ (envelope-from <willy@infradead.org>) id 1tWfl0-0005Nr-6y
  for squashfs-devel@lists.sourceforge.net;
- Fri, 10 Jan 2025 16:33:17 +0000
+ Sat, 11 Jan 2025 17:58:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DH+Cxm6d8lwPux5CX2sjl6rLlWpVJbxOakxzkL9rSrg=; b=Frk/jiwOsdXDgvrauyo6AN5Gay
- hw9qPNos7ynN3+vNDglEvogFH4UKgzTApT3jIiAq9B0rsJSnywllbaKgK7ClNwlRoIJWN0MU2Bss8
- j2Fh6OoK9t8oQn3JLWPIqqoQt+MyL6sOmI40Ly6Z6zXO5NHRCMrbvzWW9qcg4Q0ulwI4=;
+ bh=gDP2rkKKQtBaLbOL9OpXTvDsGssxcS6T4UgYMd+zd2o=; b=RluCLlaYYxrhTC33GOYJUtZuVw
+ vy4oDkJUOld53GVSoPCmB9a/eEsmTATYUrZM+RxQUegh8ujLM9DNVVwjchlR1uQgKPF2L3g6Ot6LU
+ bx1loRKFXACGWiJtgCbq5DDiwnV9rpFqr5apW9Wwd2Ii2WE/0VpkIedl9AnwxbWBwmnE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=DH+Cxm6d8lwPux5CX2sjl6rLlWpVJbxOakxzkL9rSrg=; b=gxpwgZ85A24QBMNLbYLbPprLui
- 3uG9M7ycthJMe3GDj2H1661NMcFjnN0NdJBOUvPou/mBX9DIbHKS4vVPYPVKj6CPKZGoMU4x0jeKG
- +QsKQr5H7DQdAfRL4PFeAp89aQOPDtk3yiVEPNsV4Kilkacs+NxEY5xCWShyEswofGfk=;
+ bh=gDP2rkKKQtBaLbOL9OpXTvDsGssxcS6T4UgYMd+zd2o=; b=drcNjAF4pYV0KA6v8iPXGqURsa
+ Z6PWMqyzww3+r9yPYCRytuA04m50Ra0NE87OEZpzm2jNi5eoqFi0vzXvksK0A4U9Z9Vwo8B6uK0ei
+ iJQk9ojM8NYQtdG3Rlvfrt50oXItXhOqfso5hqepE1CH7FN2Zll3JuBWqecsCSK/gQog=;
 Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1tWHwi-0005Ru-Qa for squashfs-devel@lists.sourceforge.net;
- Fri, 10 Jan 2025 16:33:17 +0000
+ id 1tWfkz-0003c0-3X for squashfs-devel@lists.sourceforge.net;
+ Sat, 11 Jan 2025 17:58:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
- References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-Type:Content-ID:Content-Description;
- bh=DH+Cxm6d8lwPux5CX2sjl6rLlWpVJbxOakxzkL9rSrg=; b=dt+oyK2PWWQthDsLKdUanaCqQT
- FkxaXu0YSv9JpiQOp0CqsWnEnioXQ+64fQFRy3cazHsCtp3KMELYscWqW8wod/sMW59uywJ+ll6c0
- NrI1om93APA6SPI1dKXdYd7DGBaDFuu3hir5feSHExbcfT2goxTzOI7grJiBD/nXnEEctKbdKYbxk
- gwcP3vC70+xHVEr27sqGy7W+bRbVYbTnTPNFELg+WyWhlFm55J7CiXNLD6Xkz+J17F4ubi8mn7tly
- ZME5dArbOpMMz68tCCtCwa4ay1Je/itsX2TA6t0gr6XBZyNz4gBvRH5Zsk9w179qG9XqPc8W6yClg
- 0677aJ5g==;
+ d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=gDP2rkKKQtBaLbOL9OpXTvDsGssxcS6T4UgYMd+zd2o=; b=TM+5lBWo1bDzyZ620+2CXerYEF
+ q1YNTlcpH/RjwUMphuiXxxKlFWoj8weTY5PQFnG6LJex0ExVYy/3mzG4s7mNegq5v8CFJwxBwmsCm
+ JzbWNcyry0kNs2HYMe4egUptLt8844dqvwW14QTIwBi7rCN9CY7gg9D6N8Boq20M1HTOFHJJ4goZk
+ 1dElQZFiB9iubewANMFy65Mr7DGDaRFq4MGEMUa/kv3/gmsjyy/cbLCdRXTwLIYRFyae/a+TsTxJ0
+ fQLZvfZP3c3FshahWL97VJ8sRHvg007b31FN3oWh7t0xDK+IQSvvOwK4CqIzdbZcKh2zDw2An6S78
+ DNYJlZqg==;
 Received: from willy by casper.infradead.org with local (Exim 4.98 #2 (Red Hat
- Linux)) id 1tWHwU-0000000E2XI-1H75; Fri, 10 Jan 2025 16:33:02 +0000
-From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
-To: Andrew Morton <akpm@linux-foundation.org>
-Date: Fri, 10 Jan 2025 16:32:58 +0000
-Message-ID: <20250110163300.3346321-2-willy@infradead.org>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20250110163300.3346321-1-willy@infradead.org>
+ Linux)) id 1tWfkn-0000000Fb4e-0Hu9; Sat, 11 Jan 2025 17:58:33 +0000
+Date: Sat, 11 Jan 2025 17:58:32 +0000
+From: Matthew Wilcox <willy@infradead.org>
+To: Ryan Roberts <ryan.roberts@arm.com>
+Message-ID: <Z4KxSBcKpwwr-WF2@casper.infradead.org>
 References: <20250110163300.3346321-1-willy@infradead.org>
+ <20250110163300.3346321-2-willy@infradead.org>
+ <b9ce358d-4f67-48be-94b3-b65a17ef56f9@arm.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <b9ce358d-4f67-48be-94b3-b65a17ef56f9@arm.com>
 X-Spam-Score: -2.5 (--)
 X-Spam-Report: Spam detection software,
  running on the system "util-spamd-2.v13.lw.sourceforge.com", 
@@ -66,11 +68,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  I got the polarity of "uptodate" wrong. Rename it. Thanks
- to Ryan for testing; please fold into above named patch, and he'd like you
- to add Tested-by: Ryan Roberts <ryan.roberts@arm.com> Signed-off-by: Matthew
- Wilcox (Oracle) <willy@infradead.org> --- fs/squashfs/file.c | 6 +++--- 1
- file changed, 3 insertions(+), 3 deletions(-) 
+ Content preview:  On Sat, Jan 11, 2025 at 01:21:31PM +0000, Ryan Roberts wrote:
+ > On 10/01/2025 16:32, Matthew Wilcox (Oracle) wrote: > > I got the polarity
+ of "uptodate" wrong. Rename it. Thanks to > > Ryan for testin [...] 
  Content analysis details:   (-2.5 points, 6.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -88,15 +88,15 @@ X-Spam-Report: Spam detection software,
  medium trust [90.155.50.34 listed in list.dnswl.org]
  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
  0.0 SPF_NONE               SPF: sender does not publish an SPF Record
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from
  author's domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
  valid
-X-Headers-End: 1tWHwi-0005Ru-Qa
-Subject: [Squashfs-devel] [PATCH 2/2] squashfs: Fix "convert
+X-Headers-End: 1tWfkz-0003c0-3X
+Subject: Re: [Squashfs-devel] [PATCH 2/2] squashfs: Fix "convert
  squashfs_fill_page() to take a folio"
 X-BeenThere: squashfs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -109,52 +109,32 @@ List-Post: <mailto:squashfs-devel@lists.sourceforge.net>
 List-Help: <mailto:squashfs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/squashfs-devel>, 
  <mailto:squashfs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-fsdevel@vger.kernel.org, Ryan Roberts <ryan.roberts@arm.com>,
- "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
+Cc: linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
  squashfs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: squashfs-devel-bounces@lists.sourceforge.net
 
-I got the polarity of "uptodate" wrong.  Rename it.  Thanks to
-Ryan for testing; please fold into above named patch, and he'd like
-you to add
+On Sat, Jan 11, 2025 at 01:21:31PM +0000, Ryan Roberts wrote:
+> On 10/01/2025 16:32, Matthew Wilcox (Oracle) wrote:
+> > I got the polarity of "uptodate" wrong.  Rename it.  Thanks to
+> > Ryan for testing; please fold into above named patch, and he'd like
+> > you to add
+> > 
+> > Tested-by: Ryan Roberts <ryan.roberts@arm.com>
+> 
+> This is missing the change to folio_end_read() and the change for IS_ERR() that
+> was in the version of the patch I tested. Just checking that those were handled
+> separately in a thread I'm not CCed on?
 
-Tested-by: Ryan Roberts <ryan.roberts@arm.com>
+https://lore.kernel.org/mm-commits/20250109043130.F38E0C4CED2@smtp.kernel.org/
+https://lore.kernel.org/mm-commits/20250110232601.CBE47C4CED6@smtp.kernel.org/
 
-Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
----
- fs/squashfs/file.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+Shouldn't be anything missing; I applied the first one to my tree,
+then wrote the second one and the third one you're replying to.  Then
+I did a git diff HEAD~3 and sent the result to you to test.
 
-diff --git a/fs/squashfs/file.c b/fs/squashfs/file.c
-index da25d6fa45ce..018f0053a4f5 100644
---- a/fs/squashfs/file.c
-+++ b/fs/squashfs/file.c
-@@ -400,7 +400,7 @@ void squashfs_copy_cache(struct folio *folio,
- 			bytes -= PAGE_SIZE, offset += PAGE_SIZE) {
- 		struct folio *push_folio;
- 		size_t avail = buffer ? min(bytes, PAGE_SIZE) : 0;
--		bool uptodate = true;
-+		bool updated = false;
- 
- 		TRACE("bytes %zu, i %d, available_bytes %zu\n", bytes, i, avail);
- 
-@@ -415,9 +415,9 @@ void squashfs_copy_cache(struct folio *folio,
- 		if (folio_test_uptodate(push_folio))
- 			goto skip_folio;
- 
--		uptodate = squashfs_fill_page(push_folio, buffer, offset, avail);
-+		updated = squashfs_fill_page(push_folio, buffer, offset, avail);
- skip_folio:
--		folio_end_read(push_folio, uptodate);
-+		folio_end_read(push_folio, updated);
- 		if (i != folio->index)
- 			folio_put(push_folio);
- 	}
--- 
-2.45.2
-
+Has anything gone wrong in this process?
 
 
 _______________________________________________
